@@ -4,7 +4,7 @@
 
 ## Kundens domän krav
 
-## Översikt över systemet
+## Översikt över systemet - Joel
 
 Bilder på hur systemet kommunicerar med de olika delarna.
 
@@ -27,7 +27,7 @@ ER-diagram
 * REST API:et skall kunna hantera flera olika versioner, tex genom att använda v1/ som en del i URI:n.
 * REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger. 
 
-# Administrativt webbgränssnitt
+# Administrativt webbgränssnitt - Patrik
 
 Sök- och filtrerings-funktioner. Söka efter elsparkcykel...
 
@@ -71,7 +71,7 @@ Rabatter för gott beteende. Bonussystem?
 
 Karta med filter. mock-up
 
-# Kundens webbgränssnitt
+# Kundens webbgränssnitt - Richard
 
 * Kunden kan logga in på en webbplats och se detaljer om sitt konto.
 
@@ -89,7 +89,7 @@ Lista som kan filtreras och söka i. mock-up
 
 Swish, Kort, Klarna etc. mock-up
 
-# Kundens app
+# Kundens app - Richard
 
 * Kunden kan hyra en specifik cykel.
 
@@ -110,7 +110,7 @@ filter: lediga/i bruk
 
 mock-ups
 
-# Cykelns program
+# Cykelns program - Tomas
 
 * Detta program är tänkt att köra i varje cykel och styra/övervaka den.
 
