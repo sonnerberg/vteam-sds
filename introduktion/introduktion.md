@@ -22,7 +22,7 @@ Systemet omfattar följande huvudsakliga komponenter:
 
 - Databas med information om cyklar, laddstationer, parkeringszoner, tillåtna zoner att cykla i, kunder och administratörer.
 
-- Backend - en webbaserad lösning kopplad till databasen som möjliggör administration av cyklar, laddstationer, parkeringszoner, tillåtna zoner att cykla i, utlåning/återlämning av cykel och hämtning av cykel.
+- Backend - en komponent som sköter kopplingen mellan API och databas.
 
 - API med möjlighet att koppla in anpassade applikationer, grundsystemet levereras med följande applikationer: 
 
