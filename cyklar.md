@@ -1,27 +1,28 @@
 
 # Table of Contents
 
-1.  [Översikt](#org8d0b2ce)
-    1.  [Beteende](#org7eafb98)
-    2.  [Krav som måste uppfyllas](#org2328e6c)
-        1.  [Positionsdata](#orgffe5342)
-        2.  [Status](#orgd0570b1)
-        3.  [Sensor](#org6d74660)
-        4.  [Positionsdata och/eller Status och/eller Sensor](#org16710f7)
-    3.  [Cykel <-> server kommunikation](#orgfeeb4ca)
-        1.  [HTTP](#orgf1ea5ad)
-        2.  [Websockets](#org8c82319)
-        3.  [IoT protokoll](#orge803cab)
-2.  [SDS](#org77b7b6d)
+1.  [Översikt](#org8a596ce)
+    1.  [Beteende](#org2ecd51a)
+    2.  [Krav som måste uppfyllas](#org34ef10e)
+        1.  [Positionsdata](#org5ddd89e)
+        2.  [Status](#org7ddd20c)
+        3.  [Sensor](#orgb838dbc)
+        4.  [Positionsdata och/eller Status och/eller Sensor](#orgb10571e)
+    3.  [Cykel <-> server kommunikation](#org0002f6b)
+        1.  [HTTP](#org2969655)
+        2.  [Websockets](#orgc77aa97)
+        3.  [IoT protokoll](#orgf464e51)
+    4.  [Simulering](#org07471f1)
+2.  [SDS](#orgc4743a8)
 
 
 
-<a id="org8d0b2ce"></a>
+<a id="org8a596ce"></a>
 
 # Översikt
 
 
-<a id="org7eafb98"></a>
+<a id="org2ecd51a"></a>
 
 ## Beteende
 
@@ -31,7 +32,7 @@
 -   En Admin ska kunna hantera och se info on cykeln.
 
 
-<a id="org2328e6c"></a>
+<a id="org34ef10e"></a>
 
 ## Krav som måste uppfyllas
 
@@ -59,7 +60,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 -   [X] \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="orgffe5342"></a>
+<a id="org5ddd89e"></a>
 
 ### Positionsdata
 
@@ -75,7 +76,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 8.  Cykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
 
 
-<a id="orgd0570b1"></a>
+<a id="org7ddd20c"></a>
 
 ### Status
 
@@ -87,14 +88,14 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 6.  \* Ledig cykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
 
 
-<a id="org6d74660"></a>
+<a id="orgb838dbc"></a>
 
 ### Sensor
 
 1.  Cykeln varnar när den behöver laddas.
 
 
-<a id="org16710f7"></a>
+<a id="orgb10571e"></a>
 
 ### Positionsdata och/eller Status och/eller Sensor
 
@@ -105,7 +106,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 5.  \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="orgfeeb4ca"></a>
+<a id="org0002f6b"></a>
 
 ## Cykel <-> server kommunikation
 
@@ -114,7 +115,7 @@ och server att prata med varandra och med risk för eventuella tankevurpor och s
 så har jag kommit fram till tre alternativ. (feedback uppskattas!)
 
 
-<a id="orgf1ea5ad"></a>
+<a id="org2969655"></a>
 
 ### HTTP
 
@@ -123,7 +124,7 @@ Tusentals cyklar kräver lika många unika IP adresser och jag vet helt enkelt i
 servern ska kunna hitta/hålla reda på alla.
 
 
-<a id="org8c82319"></a>
+<a id="orgc77aa97"></a>
 
 ### Websockets
 
@@ -132,7 +133,7 @@ påverkar serverns prestanda har jag idag ingen aning om. Jag tror inte att sjä
 kopplingen påverkar så mycket, utan snarare vad servern faktiskt gör med data som den får.
 
 
-<a id="orge803cab"></a>
+<a id="orgf464e51"></a>
 
 ### IoT protokoll
 
@@ -140,7 +141,14 @@ Detta känns som en överkurs och skulle bli väldigt förvånad om en IoT lösn
 Men alternativet finns.
 
 
-<a id="org77b7b6d"></a>
+<a id="org07471f1"></a>
+
+## Simulering
+
+Allt ligger lokalt så här är cykel <-> server kommunikation ett icke problem.
+
+
+<a id="orgc4743a8"></a>
 
 # SDS
 
@@ -164,4 +172,6 @@ Here be dragons&#x2026;.
     -   hyra, lämna tillbaka en cykel
     -   lågt batteri
     -   service
+
+-   Ett stycke om Simuleringen
 
