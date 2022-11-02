@@ -1,5 +1,5 @@
 ## Inledning
-I detta dokument beskrivs ett system som hanterar uthyrning av elsparkcyklar. Systemet ger kunder möjlighet att skapa användarkonton och hyra cyklar, administratörer ges möjlighet att övervaka cyklar och laddstationer samt se information om kunder. Systemet innehåller också ett program för cykeln som styr och övervakar denna.
+I detta dokument beskrivs ett system som hanterar uthyrning av elsparkcyklar. Systemet ger kunder möjlighet att skapa användarkonton och hyra cyklar, administratörer ges möjlighet att administrera cyklar, laddstationer, parkeringsplatser, städer och information om kunder. Systemet innehåller också ett program för cykeln som styr och övervakar denna.
 
 ### Bakgrund 
 Företaget "Svenska Elsparkcyklar AB" har utryckt ett behov av ett system som kan hantera uthyrning av elsparkcyklar i svenska städer. För närvarande är företaget etablerat och har verksamhet i "TRE STÄDER" och planerar att expandera till fler med stöd av ett nytt datasystem.
@@ -15,7 +15,7 @@ Systemets huvudsakliga användare är kunder och administratörer.
 
 Kunder har möjlighet att hyra en cykel via en mobilapp som också visar status för senaste resan och en historik över gjorda resor. Kunder har också tillgång till ett webbgränssnitt där denne kan se sina kontodetaljer och en historik över sin användning och betalningar.
 
-Administratörer har möjlighet att via ett webbgränssnitt se status på cyklar och stationer samt få information om kunder.
+Administratörer har möjlighet att via ett webbgränssnitt se status på cyklar och stationer samt få information om kunder. Administratörer kan också lägga till nya cyklar, laddstationer, zoner för parkering och städer.
 
 ### Systemets delar
 Systemet omfattar följande huvudsakliga komponenter:
@@ -26,7 +26,7 @@ Systemet omfattar följande huvudsakliga komponenter:
 
 - API med möjlighet att koppla in anpassade applikationer, grundsystemet levereras med följande applikationer: 
 
-    - Administrativt webbgränssnitt där man kan se status på cyklar, stationer och kunder.
+    - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, städer och information om kunder.
 
     - Webbgränssnitt för kunden så att denne kan logga in och se sitt konto, historik av utlåning och betalningar.
 
