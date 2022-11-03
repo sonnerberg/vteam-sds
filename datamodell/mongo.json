@@ -1,0 +1,136 @@
+{"cities": 
+    {"göttlaborg": {
+        "cyklar":{
+            "cykel1": {
+                "typ": "snabb",
+                "id": 13,
+                "batteri": 100,
+                "status": "av",
+                "position_lat": 90,
+                "position_long": 100
+            },
+            "cykel2": {
+                "typ": "gammal",
+                "id": 143,
+                "batteri": 70,
+                "status": "på",
+                "position_lat": 80,
+                "position_long": 95
+            }
+        },
+        "laddstationer":{
+            "centrum": {
+                "centroid": {
+                    "position_lat": 80,
+                    "position_long": 95
+                },
+                "geojson": {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Polygon",
+                      "coordinates": [
+                        [
+                          [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                          [100.0, 1.0], [100.0, 0.0]
+                        ]
+                      ]
+                    }     
+            }
+
+        }
+    },
+    "parkeringar": {
+        "parkering1": {
+            "antal_platser": 10,
+            "upptagna": 8,
+            "geojson": {
+                "type": "Feature",
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                      [100.0, 1.0], [100.0, 0.0]
+                    ]
+                  ]
+                }     
+        }
+        }
+    },
+    "kunder": {
+        "kund1": {
+
+        },
+        "kund2": {
+
+        }
+    }},
+    "gottisholm": {
+        "cyklar":{
+            "cykel1": {
+                "typ": "snabb",
+                "id": 13,
+                "batteri": 100,
+                "status": "av",
+                "position_lat": 90,
+                "position_long": 100
+            },
+            "cykel2": {
+                "typ": "gammal",
+                "id": 143,
+                "batteri": 70,
+                "status": "på",
+                "position_lat": 80,
+                "position_long": 95
+            }
+        },
+        "laddstationer":{
+            "centrum": {
+                "centroid": {
+                    "position_lat": 80,
+                    "position_long": 95
+                },
+                "geojson": {
+                    "type": "Feature",
+                    "geometry": {
+                      "type": "Polygon",
+                      "coordinates": [
+                        [
+                          [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                          [100.0, 1.0], [100.0, 0.0]
+                        ]
+                      ]
+                    }     
+            }
+
+        }
+    },
+    "parkeringar": {
+        "parkering1": {
+            "antal_platser": 10,
+            "upptagna": 8,
+            "geojson": {
+                "type": "Feature",
+                "geometry": {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [
+                      [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                      [100.0, 1.0], [100.0, 0.0]
+                    ]
+                  ]
+                }     
+        }
+        }
+    },
+    "kunder": {
+        "kund1": {
+
+        },
+        "kund2": {
+            
+        }
+    }
+    }
+}
+}
