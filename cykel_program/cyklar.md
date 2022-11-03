@@ -1,30 +1,30 @@
 
 # Table of Contents
 
-1.  [Översikt](#orgf962567)
-    1.  [Beteende](#org8e41923)
-    2.  [Krav som måste uppfyllas](#org6c5bda4)
-        1.  [Positionsdata](#org86c0ce5)
-        2.  [Status](#org51d777d)
-        3.  [Sensor](#orgd4f1785)
-        4.  [Positionsdata och/eller Status och/eller Sensor](#org8eee9e3)
-    3.  [Cykel <-> server kommunikation](#org72df0db)
-        1.  [HTTP](#org2e9a925)
-        2.  [Websockets](#orgcfe3873)
-        3.  [IoT protokoll](#orgaa2d938)
-    4.  [Simulering](#org58079d3)
-2.  [SDS](#orgdd84fbf)
-        1.  [Att göra](#org7450319)
-        2.  [Cykelns program](#org6653382)
+1.  [Översikt](#org7a003be)
+    1.  [Beteende](#org613b6f8)
+    2.  [Krav som måste uppfyllas](#org547951f)
+        1.  [Positionsdata](#org2b47234)
+        2.  [Status](#org59ba7ad)
+        3.  [Sensor](#org93cb437)
+        4.  [Positionsdata och/eller Status och/eller Sensor](#org56ec0ce)
+    3.  [Cykel <-> server kommunikation](#org43f39df)
+        1.  [HTTP](#org61fd13f)
+        2.  [Websockets](#org20fd39f)
+        3.  [IoT protokoll](#orgf9b3946)
+    4.  [Simulering](#org12d7e2e)
+2.  [SDS](#org07de66f)
+    1.  [Att göra](#orgb6dc390)
+    2.  [Cykelns program](#orgaa9e1cc)
 
 
 
-<a id="orgf962567"></a>
+<a id="org7a003be"></a>
 
 # Översikt
 
 
-<a id="org8e41923"></a>
+<a id="org613b6f8"></a>
 
 ## Beteende
 
@@ -34,7 +34,7 @@
 -   En Admin ska kunna hantera och se info on cykeln.
 
 
-<a id="org6c5bda4"></a>
+<a id="org547951f"></a>
 
 ## Krav som måste uppfyllas
 
@@ -62,7 +62,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 -   [X] \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="org86c0ce5"></a>
+<a id="org2b47234"></a>
 
 ### Positionsdata
 
@@ -78,7 +78,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 8.  Cykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
 
 
-<a id="org51d777d"></a>
+<a id="org59ba7ad"></a>
 
 ### Status
 
@@ -90,14 +90,14 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 6.  \* Ledig cykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
 
 
-<a id="orgd4f1785"></a>
+<a id="org93cb437"></a>
 
 ### Sensor
 
 1.  Cykeln varnar när den behöver laddas.
 
 
-<a id="org8eee9e3"></a>
+<a id="org56ec0ce"></a>
 
 ### Positionsdata och/eller Status och/eller Sensor
 
@@ -108,7 +108,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 5.  \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="org72df0db"></a>
+<a id="org43f39df"></a>
 
 ## Cykel <-> server kommunikation
 
@@ -117,7 +117,7 @@ och server att prata med varandra och med risk för eventuella tankevurpor och s
 så har jag kommit fram till tre alternativ. (feedback uppskattas!)
 
 
-<a id="org2e9a925"></a>
+<a id="org61fd13f"></a>
 
 ### HTTP
 
@@ -126,7 +126,7 @@ Tusentals cyklar kräver lika många unika IP adresser och jag vet helt enkelt i
 servern ska kunna hitta/hålla reda på alla.
 
 
-<a id="orgcfe3873"></a>
+<a id="org20fd39f"></a>
 
 ### Websockets
 
@@ -135,7 +135,7 @@ påverkar serverns prestanda har jag idag ingen aning om. Jag tror inte att sjä
 kopplingen påverkar så mycket, utan snarare vad servern faktiskt gör med data som den får.
 
 
-<a id="orgaa2d938"></a>
+<a id="orgf9b3946"></a>
 
 ### IoT protokoll
 
@@ -143,21 +143,21 @@ Detta känns som en överkurs och skulle bli väldigt förvånad om en IoT lösn
 Men alternativet finns.
 
 
-<a id="org58079d3"></a>
+<a id="org12d7e2e"></a>
 
 ## Simulering
 
 Allt ligger lokalt så här är cykel <-> server kommunikation ett icke problem.
 
 
-<a id="orgdd84fbf"></a>
+<a id="org07de66f"></a>
 
 # SDS
 
 
-<a id="org7450319"></a>
+<a id="orgb6dc390"></a>
 
-### Att göra
+## Att göra
 
 -   Beskrivning av hur det fungerar
     -   val av språk
@@ -173,9 +173,9 @@ Allt ligger lokalt så här är cykel <-> server kommunikation ett icke problem.
 -   Ett stycke om Simuleringen
 
 
-<a id="org6653382"></a>
+<a id="orgaa9e1cc"></a>
 
-### Cykelns program
+## Cykelns program
 
 (Beroende på vilken lösning vi väjer kanske det inte blir via API&rsquo;et)
 Cykels huvudsakliga uppgift är att hela tiden meddela sin positon och status via API&rsquo;et.
