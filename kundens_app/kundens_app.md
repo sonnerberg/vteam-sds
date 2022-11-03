@@ -1,30 +1,33 @@
 # Kundens app - Richard
 
-* Kunden kan hyra en specifik cykel.
+1. Kunden kan hyra en specifik cykel.
 
-Välj cykel från en lista med lediga cyklar.
+   Välj cykel från en lista med lediga cyklar.
 
-Identifieras med ID.
+   Identifieras med ID.
 
-* Under hyrtiden kan kunden köra cykeln.
+   Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en kund väljas för uthyrning.
+   I verkligheten görs detta genom att scanna en QR-kod som identifierar elsparkcykeln. ****referens???****.
+   I vårt program indentifieras en cykel genom att från en kartbild välja elsparcykelns ikon vilket ger kunden möjligheten att välja denna elsparkcykel för uthyrning.
 
-* hastighet (slider)
-* vänster (knapp som har en konstant ROT)
-* höger (knapp som har en konstant ROT)
-* broms (bak/fram) (konstant deceleration)
-* visa batterinivå (stapel med olika färger (grön, orange, röd) och procent)
+1. Under hyrtiden kan kunden köra cykeln.
 
-* Kunden lämnar tillbaka cykeln.
+   - hastighet (slider)
+   - vänster (knapp som har en konstant ROT)
+   - höger (knapp som har en konstant ROT)
+   - broms (bak/fram) (konstant deceleration)
+   - visa batterinivå (stapel med olika färger (grön, orange, röd) och procent)
 
-Pengar dras från saldo. Notiser om bonussystem, "du kunde sparat pengar om..."
+1. Kunden lämnar tillbaka cykeln.
 
-* (extra) Visa en kartbild där alla laddstationer, accepterade parkeringsplatser finns.
-* (extra) Visa en kartbild där alla alla lediga cyklar finns.
+   - Pengar dras från saldo. Notiser om bonussystem, "du kunde sparat pengar om..."
+
+1. (extra) Visa en kartbild där alla laddstationer, accepterade parkeringsplatser finns.
+
+1. (extra) Visa en kartbild där alla alla lediga cyklar finns.
 
 knappar som visar/döljer
 
 ~~filter~~: lediga (en kund ska bara se lediga cyklar)
 
 mock-ups
-
-
