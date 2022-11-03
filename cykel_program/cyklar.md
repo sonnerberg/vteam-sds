@@ -1,28 +1,30 @@
 
 # Table of Contents
 
-1.  [Översikt](#org8a596ce)
-    1.  [Beteende](#org2ecd51a)
-    2.  [Krav som måste uppfyllas](#org34ef10e)
-        1.  [Positionsdata](#org5ddd89e)
-        2.  [Status](#org7ddd20c)
-        3.  [Sensor](#orgb838dbc)
-        4.  [Positionsdata och/eller Status och/eller Sensor](#orgb10571e)
-    3.  [Cykel <-> server kommunikation](#org0002f6b)
-        1.  [HTTP](#org2969655)
-        2.  [Websockets](#orgc77aa97)
-        3.  [IoT protokoll](#orgf464e51)
-    4.  [Simulering](#org07471f1)
-2.  [SDS](#orgc4743a8)
+1.  [Översikt](#orgf962567)
+    1.  [Beteende](#org8e41923)
+    2.  [Krav som måste uppfyllas](#org6c5bda4)
+        1.  [Positionsdata](#org86c0ce5)
+        2.  [Status](#org51d777d)
+        3.  [Sensor](#orgd4f1785)
+        4.  [Positionsdata och/eller Status och/eller Sensor](#org8eee9e3)
+    3.  [Cykel <-> server kommunikation](#org72df0db)
+        1.  [HTTP](#org2e9a925)
+        2.  [Websockets](#orgcfe3873)
+        3.  [IoT protokoll](#orgaa2d938)
+    4.  [Simulering](#org58079d3)
+2.  [SDS](#orgdd84fbf)
+        1.  [Att göra](#org7450319)
+        2.  [Cykelns program](#org6653382)
 
 
 
-<a id="org8a596ce"></a>
+<a id="orgf962567"></a>
 
 # Översikt
 
 
-<a id="org2ecd51a"></a>
+<a id="org8e41923"></a>
 
 ## Beteende
 
@@ -32,7 +34,7 @@
 -   En Admin ska kunna hantera och se info on cykeln.
 
 
-<a id="org34ef10e"></a>
+<a id="org6c5bda4"></a>
 
 ## Krav som måste uppfyllas
 
@@ -60,7 +62,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 -   [X] \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="org5ddd89e"></a>
+<a id="org86c0ce5"></a>
 
 ### Positionsdata
 
@@ -76,7 +78,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 8.  Cykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
 
 
-<a id="org7ddd20c"></a>
+<a id="org51d777d"></a>
 
 ### Status
 
@@ -88,14 +90,14 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 6.  \* Ledig cykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
 
 
-<a id="orgb838dbc"></a>
+<a id="orgd4f1785"></a>
 
 ### Sensor
 
 1.  Cykeln varnar när den behöver laddas.
 
 
-<a id="orgb10571e"></a>
+<a id="org8eee9e3"></a>
 
 ### Positionsdata och/eller Status och/eller Sensor
 
@@ -106,7 +108,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 5.  \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="org0002f6b"></a>
+<a id="org72df0db"></a>
 
 ## Cykel <-> server kommunikation
 
@@ -115,7 +117,7 @@ och server att prata med varandra och med risk för eventuella tankevurpor och s
 så har jag kommit fram till tre alternativ. (feedback uppskattas!)
 
 
-<a id="org2969655"></a>
+<a id="org2e9a925"></a>
 
 ### HTTP
 
@@ -124,7 +126,7 @@ Tusentals cyklar kräver lika många unika IP adresser och jag vet helt enkelt i
 servern ska kunna hitta/hålla reda på alla.
 
 
-<a id="orgc77aa97"></a>
+<a id="orgcfe3873"></a>
 
 ### Websockets
 
@@ -133,7 +135,7 @@ påverkar serverns prestanda har jag idag ingen aning om. Jag tror inte att sjä
 kopplingen påverkar så mycket, utan snarare vad servern faktiskt gör med data som den får.
 
 
-<a id="orgf464e51"></a>
+<a id="orgaa2d938"></a>
 
 ### IoT protokoll
 
@@ -141,24 +143,21 @@ Detta känns som en överkurs och skulle bli väldigt förvånad om en IoT lösn
 Men alternativet finns.
 
 
-<a id="org07471f1"></a>
+<a id="org58079d3"></a>
 
 ## Simulering
 
 Allt ligger lokalt så här är cykel <-> server kommunikation ett icke problem.
 
 
-<a id="orgc4743a8"></a>
+<a id="orgdd84fbf"></a>
 
 # SDS
 
-Here be dragons&#x2026;.
 
--   Beskrivning av förutsättningarna
-    -   ev väldigt många cycklar
-    -   lätt att lägga till, ta bort cykel
-    -   lätt att få information om cyklar
-    -   all debiterbar data har en cykel som ursprung
+<a id="org7450319"></a>
+
+### Att göra
 
 -   Beskrivning av hur det fungerar
     -   val av språk
@@ -168,10 +167,43 @@ Here be dragons&#x2026;.
         -   varför?
 
 -   Ett/flera usecases med tillhörande sekvensdiagram
-    -   lägga till, ta bort cykel
     -   hyra, lämna tillbaka en cykel
-    -   lågt batteri
     -   service
 
 -   Ett stycke om Simuleringen
+
+
+<a id="org6653382"></a>
+
+### Cykelns program
+
+(Beroende på vilken lösning vi väjer kanske det inte blir via API&rsquo;et)
+Cykels huvudsakliga uppgift är att hela tiden meddela sin positon och status via API&rsquo;et.
+
+Tusentals cyklar finns i systemet. Så för att minimera belastningen på API och backend så
+uppdaterar en cykel sin position och status med olika intervall beroende på olika faktorer.
+
+-   En uthyrd cykel i rörelse skickar positionsdata ofta
+-   En Ledig stillastående cykel skickar positionsdata sällan
+-   En cykel på laddning eller service skickar positionsdata sällan
+
+I varje cykel finns sensorer som känner av status hos cykeln och när statusen ändras
+så skickas det statusdata omgående.
+
+-   Batterinivån är låg
+-   En lampa har gått sönder etc
+
+Så fort det blir rörelse på en cykel som ej är uthyrd skickas position och statusdata
+omgående, och sedan med ett tätt intervall tills cykeln återigen står stilla.
+
+Det är backend som talar om för cykeln när, och av vem, den blir uthyrd. Först då är
+det möjligt för en kund att framföra cykeln. När kunden väljer att avsluta lånet
+så talar backend om att cykeln inte längre är utlånad och den låses och kan inte längre
+köras.
+
+Varje cykel sparar också en egen historik över alla sina resor.
+
+-   Kund som hyrt cykeln
+-   Resans startposition samt klockslag
+-   Resans slutposition samt klockslag
 
