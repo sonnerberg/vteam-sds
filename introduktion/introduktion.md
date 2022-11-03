@@ -13,7 +13,7 @@ Vår förhoppning är att det system som vi presenterar här kommer att kunna l�
 ### Systemets användare
 Systemets huvudsakliga användare är kunder och administratörer. 
 
-Kunder har möjlighet att hyra en cykel via en mobilapp som också visar status för senaste resan och en historik över gjorda resor. Kunder har också tillgång till ett webbgränssnitt där denne kan se sina kontodetaljer och en historik över sin användning och betalningar.
+Kunder har möjlighet att hyra en cykel via en mobilapp som också visar status för senaste resan och en historik över gjorda resor. Kunder har också tillgång till ett webbgränssnitt där de kan se sina kontodetaljer och en historik över sin användning och betalningar.
 
 Administratörer har möjlighet att via ett webbgränssnitt se status på cyklar och stationer samt få information om kunder. Administratörer kan också lägga till nya cyklar, laddstationer, zoner för parkering och städer.
 
@@ -30,7 +30,7 @@ Systemet omfattar följande huvudsakliga komponenter:
 
     - Webbgränssnitt för kunden så att denne kan logga in och se sitt konto, historik av utlåning och betalningar.
 
-    - Mobilanpassad webbapp till kunden så den kan se låna/lämna tillbaka cykeln samt se status på senaste resan och historik över gjorda resor.
+    - Mobilanpassad webbapp för kunden så denne kan se låna/lämna tillbaka cykeln samt se status på senaste resan och historik över gjorda resor.
 
     - Ett cykelprogram som styr och övervakar cykeln (på, av, hastighet, begränsa hastighet, position, behöver service/laddning).
 
