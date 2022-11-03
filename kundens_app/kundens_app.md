@@ -33,7 +33,7 @@
 
    - Pengar dras från saldo. Notiser om bonussystem, "du kunde sparat pengar om..."
 
-   Då användaren avslutar sin hyrning av elsparkcykeln så debiteras användaren automatiskt för sin färd. Färdens kostnad kan variera beroende på:
+   Då användaren avslutar sin hyrning av elsparkcykeln så debiteras användarens konto automatiskt för färden. Färdens kostnad kan variera beroende på:
 
    - tid på dygnet (tillgång och efterfrågan)
    - om cykeln flyttats från fri parkering (valfri parkeringsplats utanför rekommenderade parkeringszoner) till en mer önskvärd parkeringsplats
