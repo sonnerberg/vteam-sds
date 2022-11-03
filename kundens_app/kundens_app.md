@@ -2,13 +2,13 @@
 
 1. Kunden kan hyra en specifik cykel.
 
-   Välj cykel från en lista med lediga cyklar.
+   Välj elsparkcykel från en lista med lediga cyklar.
 
    Identifieras med ID.
 
    Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en kund väljas för uthyrning.
    I verkligheten görs detta genom att scanna en QR-kod som identifierar elsparkcykeln. ****referens???****.
-   I vårt program indentifieras en cykel genom att från en kartbild välja elsparcykelns ikon vilket ger kunden möjligheten att välja denna elsparkcykel för uthyrning.
+   I vårt program indentifieras en elsparkcykel genom att från en kartbild välja elsparcykelns ikon vilket ger kunden möjligheten att välja denna elsparkcykel för uthyrning.
 
 1. Under hyrtiden kan kunden köra cykeln.
 
