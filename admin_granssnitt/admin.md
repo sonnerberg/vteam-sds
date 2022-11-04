@@ -4,7 +4,9 @@
 1.  [Admin-gränssnitt](#org8a596ce)
     1.  [Översikt och daglig drift](#org2ecd51a)
     2.  [Hantering av kunder](#org34ef10e)
-    3.  [Geodatahantering](#org0002f6b)
+    3.  [Behörighetshantering](#org0002f6a)
+    4.  [Geodatahantering](#org0002f6b)
+
 
 <a id="org8a596ce"></a>
 
@@ -19,7 +21,7 @@ Systemets admin-gränssnitt används av behöriga användare för att få en öv
 - Parkeringsplatser
 - Områden med särskilda bestämmelser
 
-Admin-gränssnittet innehåller vyer för att inspektera resurser, skicka kommandon till enskilda cyklar, hantera kundinformation, samt uppdatera systemet med ny data, t ex nya städer man etablerar sig i, nya cyklar, nya parkeringsplatser etc.
+Admin-gränssnitt innehåller vyer för att inspektera resurser, skicka kommandon till enskilda cyklar, hantera kundinformation, hantera behörigheter, samt uppdatera systemet med ny data, t ex nya städer man etablerar sig i, nya cyklar, nya parkeringsplatser etc.
 
 <a id="org2ecd51a"></a>
 
@@ -35,11 +37,18 @@ FRÅGA - MAN TÄNKER SIG ATT STOPPKOMMANDO TILL CYKELN BORDE SKE AUTOMATISKT OM 
 
 Kundvyn är en klassisk listvy. Här kan man se en lista på alla företagets kunder, som kan filtreras på stad, användarnamn, antal gjorda resor mm. I denna vyn kan administratören också uppdatera information om enskilda kunder, t ex för att ge en kund en generell rabatt eller rabatt för en enskild resa. Administratören kan också skapa upp nya kunder i denna vy, även om detta i normalfallet hanteras av kunden själv.
 
+<a id="org0002f6a"></a>
+
+## Behörighetshantering
+
+Vyn för behörighetshantering används för att skapa användare och tilldela dessa behörigheter i admin-systemet. Master-användaren anges vid konfiguration av systemet, men alla övriga roller hanteras i detta gränssnitt.
 
 <a id="org0002f6b"></a>
 
 ## Geodatahantering
 
 Systemet har kraftfulla och lättanvända funktioner för att hantera nya marknader och nuya resurser. I vyn för geodatahantering kan administratören lägga upp nya städer för företaget, samt skapa, uppdatera och radera information om enskilda resurser. 
+
+
 
 
