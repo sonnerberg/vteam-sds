@@ -1,30 +1,30 @@
 
 # Table of Contents
 
-1.  [Översikt](#org7a003be)
-    1.  [Beteende](#org613b6f8)
-    2.  [Krav som måste uppfyllas](#org547951f)
-        1.  [Positionsdata](#org2b47234)
-        2.  [Status](#org59ba7ad)
-        3.  [Sensor](#org93cb437)
-        4.  [Positionsdata och/eller Status och/eller Sensor](#org56ec0ce)
-    3.  [Cykel <-> server kommunikation](#org43f39df)
-        1.  [HTTP](#org61fd13f)
-        2.  [Websockets](#org20fd39f)
-        3.  [IoT protokoll](#orgf9b3946)
-    4.  [Simulering](#org12d7e2e)
-2.  [SDS](#org07de66f)
-    1.  [Att göra](#orgb6dc390)
-    2.  [Cykelns program](#orgaa9e1cc)
+1.  [Översikt](#orgff24b2b)
+    1.  [Beteende](#org91347f5)
+    2.  [Krav som måste uppfyllas](#org9b9c93d)
+        1.  [Positionsdata](#org689404c)
+        2.  [Status](#org57212d5)
+        3.  [Sensor](#org60cbc6c)
+        4.  [Positionsdata och/eller Status och/eller Sensor](#org4ad30f3)
+    3.  [Cykel <-> server kommunikation](#org91640b8)
+        1.  [HTTP](#org63ef627)
+        2.  [Websockets](#org0b7f3ff)
+        3.  [IoT protokoll](#org8bae176)
+    4.  [Simulering](#org783b4b3)
+2.  [SDS](#org662e5ec)
+    1.  [Att göra](#org3058b61)
+    2.  [Cykelns program](#org9094e66)
 
 
 
-<a id="org7a003be"></a>
+<a id="orgff24b2b"></a>
 
 # Översikt
 
 
-<a id="org613b6f8"></a>
+<a id="org91347f5"></a>
 
 ## Beteende
 
@@ -34,7 +34,7 @@
 -   En Admin ska kunna hantera och se info on cykeln.
 
 
-<a id="org547951f"></a>
+<a id="org9b9c93d"></a>
 
 ## Krav som måste uppfyllas
 
@@ -62,7 +62,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 -   [X] \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="org2b47234"></a>
+<a id="org689404c"></a>
 
 ### Positionsdata
 
@@ -78,7 +78,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 8.  Cykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
 
 
-<a id="org59ba7ad"></a>
+<a id="org57212d5"></a>
 
 ### Status
 
@@ -90,14 +90,14 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 6.  \* Ledig cykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
 
 
-<a id="org93cb437"></a>
+<a id="org60cbc6c"></a>
 
 ### Sensor
 
 1.  Cykeln varnar när den behöver laddas.
 
 
-<a id="org56ec0ce"></a>
+<a id="org4ad30f3"></a>
 
 ### Positionsdata och/eller Status och/eller Sensor
 
@@ -108,7 +108,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 5.  \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="org43f39df"></a>
+<a id="org91640b8"></a>
 
 ## Cykel <-> server kommunikation
 
@@ -117,7 +117,7 @@ och server att prata med varandra och med risk för eventuella tankevurpor och s
 så har jag kommit fram till tre alternativ. (feedback uppskattas!)
 
 
-<a id="org61fd13f"></a>
+<a id="org63ef627"></a>
 
 ### HTTP
 
@@ -126,7 +126,7 @@ Tusentals cyklar kräver lika många unika IP adresser och jag vet helt enkelt i
 servern ska kunna hitta/hålla reda på alla.
 
 
-<a id="org20fd39f"></a>
+<a id="org0b7f3ff"></a>
 
 ### Websockets
 
@@ -135,7 +135,7 @@ påverkar serverns prestanda har jag idag ingen aning om. Jag tror inte att sjä
 kopplingen påverkar så mycket, utan snarare vad servern faktiskt gör med data som den får.
 
 
-<a id="orgf9b3946"></a>
+<a id="org8bae176"></a>
 
 ### IoT protokoll
 
@@ -143,19 +143,19 @@ Detta känns som en överkurs och skulle bli väldigt förvånad om en IoT lösn
 Men alternativet finns.
 
 
-<a id="org12d7e2e"></a>
+<a id="org783b4b3"></a>
 
 ## Simulering
 
 Allt ligger lokalt så här är cykel <-> server kommunikation ett icke problem.
 
 
-<a id="org07de66f"></a>
+<a id="org662e5ec"></a>
 
 # SDS
 
 
-<a id="orgb6dc390"></a>
+<a id="org3058b61"></a>
 
 ## Att göra
 
@@ -173,37 +173,46 @@ Allt ligger lokalt så här är cykel <-> server kommunikation ett icke problem.
 -   Ett stycke om Simuleringen
 
 
-<a id="orgaa9e1cc"></a>
+<a id="org9094e66"></a>
 
 ## Cykelns program
 
-(Beroende på vilken lösning vi väjer kanske det inte blir via API&rsquo;et)
-Cykels huvudsakliga uppgift är att hela tiden meddela sin positon och status via API&rsquo;et.
+En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et.
 
-Tusentals cyklar finns i systemet. Så för att minimera belastningen på API och backend så
-uppdaterar en cykel sin position och status med olika intervall beroende på olika faktorer.
+Elsparkcykelns program har bara information som rör sin egen position samt hälsa och övrig information
+som rör dess omgivning skickas till den från backend.
 
--   En uthyrd cykel i rörelse skickar positionsdata ofta
--   En Ledig stillastående cykel skickar positionsdata sällan
--   En cykel på laddning eller service skickar positionsdata sällan
+-   Uthyrd till en kund
+-   Kund avslutar lånet
+-   Begränsa hastighet när den befinner sig i specifika zoner
+-   Stoppa den ifall den är utanför tillåtet område.
+-   Intagen på service
+-   Service utförd
 
-I varje cykel finns sensorer som känner av status hos cykeln och när statusen ändras
-så skickas det statusdata omgående.
+I varje elsparkcykel finns sensorer som känner av hälsan och när den ändras
+så skickas den informationen till backend.
 
 -   Batterinivån är låg
--   En lampa har gått sönder etc
+-   En lampa har gått sönder
+-   Punktering etc
 
-Så fort det blir rörelse på en cykel som ej är uthyrd skickas position och statusdata
-omgående, och sedan med ett tätt intervall tills cykeln återigen står stilla.
+Det är endast när elsparkcykelns status har blivit ändrad till &rsquo;uthyrd&rsquo; eller på &rsquo;service&rsquo; som
+elsparkcykeln är upplåst och går att köra. Så fort dess status återvänder till &rsquo;ledig&rsquo; så
+stängs den av och bromsas, och det enda sättat att flytta den är då att fysiskt lyfta upp och bära bort den.
+Blir det rörelse på en elsparkcykel som ej är uthyrd skickas då en varning omgående till backend,
+och sedan med ett tätt intervall tills den återigen står stilla. Så att personal kan hitta eventuellt stulna
+elsparkcykelar.
 
-Det är backend som talar om för cykeln när, och av vem, den blir uthyrd. Först då är
-det möjligt för en kund att framföra cykeln. När kunden väljer att avsluta lånet
-så talar backend om att cykeln inte längre är utlånad och den låses och kan inte längre
-köras.
+Tusentals elsparkcyklar finns i systemet. Så för att minimera belastningen på API och backend så
+uppdaterar dom sin position med olika intervall beroende på olika faktorer.
 
-Varje cykel sparar också en egen historik över alla sina resor.
+-   En uthyrd elsparkcykel i rörelse skickar positionisdata ofta
+-   En ledig och stillastående elsparkcykel skickar positionsdata sällan
+-   En elsparkcykel på laddning eller service skickar positionsdata sällan
 
--   Kund som hyrt cykeln
+Varje elsparkcykel sparar också en egen historik över alla sina resor.
+
+-   Resans kund
 -   Resans startposition samt klockslag
 -   Resans slutposition samt klockslag
 
