@@ -11,16 +11,16 @@ Vår förhoppning är att det system som vi presenterar här kommer att kunna l�
 ## Översikt över systemet
 
 ### Systemets användare
-Systemets huvudsakliga användare är kunder och administratörer. 
+Systemets huvudsakliga användare är kunder (benämns härefter som användare) och administratörer. 
 
-Kunder har möjlighet att hyra en cykel via en mobilapp som också visar status för senaste resan och en historik över gjorda resor. Kunder har också tillgång till ett webbgränssnitt där de kan se sina kontodetaljer och en historik över sin användning och betalningar.
+Användare har möjlighet att hyra en cykel via en mobilapplikation som också visar status för senaste resan och en historik över gjorda resor. Användare har också tillgång till ett webbgränssnitt där de kan se sina kontodetaljer och en historik över sin användning och betalningar.
 
-Administratörer har möjlighet att via ett webbgränssnitt se status på cyklar och stationer samt få information om kunder. Administratörer kan också lägga till nya cyklar, laddstationer, zoner för parkering och städer.
+Administratörer har möjlighet att via ett webbgränssnitt se status på cyklar och stationer samt få information om kunder. Administratörer kan också lägga till nya cyklar, laddstationer, zoner för parkering, förbjudna zoner och städer.
 
 ### Systemets delar
 Systemet omfattar följande huvudsakliga komponenter:
 
-- Databas med information om cyklar, laddstationer, parkeringszoner, tillåtna zoner att cykla i, kunder och administratörer.
+- Databas med information om cyklar, laddstationer, parkeringszoner, tillåtna zoner att cykla i, användare och administratörer.
 
 - Backend - en komponent som sköter kopplingen mellan API och databas.
 
