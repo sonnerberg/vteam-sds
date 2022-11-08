@@ -90,6 +90,23 @@ Som självständig, helt databasagnostisk komponent funkar den dock inte, så vi
 
 Shapely (https://shapely.readthedocs.io/en/) är ett bibliotek med många olika funktioner för geospatial analys.Med hjälp av Shapely kan man tillfredställa alla våra behov utom ett, ruttning av elsparkcyklar vid simulering. Shapely kräver dock att man skapar upp geometrierna man vill använda på ett Shapely-specifikt sätt. För att kunna hantera ett dataflöde från, säg, en webbkarta till och från Shapely verkar man behöva använda andra bibliotek, t ex Fiona (https://fiona.readthedocs.io/en/stable/). Slänger man in Folium (https://python-visualization.github.io/folium/modules.html#module-folium.vector_layers) i mixen har man också en komponent som renderar Leaflet-baserade webbkartor åt en. Men det blev ju väldigt många olika bibliotek här...
 
-PyQGIS (https://docs.qgis.org/3.22/en/docs/pyqgis_developer_cookbook/index.html) är ett Python-API mot QGIS, 
+#### PyQGIS
+
+PyQGIS (https://docs.qgis.org/3.22/en/docs/pyqgis_developer_cookbook/index.html) är ett Python-API mot QGIS, det globalt absolut mest använda desktop-GIS:et i öppen källkod. Genom PyQGIS exponeras i princip all (kärnan är skriven i C++, så det kan nog finnas en del som inte exponeras genom Python-API:et) funktionalitet som ingår i QGIS, och det är tveklöst tillräckligt för att lösa våra behov. Jag är dock inte hundra på exakt hur man initierar PyQGIS på egen hand, utan QGIS-klienten installerad. Google säger att det går men kan vara lite trassligt. PyQGIS ger oss också mycket mer än vi behöver, och inlärningskurvan är nog lite väl brant för att PyQGIS ska vara till nytta i detta sammanhang
+
+#### Routing-Py
+
+Det finns väldigt gott om olika Python-bibliotek för att hantera olika varianter av nätverksanalyser, som säkert skulle gå att använda i detta sammanhang. Det som verkar lättast att komma igång med av de jag hittat verkar dock vara Routing-Py (https://github.com/gis-ops/routing-py). Routing-Py erbjuder ett gränssnitt för att hantera anrop till befintliga ruttnings-API, och sedan hantera svaren, bl a rekommenderad färdväg. För att använda Routing-Py behövs API-nyckel till någon av ruttnings-API:erna. Openrouteservice, t ex, är gratis, men med ett tak på antalet anrop per dag/minut.
+
+#### Sammanfattning Python
+
+Det finns allt man behöver i Python-världen. Men till skillnad från JS-världen, där nån samlat ihop lite grejer som kan vara käcka i ett ganska enkelt paket, har Python-folket gått all in för länge sen. Det märks att man använder mycket Python i data science- och forskningssammanhang - man får lägga lite tid på att fatta grejerna, och också ofta anpassa sin data för att få det att lira.
+
+### PS: Kartservrar
+
+Som jag skrivit i inledningen kommer vi vilja visa många elsparkcyklar på kartan med god prestande. En förutsättning för att lyckas med detta är att implementera ett geografiskt index på datakällan, så att vi vet exakt vad som ska servas ut i en given kartvy. Ett annat sätt är att presentera alla objekten som bilder, istället för enskilda vektorer. Det lättaste sättet att lösa detta på är att plocka in en kartserver som renderar geodata som WMS - WebMapService - som en del av backend. En WMS plockar in data i form av vektorer eller rasterbilder (i fallet med cyklarna vektorer) och svarar på anrop med en färdigritad kartbild för just det område kartklienten är intresserad av. Vinsten med detta är att användarens webläsare slipper plocka hem 1000 enskilda elsparkcyklar, utan kan nöja sig med en bild som visar var dessa 1000 elsparkcyklar befinner sig i ögonblicket anropet mot WMS:en sker.
+
+Den  troligen mest använda kartservern i öppen källkod är Geoserver (https://geoserver.org/)
+
 
 
