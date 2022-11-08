@@ -34,6 +34,8 @@ Systemet omfattar följande huvudsakliga komponenter:
 
     - Ett cykelprogram som styr och övervakar cykeln (på, av, hastighet, begränsa hastighet, position, behöver service/laddning).
 
+Samtliga applikationer som kopplas mot API:et måste autentisera sin anslutning.
+
 Nedanstående diagram visar en översikt över systemets huvudkomponenter samt hur de relaterar till- och kommunicerar med varandra i olika lager. [3]
 
 
