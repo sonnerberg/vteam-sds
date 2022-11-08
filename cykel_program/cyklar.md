@@ -1,30 +1,30 @@
 
-# Table of Contents
+# Inneh&aring;ll
 
-1.  [Översikt](#org9c4f134)
-    1.  [Beteende](#org234b968)
-    2.  [Krav som måste uppfyllas](#org2c05e9f)
-        1.  [Positionsdata](#orgd7477f0)
-        2.  [Status](#orgf9104ec)
-        3.  [Sensor](#orgf2b88ab)
-        4.  [Positionsdata och/eller status och/eller sensor](#orgcd000cd)
-    3.  [Elsparkcykel <-> server kommunikation](#org09aead3)
-        1.  [HTTP](#org62e0e71)
-        2.  [Websockets](#org354abc5)
-        3.  [IoT protokoll](#orgb4af644)
-    4.  [Simulering](#orgf063198)
-2.  [SDS](#org94e6a78)
-    1.  [Att göra](#org248a7e4)
-    2.  [Cykelns program](#org6267655)
+-   [Översikt](#org6bd1c17)
+    -   [Beteende](#orgde8e420)
+    -   [Krav som måste uppfyllas](#org1143c7f)
+        -   [Positionsdata](#org1f6a366)
+        -   [Status](#orgf56a1bc)
+        -   [Sensor](#org0c72933)
+        -   [Positionsdata och/eller status och/eller sensor](#org0754226)
+    -   [Elsparkcykel <-> server kommunikation](#orgda3bf18)
+        -   [HTTP](#org9d12b10)
+        -   [Websockets](#org74f00f1)
+        -   [IoT protokoll](#org71950ba)
+    -   [Simulering](#org355d067)
+-   [SDS](#org3d17a31)
+    -   [Att göra](#org94bfbf5)
+    -   [Cykelns program](#orgd140aaf)
 
 
 
-<a id="org9c4f134"></a>
+<a id="org6bd1c17"></a>
 
 # Översikt
 
 
-<a id="org234b968"></a>
+<a id="orgde8e420"></a>
 
 ## Beteende
 
@@ -34,7 +34,7 @@
 -   En administratör ska kunna hantera och se information om elsparkcykeln.
 
 
-<a id="org2c05e9f"></a>
+<a id="org1143c7f"></a>
 
 ## Krav som måste uppfyllas
 
@@ -62,7 +62,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 -   [X] \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="orgd7477f0"></a>
+<a id="org1f6a366"></a>
 
 ### Positionsdata
 
@@ -78,7 +78,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 8.  Elsparkcykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
 
 
-<a id="orgf9104ec"></a>
+<a id="orgf56a1bc"></a>
 
 ### Status
 
@@ -90,14 +90,14 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 6.  \* Ledig elsparkcykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
 
 
-<a id="orgf2b88ab"></a>
+<a id="org0c72933"></a>
 
 ### Sensor
 
 1.  Elsparkcykeln varnar när den behöver laddas.
 
 
-<a id="orgcd000cd"></a>
+<a id="org0754226"></a>
 
 ### Positionsdata och/eller status och/eller sensor
 
@@ -108,7 +108,7 @@ Vilken data behövs för att tillmötesgå samtliga krav?
 5.  \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 
-<a id="org09aead3"></a>
+<a id="orgda3bf18"></a>
 
 ## Elsparkcykel <-> server kommunikation
 
@@ -117,7 +117,7 @@ och server att prata med varandra och med risk för eventuella tankevurpor och s
 så har jag kommit fram till tre alternativ. (feedback uppskattas!)
 
 
-<a id="org62e0e71"></a>
+<a id="org9d12b10"></a>
 
 ### HTTP
 
@@ -126,7 +126,7 @@ Tusentals elsparkcyklar kräver lika många unika IP adresser och jag vet helt e
 servern ska kunna hitta/hålla reda på alla.
 
 
-<a id="org354abc5"></a>
+<a id="org74f00f1"></a>
 
 ### Websockets
 
@@ -135,7 +135,7 @@ påverkar serverns prestanda har jag idag ingen aning om. Jag tror inte att sjä
 kopplingen påverkar så mycket, utan snarare vad servern faktiskt gör med data som den får.
 
 
-<a id="orgb4af644"></a>
+<a id="org71950ba"></a>
 
 ### IoT protokoll
 
@@ -143,19 +143,19 @@ Detta känns som en överkurs och skulle bli väldigt förvånad om en IoT lösn
 Men alternativet finns.
 
 
-<a id="orgf063198"></a>
+<a id="org355d067"></a>
 
 ## Simulering
 
 Allt ligger lokalt så här är elsparkcykel <-> server kommunikation ett mindre problem.
 
 
-<a id="org94e6a78"></a>
+<a id="org3d17a31"></a>
 
 # SDS
 
 
-<a id="org248a7e4"></a>
+<a id="org94bfbf5"></a>
 
 ## Att göra
 
@@ -173,7 +173,7 @@ Allt ligger lokalt så här är elsparkcykel <-> server kommunikation ett mindre
 -   Ett stycke om Simuleringen
 
 
-<a id="org6267655"></a>
+<a id="orgd140aaf"></a>
 
 ## Cykelns program
 
@@ -196,8 +196,8 @@ så skickas den informationen till backend.
 -   En lampa har gått sönder
 -   Punktering etc.
 
-Det är endast när elsparkcykelns status har blivit ändrad till &ldquo;uthyrd&rdquo; eller på &ldquo;service som
-elsparkcykeln är upplåst och går att köra. Så fort dess status återvänder till &rdquo;ledig&ldquo; så
+Det är endast när elsparkcykelns status har blivit ändrad till &rdquo;uthyrd&rdquo; eller på &rdquo;service som
+elsparkcykeln är upplåst och går att köra. Så fort dess status återvänder till &rdquo;ledig&rdquo; så
 stängs den av och bromsas, och det enda sättat att flytta den är då att fysiskt lyfta upp och bära bort den.
 Blir det rörelse på en elsparkcykel som ej är uthyrd skickas då en varning omgående till backend,
 och sedan med ett tätt intervall tills den återigen står stilla. Detta möjliggör att personal kan hitta eventuellt stulna

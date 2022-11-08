@@ -1,5 +1,7 @@
 #+title: Cyklar
 #+description: Cykelns funktioner och krav
+#+language: sv
+#+options: num:nil
 
 * Översikt
 
@@ -145,7 +147,7 @@ elsparkcykelar.
 Tusentals elsparkcyklar finns i systemet. Så för att minimera belastningen på API och backend så
 uppdaterar dom sin position med olika intervall beroende på olika faktorer.
 
-- En uthyrd elsparkcykel i rörelse skickar positionisdata ofta
+- En uthyrd elsparkcykel i rörelse skickar positionsdata ofta
 - En ledig och stillastående elsparkcykel skickar positionsdata sällan
 - En elsparkcykel på laddning eller service skickar positionsdata sällan
 
