@@ -76,6 +76,13 @@ En användare har också relationer till andra entiteter, den kan ha:
 - en elsparkcykel (om användaren hyr en cykel)
 - en eller flera (historiska) resor
 
+## Administratör
+Denna tabell innehåller information om administratörer. Varje administratör har:
+- ett unikt id
+- ett användarnamn
+- ett lösenord
+- en typ som beskriver administratörens behörighet (huvudadministratör eller vanlig administratör)
+
 ## Resa
 Denna tabell innehåller information om resor. Varje resa har:
 - ett unikt id
