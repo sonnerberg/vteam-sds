@@ -47,7 +47,7 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 
 [1] https://www.transportstyrelsen.se/globalassets/global/publikationer-och-rapporter/vag/slutrapport-utredning-regler-eldrivna-enpersonsfordon.pdf
 
-[2] Jönköpingsposten 3/9 2022 (byt källa om möjligt) ytterligare källa: https://rkrattsbaser.gov.se/sfst?bet=1998:1276 $4
+[2] Jönköpingsposten 3/9 2022 samt https://rkrattsbaser.gov.se/sfst?bet=1998:1276 $4
 
 [3] https://www.oreilly.com/content/software-architecture-patterns/
 
