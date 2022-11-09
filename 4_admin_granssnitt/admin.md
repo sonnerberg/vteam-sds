@@ -1,12 +1,11 @@
 
 # Administratörsgränssnitt
 
-1.  [Administratörsgränssnitt](#org8a596ce)
-    1.  [Översikt och daglig drift](#org2ecd51a)
-    2.  [Hantering av kunder](#org34ef10e)
-    3.  [Behörighetshantering](#org0002f6a)
-    4.  [Geodatahantering](#org0002f6b)
-
+1. [Administratörsgränssnitt](#org8a596ce)
+    1. [Översikt och daglig drift](#org2ecd51a)
+    2. [Hantering av kunder](#org34ef10e)
+    3. [Behörighetshantering](#org0002f6a)
+    4. [Geodatahantering](#org0002f6b)
 
 <a id="org8a596ce"></a>
 
@@ -47,8 +46,7 @@ Vyn för behörighetshantering används för att skapa användare och tilldela d
 
 ## Geodatahantering
 
-Systemet har kraftfulla och lättanvända funktioner för att hantera nya marknader och nya resurser. I vyn för geodatahantering kan administratören lägga till nya städer för företaget, samt skapa, uppdatera och radera information om enskilda resurser. 
+Systemet har kraftfulla och lättanvända funktioner för att hantera nya marknader och nya resurser. I vyn för geodatahantering kan administratören lägga till nya städer för företaget, samt skapa, uppdatera och radera information om enskilda resurser.
 
-
-
-
+![Systemöversikt](admin.drawio.png)
+_Översikt över systemet_

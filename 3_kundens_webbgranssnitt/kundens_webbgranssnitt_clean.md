@@ -71,3 +71,18 @@ Användaren kan också se sin färdhistorik som innefattar:
 `/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
 `/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
 `/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
+
+![Hemskärm](desktop_-_home.png)
+*Hemskärm i webbläsare för dator*
+
+![Hemskärm](desktop_-_password_login.png)
+*Logga in i webbläsare för dator*
+
+![Hemskärm](desktop_-_register.png)
+*Registrera i webbläsare för dator*
+
+![Hemskärm](desktop_-_contact.png)
+*Kontakta företaget i webbläsare för dator*
+
+![Hemskärm](desktop_-_fr%C3%A5gor_och_svar.png)
+*Frågor och svar i webbläsare för dator*
