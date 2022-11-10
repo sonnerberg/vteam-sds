@@ -1,3 +1,5 @@
+# Elskparkcyklar AB
+
 ## Inledning
 
 I detta dokument beskrivs ett system som hanterar uthyrning av elsparkcyklar. Systemet ger kunder möjlighet att skapa användarkonton och hyra cyklar, administratörer ges möjlighet att administrera cyklar, laddstationer, parkeringsplatser, städer och information om kunder. Systemet innehåller också ett program för cykeln som styr och övervakar denna.
@@ -61,7 +63,7 @@ UML-diagram (draw.io t.ex.)
 
 Komponentdiagram
 
-# Kundens app
+## Kundens app
 
 Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning.
 I verkligheten görs detta genom att scanna en QR-kod som identifierar elsparkcykeln. [referens](https://turiststockholm.se/sightseeing-guider/hyra-elsparkcykel-i-stockholm-med-voi/).
@@ -70,8 +72,7 @@ I vårt program indentifieras en elsparkcykel genom att från en kartbild välja
 Då en uthyrning påbörjats så kan användaren manövrera elsparkcykeln. De manövreringsmöjligheter som finns är:
 
 - elsparkcykelns hastighet (gashandtag)
-- svänga vänster och höger genom att svänga med styret
-- bromsa ***(finns det mer än en broms???)***
+- bromsa
 
 Användaren kan också få information från den hyrda elsparkcykeln i form av:
 
@@ -103,7 +104,7 @@ Denna kartbild visar var samtliga lediga elsparkcyklar finns att hitta.
 ![Hemskärm](mobile_-_faq.png)
 *Frågor och svar i mobilapp*
 
-# Kundens webbgränssnitt
+## Kundens webbgränssnitt
 
 När en användare besöker företagets hemsida så behöver användaren registera ett konto för att kunna hyra elsparkcyklar. Det finns flera sätt att skapa ett konto. Antingen görs det på sedvanligt vis genom att uppge:
 
@@ -192,17 +193,7 @@ Användaren kan också se sin färdhistorik som innefattar:
 ![Hemskärm](desktop_-_fr%C3%A5gor_och_svar.png)
 *Frågor och svar i webbläsare för dator*
 
-# Administratörsgränssnitt
-
-1. [Administratörsgränssnitt](#org8a596ce)
-    1. [Översikt och daglig drift](#org2ecd51a)
-    2. [Hantering av kunder](#org34ef10e)
-    3. [Behörighetshantering](#org0002f6a)
-    4. [Geodatahantering](#org0002f6b)
-
-<a id="org8a596ce"></a>
-
-# Administratörsgränssnitt
+## Administratörsgränssnitt
 
 Systemets administratörsgränssnitt används av behöriga användare för att få en översikt över företagets alla resurser:
 
@@ -215,27 +206,19 @@ Systemets administratörsgränssnitt används av behöriga användare för att f
 
 Administratörsgränssnitt innehåller vyer för att inspektera resurser, skicka kommandon till enskilda cyklar, hantera kundinformation, hantera behörigheter, samt uppdatera systemet med ny data, t ex nya städer man etablerar sig i, nya cyklar, nya parkeringsplatser etc.
 
-<a id="org2ecd51a"></a>
-
 ## Översikt och daglig drift
 
 I vyn för översikt och daglig drift presenteras all information kring cyklar, laddstationer, parkeringsplatser och områden med särskilda bestämmelser för varje stad man verkar i. Vyn är kartcentrerad. I kartan kan man se information om aktuell status för alla tillgängliga resurser i vald stad, samt även filtrera kartvyn baserat på resursers typ, identitet eller status. Denna vy används också för att skicka manuella driftkommandon till enskilda cyklar. Det kan t ex  vara ett kommando för att stoppa cykeln, om administratören ser behov av det.
 
 FRÅGA - MAN TÄNKER SIG ATT STOPPKOMMANDO TILL CYKELN BORDE SKE AUTOMATISKT OM EN CYKEL ÅKER FÖR LÅNGT UT TEX.
 
-<a id="org34ef10e"></a>
-
 ## Hantering av kunder
 
 Kundvyn är en klassisk listvy. Här kan man se en lista på alla företagets kunder, som kan filtreras på stad, användarnamn, antal gjorda resor m m. I denna vyn kan administratören också uppdatera information om enskilda kunder, t ex för att ge en kund en generell rabatt eller rabatt för en enskild resa. Administratören kan också skapa upp nya kunder i denna vy, även om detta i normalfallet hanteras av kunden själv.
 
-<a id="org0002f6a"></a>
-
 ## Behörighetshantering
 
 Vyn för behörighetshantering används för att skapa användare och tilldela dessa behörigheter i administratörssystemet. Huvudadministratören anges vid konfiguration av systemet, men alla övriga roller hanteras i detta gränssnitt.
-
-<a id="org0002f6b"></a>
 
 ## Geodatahantering
 
@@ -244,107 +227,48 @@ Systemet har kraftfulla och lättanvända funktioner för att hantera nya markna
 ![Systemöversikt](admin.drawio.png)
 *Översikt över systemet*
 
-# Inneh&aring;ll
+## Översikt cykeldator
 
-- [Översikt](#org6bd1c17)
-  - [Beteende](#orgde8e420)
-  - [Krav som måste uppfyllas](#org1143c7f)
-    - [Positionsdata](#org1f6a366)
-    - [Status](#orgf56a1bc)
-    - [Sensor](#org0c72933)
-    - [Positionsdata och/eller status och/eller sensor](#org0754226)
-  - [Elsparkcykel <-> server kommunikation](#orgda3bf18)
-    - [HTTP](#org9d12b10)
-    - [Websockets](#org74f00f1)
-    - [IoT protokoll](#org71950ba)
-  - [Simulering](#org355d067)
-- [SDS](#org3d17a31)
-  - [Att göra](#org94bfbf5)
-  - [Cykelns program](#orgd140aaf)
-
-<a id="org6bd1c17"></a>
-
-# Översikt
-
-<a id="orgde8e420"></a>
-
-## Beteende
+### Beteende
 
 - Varje elsparkcykel har sitt eget program och id.
 - En elsparkcykel ska kunna meddela position/status med jämna mellanrum.
 - En användare ska kunna hyra och lämna tillbake en elsparkcykel.
 - En administratör ska kunna hantera och se information om elsparkcykeln.
 
-<a id="org1143c7f"></a>
-
-## Krav som måste uppfyllas
-
-Vilken data behövs för att tillmötesgå samtliga krav?
-
-- [X] Man kan se alla städer och elsparkcyklar som finns i systemet.
-- [X] Varje stad har ett antal laddstationer där elsparkcyklarna kan laddas. Användaren eller servicepersonalen kan förflytta en elsparkcykel dit.
-- [X] Varje stad har ett antal accepterade platser där elsparkcyklar bör parkeras.
-- [X] Elsparkcyklar kan även parkeras utanför laddstationer och utanför accepterade platser,men det kan då tillkomma en extra avgift för användaren. Detta kallas fri parkering.
-- [X] Man kan se var elsparkcyklarna finns parkerade.
-- [X] Man kan se hur många (och vilka) elsparkcyklar som finns på varje laddstation och accepterad parkeringsplats.
-- [X] Varje resa som en användare gör kostar pengar, dels en fast taxa och en rörlig taxa per tidsenhet och en taxa beroende av var de parkerar.
-- [X] Om en användare tar en elsparkcykel som står på fri parkering - och lämnar på en definierad parkering - så blir startavgiften lite lägre
-- [X] Man kan få en översikt över laddstationer och elsparkcyklar och deras position på en karta.
-- [X] (extra) Visa en kartbild där alla alla lediga elsparkcyklar finns.
-- [X] Elsparkcykeln meddelar dess position med jämna mellanrum.
-- [X] Elsparkcykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
-- [X] Man skall kunna stänga av/stoppa en elsparkcykel så att den inte kan köras längre.
-- [X] När en användare hyr elsparkcykeln är det möjligt att starta den och köra.
-- [X] Användaren kan lämna tillbaka en elsparkcykel och släppa kontrollen över den.
-- [X] Elsparkcykeln varnar när den behöver laddas.
-- [X] Elsparkcykeln sparar en logg över sina resor med start (plats, tid) och slut (plats, tid) samt användare.
-- [X] När elsparkcykeln tas in för underhåll eller laddning så markeras det att elsparkcykeln är i underhållsläge. En elsparkcykel som laddas på en laddstation kan inte hyras av en användare och en röd lampa visar att den inte är tillgänglig.
-- [X] \* Ledig elsparkcykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
-- [X] \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
-
-<a id="org1f6a366"></a>
-
 ### Positionsdata
 
-1. Man kan få en översikt över elsparkcyklar och deras position på en karta
-2. Varje stad har ett antal laddstationer där elsparkcyklarna kan laddas.
-    Användaren eller servicepersonalen kan förflytta en elsparkcykel dit.
-3. Varje stad har ett antal accepterade platser där elsparkcyklar bör parkeras.
-4. Elsparkcyklar kan även parkeras utanför laddstationer och utanför accepterade platser,
-    men det kan då tillkomma en extra avgift för användren. Detta kallas fri parkering.
-5. Man kan se var elsparkcyklarna finns parkerade.
-6. (extra) Visa en kartbild där alla alla lediga elsparkcyklar finns.
-7. Elsparkcykeln meddelar dess position med jämna mellanrum.
-8. Elsparkcykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
-
-<a id="orgf56a1bc"></a>
+1.Man kan få en översikt över elsparkcyklar och deras position på en karta
+1.Varje stad har ett antal laddstationer där elsparkcyklarna kan laddas.
+1 Användaren eller servicepersonalen kan förflytta en elsparkcykel dit.
+1.Varje stad har ett antal accepterade platser där elsparkcyklar bör parkeras.
+1.Elsparkcyklar kan även parkeras utanför laddstationer och utanför accepterade platser,
+1 men det kan då tillkomma en extra avgift för användren. Detta kallas fri parkering.
+1.Man kan se var elsparkcyklarna finns parkerade.
+1.(extra) Visa en kartbild där alla alla lediga elsparkcyklar finns.
+1.Elsparkcykeln meddelar dess position med jämna mellanrum.
+1.Elsparkcykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
 
 ### Status
 
-1. Man kan se alla städer och elsparkcyklar som finns i systemet.
-2. Man skall kunna stänga av/stoppa en elsparkcykel så att den inte kan köras längre.
-3. När en användare hyr elsparkcykeln är det möjligt att starta den och köra.
-4. Användaren kan lämna tillbaka en elsparkcykel och släppa kontrollen över den.
-5. När elsparkcykeln tas in för underhåll eller laddning så markeras det att elsparkcykeln är i underhållsläge. En elsparkcykel som laddas på en laddstation kan inte hyras av en användare och en röd lampa visar att den inte är tillgänglig.
-6. \* Ledig elsparkcykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
-
-<a id="org0c72933"></a>
+1.Man kan se alla städer och elsparkcyklar som finns i systemet.
+1.Man skall kunna stänga av/stoppa en elsparkcykel så att den inte kan köras längre.
+1.När en användare hyr elsparkcykeln är det möjligt att starta den och köra.
+1.Användaren kan lämna tillbaka en elsparkcykel och släppa kontrollen över den.
+1.När elsparkcykeln tas in för underhåll eller laddning så markeras det att elsparkcykeln är i underhållsläge. En elsparkcykel som laddas på en laddstation kan inte hyras av en användare och en röd lampa visar att den inte är tillgänglig.
+1.\* Ledig elsparkcykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
 
 ### Sensor
 
-1. Elsparkcykeln varnar när den behöver laddas.
-
-<a id="org0754226"></a>
+1.Elsparkcykeln varnar när den behöver laddas.
 
 ### Positionsdata och/eller status och/eller sensor
 
-1. Man kan se hur många (och vilka) elsparkcyklar som finns på varje laddstation och accepterad parkeringsplats.
-2. Varje resa som en användare gör kostar pengar, dels en fast taxa och en rörlig taxa per tidsenhet och en taxa beroende av var de parkerar.
-3. Om en användare tar en elsparkcykel som står på fri parkering - och lämnar på en definierad parkering - så blir startavgiften lite lägre
-4. Elsparkcykeln sparar en logg över sina resor med start (plats, tid) och slut (plats, tid) samt användare.
-5. \* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
-
-<a id="orgda3bf18"></a>
+1.Man kan se hur många (och vilka) elsparkcyklar som finns på varje laddstation och accepterad parkeringsplats.
+1.Varje resa som en användare gör kostar pengar, dels en fast taxa och en rörlig taxa per tidsenhet och en taxa beroende av var de parkerar.
+1.Om en användare tar en elsparkcykel som står på fri parkering - och lämnar på en definierad parkering - så blir startavgiften lite lägre
+1.Elsparkcykeln sparar en logg över sina resor med start (plats, tid) och slut (plats, tid) samt användare.
+1.\* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
 
 ## Elsparkcykel <-> server kommunikation
 
@@ -352,15 +276,11 @@ Här har jag, med mina begränsade kunskaper, vänt och vridit på olika sätt a
 och server att prata med varandra och med risk för eventuella tankevurpor och snetänk
 så har jag kommit fram till tre alternativ. (feedback uppskattas!)
 
-<a id="org9d12b10"></a>
-
 ### HTTP
 
 Att använda HTTP går bra från elsparkcykel till server, men är värre åt andra hållet.
 Tusentals elsparkcyklar kräver lika många unika IP adresser och jag vet helt enkelt inte hur
 servern ska kunna hitta/hålla reda på alla.
-
-<a id="org74f00f1"></a>
 
 ### Websockets
 
@@ -368,41 +288,14 @@ Med en websockets connection kan data flöda åt båda hållen, men hur tusental
 påverkar serverns prestanda har jag idag ingen aning om. Jag tror inte att själva
 kopplingen påverkar så mycket, utan snarare vad servern faktiskt gör med data som den får.
 
-<a id="org71950ba"></a>
-
 ### IoT protokoll
 
 Detta känns som en överkurs och skulle bli väldigt förvånad om en IoT lösning hade förväntats av oss.
 Men alternativet finns.
 
-<a id="org355d067"></a>
-
 ## Simulering
 
 Allt ligger lokalt så här är elsparkcykel <-> server kommunikation ett mindre problem.
-
-<a id="org3d17a31"></a>
-
-# SDS
-
-<a id="org94bfbf5"></a>
-
-## Att göra
-
-- Beskrivning av hur det fungerar
-  - val av språk
-    - varför?
-  - implementation
-    - hur?
-    - varför?
-
-- Ett/flera usecases med tillhörande sekvensdiagram
-  - hyra, lämna tillbaka en elsparkcykel
-  - service
-
-- Ett stycke om Simuleringen
-
-<a id="orgd140aaf"></a>
 
 ## Cykelns program
 
@@ -439,13 +332,13 @@ uppdaterar dom sin position med olika intervall beroende på olika faktorer.
 - En ledig och stillastående elsparkcykel skickar positionsdata sällan
 - En elsparkcykel på laddning eller service skickar positionsdata sällan
 
-Varje elsparkcykel sparar också en egen historik över alla sina resor.
+Vae elsparkcykel sparar också en egen historik över alla sina resor.
 
 - Resans användare
 - Resans startposition samt klockslag
 - Resans slutposition samt klockslag
 
-# Databas
+## Databas
 
 Information systemets olika entiteter samlas i en databas. En entitet kan t.ex. vara "användare", "stad" eller "administratör". Varje entitet har en egen tabell i databasen. I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.
 
@@ -560,30 +453,14 @@ Denna tabell innehåller information om resor. Varje resa har:
 
 Nedanstående bild visar de entiteter som förekommer i databasen, deras attribut och inbördes relationer.
 
-![Översikt databas](databas.md)
-*Översikt databas*
-
-# Inneh&aring;ll
-
-- [REST-API](#orgbe735e5)
-  - [Dokumentation](#orgdda9518)
-  - [Versioner](#org93e4dc0)
-  - [Autentisering](#org6f2c41d)
-    - [Godkänd autentisering](#orge9bf721)
-    - [Misslyckad autentisering](#orgf887b34)
-
-<a id="orgbe735e5"></a>
-
-# REST-API
+## REST-API
 
 (Hur göra en intern github länk till Richards fantastiska API spreadsheet?)
 (Känns som jag behöver skriva lite mer i denna del men kommer inte på vad.)
 
 Systemets applikationer använder ett REST-API för att kommunicera med systemets backend.
 
-<a id="orgdda9518"></a>
-
-## Dokumentation
+### Dokumentation
 
 För att underlätta för tredjepartsleverntörer att bygga externa tjänster och applicationer är
 REST-API&rsquo;et väldokumenterat.
@@ -591,23 +468,15 @@ REST-API&rsquo;et väldokumenterat.
 - Länk till dokumentationen?
 - Ett exempel från dokumentationen på en enskild endpoint?
 
-<a id="org93e4dc0"></a>
-
 ## Versioner
 
 REST-API&rsquo;et har byggts för att vara framtidssäkert där uppdateringar och tillägg hanteras med
 versionsnummer som en del i URI:n.
 
-- &#x2026;/v1/endpoint
-
-<a id="org6f2c41d"></a>
-
 ## Autentisering
 
 Alla applikationer som använder REST-API&rsquo;et måste autentisera (JWT?) sig för att kontrollera att endast
 endpoints som rör applikationen finns tillgängliga.
-
-<a id="orge9bf721"></a>
 
 ### Godkänd autentisering
 
@@ -621,7 +490,6 @@ En applikation för administratörer kan se alla användare i systemet.
                 "id": 1,
                 "name": "John Doe",
                 ...
-
             },
             {
                 "id": 2,
@@ -630,8 +498,6 @@ En applikation för administratörer kan se alla användare i systemet.
             }
         ]
     }
-
-<a id="orgf887b34"></a>
 
 ### Misslyckad autentisering
 
