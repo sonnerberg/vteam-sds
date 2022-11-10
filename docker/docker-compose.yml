@@ -1,0 +1,38 @@
+version: "3.4"
+
+
+services:
+
+   node:
+    container_name: node
+    build: ./node
+    command: /code/node_modules/.bin/nodemon /code/app/index.js
+    volumes:
+      - ./node/app:/code/app
+    ports:
+      - 3001:3000
+    restart: on-failure
+
+   mariadb:
+     container_name: maria
+     image: mariadb:latest
+     restart: always
+     ports:
+       - 3307:3306
+     environment:
+       MYSQL_ROOT_PASSWORD: example
+       MYSQL_DATABASE: mydb
+       MYSQL_USER: user
+       MYSQL_PASSWORD: user
+  
+#    react:
+#      container_name: react-frontend
+#      build: ./react
+#      working_dir: /code/app
+#      command: npm start
+#      volumes:
+#        - ./react/app:/code/app
+#      ports:
+#        - 8083:3000
+#      restart: on-failure
+# 
