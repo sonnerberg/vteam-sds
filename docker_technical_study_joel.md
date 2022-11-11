@@ -216,12 +216,25 @@ To stop the containers and take down the network, open a new terminal window go 
 
 Let us proceed with `mariadb`.
 
+First we create a .env file in the project root to store database passwords.
+
+```bash
+.
+└── .env
+```
+
+```bash
+ROOT_PASS="YOUR ROOT PASSWORD"
+USER_PASS="YOUR USER PASSWORD"
+```
+
+We can specify an image to use in docker-compose.yml. Here we are using mariadb:latest: [mariadb](https://hub.docker.com/_/mariadb).
+
 ```bash
 .
 └── docker-compose.yml
 ```
 
-We can specify an image to use in docker-compose.yml. Here we are using mariadb:latest: [mariadb](https://hub.docker.com/_/mariadb).
 
 ```bash
 version: "3.4"
@@ -245,10 +258,10 @@ services:
     volumes:
      - ./mariadb/sql:/docker-entrypoint-initdb.d
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASS}
       MYSQL_DATABASE: mydb
       MYSQL_USER: user
-      MYSQL_PASSWORD: user
+      MYSQL_PASSWORD: ${USER_PASS}
 ```
 
 We are mapping ./mariadb/sql to /docker-entrypoint-initdb.d in the container. All SQL files in
@@ -294,7 +307,7 @@ As explained at [https://hub.docker.com/mariadb](https://hub.docker.com/mariadb)
 docker run -it --network vteam_default --rm mariadb mariadb -hmaria -uuser -p
 ```
 
-Enter the user password (user) and you can enter some SQL queries, maybe see if there is a database called mydb and a table called data? Exit the MariaDB instance and the container by typing exit.
+Enter the user password you specified in .env and you can enter some SQL queries, maybe see if there is a database called mydb and a table called data? Exit the MariaDB instance and the container by typing exit.
 
 You can stop the containers and take down the network by opening a new terminal and go to your app directory issuing: ```docker-compose down```
 
@@ -332,10 +345,10 @@ services:
     volumes:
      - ./mariadb/sql:/docker-entrypoint-initdb.d
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASS}
       MYSQL_DATABASE: mydb
       MYSQL_USER: user
-      MYSQL_PASSWORD: user
+      MYSQL_PASSWORD: ${USER_PASS}
 
   react:
     container_name: react
@@ -354,7 +367,24 @@ Issue: `docker-compose up --build` to start everything. Now you can visit [http:
 You can stop the containers and take down the network by opening a new terminal and go to your app directory issuing: ```docker-compose down```
 
 ## Using the containers together
-We can now use the containers together. We begin by connecting to the MariaDB instance from the node container. To do this we need to install the MariaDB Node.js Connector. We can do this in the Docker file in the node directory:
+We can now use the containers together. We begin by connecting to the MariaDB instance from the node container. 
+
+First we create a .env file in the node directory
+
+```bash
+.
+└── node
+    └── .env
+```
+
+Store the password for your MariaDB user in the file.
+
+```bash
+DB_PASS="YOUR DB USER PASSWORD"
+```
+
+
+Then we need to install the MariaDB Node.js Connector. We can do this in the Docker file in the node directory and we also copy the .env file and install the npm package dotenv to read in environment variables from .env in the node container.
 
 ```bash
 .
@@ -367,7 +397,9 @@ FROM node:latest
 
 WORKDIR /code
 
-RUN npm install express nodemon mariadb
+COPY .env ./
+
+RUN npm install express nodemon mariadb dotenv
 ```
 
 Then we add some code to node/index.js, there is an example at [https://mariadb.com/kb/en/getting-started-with-the-nodejs-connector/](https://mariadb.com/kb/en/getting-started-with-the-nodejs-connector/) which we modify below.
@@ -380,15 +412,17 @@ Then we add some code to node/index.js, there is an example at [https://mariadb.
 ```
 
 ```bash
+require('dotenv').config();
 const express = require('express')
 const app = express()
 const port = 3000
 
 const mariadb = require('mariadb');
+
 const pool = mariadb.createPool({
     host: 'mariadb', 
     user:'user', 
-    password: 'user',
+    password: `${process.env.DB_PASS}`,
     database: 'mydb',
     connectionLimit: 5
 });
@@ -439,7 +473,9 @@ FROM node:latest
 
 WORKDIR /code
 
-RUN npm install express nodemon mariadb cors
+COPY .env ./
+
+RUN npm install express nodemon mariadb dotenv cors
 ```
 Then we set up cors between the Express app and localhost:8083 where the React app is running.
 ```bash
@@ -450,6 +486,7 @@ Then we set up cors between the Express app and localhost:8083 where the React a
 ```
 
 ```bash
+require('dotenv').config();
 const express = require('express')
 const cors = require("cors");
 const app = express()
@@ -462,7 +499,7 @@ const mariadb = require('mariadb');
 const pool = mariadb.createPool({
     host: 'mariadb', 
     user:'user', 
-    password: 'user',
+    password: `${process.env.DB_PASS}`,
     database: 'mydb',
     connectionLimit: 5
 });
