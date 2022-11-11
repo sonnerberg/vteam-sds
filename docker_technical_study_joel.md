@@ -494,13 +494,14 @@ app.listen(port, () => {
 });
 ```
 
-Then we add a button with a function to fetch and display data from the Express app (which gets its data from the maria container). Add a Button.js file in the react/app directory
+Then we add a button with a function to fetch and display data from the Express app (which gets its data from the maria container). Add a Button.js file in the react/app/src directory
 
 ```bash
 .
 └── react
     └── app
-        └── Button.js
+        └── src
+            └── Button.js
 ```
 
 Add this to the file:
@@ -515,20 +516,21 @@ export default  function Button({handleClick}) {
 
 ```
 
-Then modify react/app/App.js:
+Then modify react/app/src/App.js:
 
 ```bash
 .
 └── react
     └── app
-        └── App.js
+        └── src
+            └── App.js
 ```
 
 ```bash
 import logo from './logo.svg';
 import './App.css';
 import Button from './Button';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
   const [message, setMessage] = useState('');
