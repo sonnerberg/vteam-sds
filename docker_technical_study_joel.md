@@ -381,12 +381,8 @@ Then we add some code to node/index.js, there is an example at [https://mariadb.
 
 ```bash
 const express = require('express')
-const cors = require("cors");
 const app = express()
 const port = 3000
-
-app.use(cors());
-app.options('http://localhost:8083', cors());
 
 const mariadb = require('mariadb');
 const pool = mariadb.createPool({
@@ -464,17 +460,18 @@ app.options('http://localhost:8083', cors());
 
 const mariadb = require('mariadb');
 const pool = mariadb.createPool({
-     host: 'mariadb', 
-     user:'user', 
-     password: 'user',
-     connectionLimit: 5
+    host: 'mariadb', 
+    user:'user', 
+    password: 'user',
+    database: 'mydb',
+    connectionLimit: 5
 });
 
 async function asyncFunction() {
   let conn;
   try {
   conn = await pool.getConnection();
-  const rows = await conn.query("SELECT 'Hello from mariadb' as val");
+  const rows = await conn.query("SELECT * FROM data");
   console.log(rows);
   return rows;
 
@@ -487,10 +484,9 @@ async function asyncFunction() {
   }
 }
 
-
 app.get('/', async (req, res) => {
   const rows = await asyncFunction();
-  res.json(rows[0].val);
+  res.json(rows[0].greeting);
 });
 
 app.listen(port, () => {
