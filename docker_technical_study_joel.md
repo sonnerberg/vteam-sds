@@ -324,6 +324,11 @@ First we have to create the react app that we will be using in the container. Go
 Then add the service to docker-compose.yml here we are again specifying an image to use and for our react container we are going to use node: [react](https://hub.docker.com/_/node)
 
 ```bash
+.
+└── docker-compose.yml
+```
+
+```bash
 version: "3.4"
 
 services:
@@ -367,25 +372,7 @@ Issue: `docker-compose up --build` to start everything. Now you can visit [http:
 You can stop the containers and take down the network by opening a new terminal and go to your app directory issuing: ```docker-compose down```
 
 ## Using the containers together
-We can now use the containers together. We begin by connecting to the MariaDB instance from the node container. 
-
-First we create a .env file in the node directory
-
-```bash
-.
-└── node
-    └── .env
-```
-
-Store the password for your MariaDB user in the file.
-
-```bash
-DB_PASS="YOUR DB USER PASSWORD"
-```
-
-
-Then we need to install the MariaDB Node.js Connector. We can do this in the Docker file in the node directory and we also copy the .env file and install the npm package dotenv to read in environment variables from .env in the node container.
-
+We can now use the containers together. We begin by connecting to the MariaDB instance from the node container. To do this we need to install the MariaDB Node.js Connector. We can do this in the Docker file in the node directory.
 ```bash
 .
 └── node
@@ -397,9 +384,55 @@ FROM node:latest
 
 WORKDIR /code
 
-COPY .env ./
+RUN npm install express nodemon mariadb
+```
 
-RUN npm install express nodemon mariadb dotenv
+We also add the db user password as an environment variable for the node container in docker-compose.yml.
+
+```bash
+.
+└── docker-compose.yml
+```
+
+```bash
+version: "3.4"
+
+services:
+
+  node:
+    container_name: node
+    build: ./node
+    command: /code/node_modules/.bin/nodemon /code/app/index.js
+    volumes:
+      - ./node/app:/code/app
+    ports:
+      - 3000:3000
+    restart: on-failure
+    environment:
+      DB_PASS: ${USER_PASS}
+
+  mariadb:
+    container_name: maria
+    image: mariadb:latest
+    restart: always
+    volumes:
+     - ./mariadb/sql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASS}
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: ${USER_PASS}
+
+  react:
+    container_name: react
+    image: node:latest
+    working_dir: /code/app
+    command: npm start
+    volumes:
+      - ./react/app:/code/app
+    ports:
+      - 8083:3000
+    restart: on-failure
 ```
 
 Then we add some code to node/index.js, there is an example at [https://mariadb.com/kb/en/getting-started-with-the-nodejs-connector/](https://mariadb.com/kb/en/getting-started-with-the-nodejs-connector/) which we modify below.
@@ -473,9 +506,7 @@ FROM node:latest
 
 WORKDIR /code
 
-COPY .env ./
-
-RUN npm install express nodemon mariadb dotenv cors
+RUN npm install express nodemon mariadb cors
 ```
 Then we set up cors between the Express app and localhost:8083 where the React app is running.
 ```bash
