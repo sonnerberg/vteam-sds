@@ -130,7 +130,7 @@ added for the backend to respond with a response. There is an example at
 ```bash
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 1338
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -160,7 +160,7 @@ services:
     volumes:
       - ./node/app:/code/app
     ports:
-      - 3000:3000
+      - 1338:1338
     restart: on-failure
 ```
 
@@ -205,10 +205,10 @@ node    | [nodemon] to restart at any time, enter `rs`
 node    | [nodemon] watching path(s): *.*
 node    | [nodemon] watching extensions: js,mjs,json
 node    | [nodemon] starting `node /code/app/index.js`
-node    | Example app listening on port 3000
+node    | Example app listening on port 1338
 ```
 
-You can test the container by visiting [express](http://localhost:3000).
+You can test the container by visiting [express](http://localhost:1338).
 
 To stop the containers and take down the network, open a new terminal window go to your app directory and issue: ```docker-compose down```
 
@@ -248,7 +248,7 @@ services:
     volumes:
       - ./node/app:/code/app
     ports:
-      - 3000:3000
+      - 1338:1338
     restart: on-failure
 
   mariadb:
@@ -340,7 +340,7 @@ services:
     volumes:
       - ./node/app:/code/app
     ports:
-      - 3000:3000
+      - 1338:1338
     restart: on-failure
 
   mariadb:
@@ -363,11 +363,11 @@ services:
     volumes:
       - ./react/app:/code/app
     ports:
-      - 8083:3000
+      - 3000:3000
     restart: on-failure
 ```
 
-Issue: `docker-compose up --build` to start everything. Now you can visit [http://localhost:8083](http://localhost:8083) to see the react app running.
+Issue: `docker-compose up --build` to start everything. Now you can visit [http://localhost:3000](http://localhost:3000) to see the react app running.
 
 You can stop the containers and take down the network by opening a new terminal and go to your app directory issuing: ```docker-compose down```
 
@@ -406,7 +406,7 @@ services:
     volumes:
       - ./node/app:/code/app
     ports:
-      - 3000:3000
+      - 1338:1338
     restart: on-failure
     environment:
       DB_PASS: ${USER_PASS}
@@ -431,11 +431,11 @@ services:
     volumes:
       - ./react/app:/code/app
     ports:
-      - 8083:3000
+      - 3000:3000
     restart: on-failure
 ```
 
-Then we add some code to node/index.js, there is an example at [https://mariadb.com/kb/en/getting-started-with-the-nodejs-connector/](https://mariadb.com/kb/en/getting-started-with-the-nodejs-connector/) which we modify below.
+Then we add some code to node/app/index.js, there is an example at [https://mariadb.com/kb/en/getting-started-with-the-nodejs-connector/](https://mariadb.com/kb/en/getting-started-with-the-nodejs-connector/) which we modify below.
 
 ```bash
 .
@@ -445,10 +445,9 @@ Then we add some code to node/index.js, there is an example at [https://mariadb.
 ```
 
 ```bash
-require('dotenv').config();
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 1338
 
 const mariadb = require('mariadb');
 
@@ -486,7 +485,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
 ```
-Issue: `docker-compose up --build` to start everything. You can now visit [http://localhost:3000](http://localhost:3000) to see the the data the express app has fetched from the MariaDB instance in the maria container.
+Issue: `docker-compose up --build` to start everything. You can now visit [http://localhost:1338](http://localhost:1338) to see the the data the express app has fetched from the MariaDB instance in the maria container.
 
 You can stop the containers and take down the network by opening a new terminal and go to your app directory issuing: ```docker-compose down```
 
@@ -517,14 +516,13 @@ Then we set up cors between the Express app and localhost:8083 where the React a
 ```
 
 ```bash
-require('dotenv').config();
 const express = require('express')
 const cors = require("cors");
 const app = express()
-const port = 3000
+const port = 1338
 
 app.use(cors());
-app.options('http://localhost:8083', cors());
+app.options('http://localhost:3000', cors());
 
 const mariadb = require('mariadb');
 const pool = mariadb.createPool({
@@ -595,7 +593,6 @@ Then modify react/app/src/App.js:
 ```
 
 ```bash
-import logo from './logo.svg';
 import './App.css';
 import Button from './Button';
 import { useState } from 'react';
@@ -604,7 +601,7 @@ function App() {
   const [message, setMessage] = useState('');
 
   async function handleClick() {
-    const response = await fetch('http://localhost:3000/');
+    const response = await fetch('http://localhost:1338/');
     const result = await response.json();
     setMessage(result);
   }
@@ -612,11 +609,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-
         <Button handleClick={handleClick} />
         <div>{message}</div>
       </header>
@@ -626,9 +618,10 @@ function App() {
 
 export default App;
 
+
 ```
 
-Issue: `docker-compose up --build` to start everything. Now you can visit [http://localhost:8083](http://localhost:8083) and click the button "Fetch data" to see a message displayed. This message is fetched from the Express app at localhost:3000 which in turn gets it´s data from the MariaDB instance running in the maria container.
+Issue: `docker-compose up --build` to start everything. Now you can visit [http://localhost:3000](http://localhost:3000) and click the button "Fetch data" to see a message displayed. This message is fetched from the Express app at localhost:1338 which in turn gets it´s data from the MariaDB instance running in the maria container.
 
 ## Conclusion
 In the way demonstrated in this study we can set up a network of Docker containers in a default network and let them "talk" to each other.
