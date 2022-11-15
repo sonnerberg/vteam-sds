@@ -25,3 +25,17 @@ Denna kartbild visar var samtliga laddstationer och rekommenderade parkeringspla
 
 Denna kartbild visar var samtliga lediga elsparkcyklar finns att hitta.
 
+![Hemskärm](mobile_-_home.png)
+_Hemskärm i mobilapp_
+
+![Hemskärm](mobile_-_login.png)
+_Logga in i mobilapp_
+
+![Hemskärm](mobile_-_register.png)
+_Registrera i mobilapp_
+
+![Hemskärm](mobile_-_contact.png)
+_Kontakta företaget i mobilapp_
+
+![Hemskärm](mobile_-_faq.png)
+_Frågor och svar i mobilapp_
