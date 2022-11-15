@@ -4,7 +4,7 @@
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
-En användare kan logga in i ett webbgränssnitt för att se detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. 
+I användarens webbgränssnitt kan en användare logga in i för att se detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. Denna del av systemet är en desktopapp som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt. [React](https://reactjs.org/) 
 
 Användaren kan också se detaljer om sina resor som innefattar:
 
@@ -18,11 +18,11 @@ Användaren kan också se detaljer om sina resor som innefattar:
 * Kostnad för resan (kronor, ören)
 
 
-Då användaren loggat in på sitt konto så kan användaren också se och fylla på sitt saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst i så fall dras en avgift varje månad. 
+Då användaren loggat in på sitt konto så kan denne också se och fylla på sitt saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst i så fall dras en avgift varje månad. 
 
-Nedanstående bild visar flödet i användarens webbgränssnitt:
+Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
-
+![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
 
 
 Nedanstående tabell flyttas till avsnittet API.
