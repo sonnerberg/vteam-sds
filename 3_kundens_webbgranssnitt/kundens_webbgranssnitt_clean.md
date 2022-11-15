@@ -1,28 +1,31 @@
-# Kundens webbgränssnitt
+# Användarens webbgränssnitt
 
-När en användare besöker företagets hemsida så behöver användaren registera ett konto för att kunna hyra elsparkcyklar. Det finns flera sätt att skapa ett konto. Antingen görs det på sedvanligt vis genom att uppge:
 
-* förnamn
-* efternamn
-* adress
-* faktureringsadress
-* användarnamn
-* lösenord
+![Hemskärm](desktop_-_home.png)
+*Hemskärm i webbläsare för dator*
 
-Eller så kan användaren välja att logga in med Oauth via Github. Då användaren loggat in på sitt konto så kan användaren se och fylla på sitt saldo. Saldot används för att bekosta resor med elsparkcykel. 
+En användare kan logga in i ett webbgränssnitt för att se detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. 
 
-Användaren behöver inte ha ett positivt saldo utan kan sedan tidigare ha valt att betala i efterhand via diverse betaltjänster.
-
-Användaren kan också se sin färdhistorik som innefattar:
+Användaren kan också se detaljer om sina resor som innefattar:
 
 * ID på resan
 * Startdatum (2000-01-01)
 * Starttid (11:11 LT)
 * Slutdatum (2000-01-01)
 * Sluttid (11:11 LT)
-* Startpunkt (lat/long, geografiskt närliggande namn?)
-* Slutpunkt (lat/long, geografiskt närliggande namn?)
+* Startpunkt
+* Slutpunkt
 * Kostnad för resan (kronor, ören)
+
+
+Då användaren loggat in på sitt konto så kan användaren också se och fylla på sitt saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst i så fall dras en avgift varje månad. 
+
+Nedanstående bild visar flödet i användarens webbgränssnitt:
+
+
+
+
+Nedanstående tabell flyttas till avsnittet API.
 
 ## Substantiv
 
@@ -72,8 +75,6 @@ Användaren kan också se sin färdhistorik som innefattar:
 `/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
 `/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
 
-![Hemskärm](desktop_-_home.png)
-*Hemskärm i webbläsare för dator*
 
 ![Hemskärm](desktop_-_password_login.png)
 *Logga in i webbläsare för dator*
