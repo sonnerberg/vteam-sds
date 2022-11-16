@@ -254,113 +254,48 @@ Administratörsgränssnitt innehåller vyer för att inspektera resurser, skicka
 
 I vyn för översikt och daglig drift presenteras all information kring cyklar, laddstationer, parkeringsplatser och områden med särskilda bestämmelser för varje stad man verkar i. Vyn är kartcentrerad. I kartan kan man se information om aktuell status för alla tillgängliga resurser i vald stad, samt även filtrera kartvyn baserat på resursers typ, identitet eller status. Denna vy används också för att skicka manuella driftkommandon till enskilda cyklar. Det kan t ex  vara ett kommando för att stoppa cykeln, om administratören ser behov av det.
 
-FRÅGA - MAN TÄNKER SIG ATT STOPPKOMMANDO TILL CYKELN BORDE SKE AUTOMATISKT OM EN CYKEL ÅKER FÖR LÅNGT UT TEX.
+![Systemets översiktsvy](admin_oversikt.drawio.png)
+*Översiktsvy från systemet*
 
 ## Hantering av kunder
 
 Kundvyn är en klassisk listvy. Här kan man se en lista på alla företagets kunder, som kan filtreras på stad, användarnamn, antal gjorda resor m m. I denna vyn kan administratören också uppdatera information om enskilda kunder, t ex för att ge en kund en generell rabatt eller rabatt för en enskild resa. Administratören kan också skapa upp nya kunder i denna vy, även om detta i normalfallet hanteras av kunden själv.
 
+![Systemets kundvy](admin_kundvy.drawio.png)
+*Kundvy från systemet*
+
 ## Behörighetshantering
 
 Vyn för behörighetshantering används för att skapa användare och tilldela dessa behörigheter i administratörssystemet. Huvudadministratören anges vid konfiguration av systemet, men alla övriga roller hanteras i detta gränssnitt.
+
+![Systemets behörighetsvy](admin_behorighet.drawio.png)
+*Behörighetsvy från systemet*
 
 ## Geodatahantering
 
 Systemet har kraftfulla och lättanvända funktioner för att hantera nya marknader och nya resurser. I vyn för geodatahantering kan administratören lägga till nya städer för företaget, samt skapa, uppdatera och radera information om enskilda resurser.
 
-![Systemöversikt](admin.drawio.png)
-*Översikt över systemet*
+![Systemets kartredigeringsvy](admin_kartred.drawio.png)
+*Kartredigeringsvy från systemet*
 
-## Översikt cykeldator
-
-### Beteende
-
-- Varje elsparkcykel har sitt eget program och id.
-- En elsparkcykel ska kunna meddela position/status med jämna mellanrum.
-- En användare ska kunna hyra och lämna tillbake en elsparkcykel.
-- En administratör ska kunna hantera och se information om elsparkcykeln.
-
-### Positionsdata
-
-1.Man kan få en översikt över elsparkcyklar och deras position på en karta
-1.Varje stad har ett antal laddstationer där elsparkcyklarna kan laddas.
-1 Användaren eller servicepersonalen kan förflytta en elsparkcykel dit.
-1.Varje stad har ett antal accepterade platser där elsparkcyklar bör parkeras.
-1.Elsparkcyklar kan även parkeras utanför laddstationer och utanför accepterade platser,
-1 men det kan då tillkomma en extra avgift för användren. Detta kallas fri parkering.
-1.Man kan se var elsparkcyklarna finns parkerade.
-1.(extra) Visa en kartbild där alla alla lediga elsparkcyklar finns.
-1.Elsparkcykeln meddelar dess position med jämna mellanrum.
-1.Elsparkcykeln meddelar om den kör eller står stilla och vilken hastighet den rör sig i.
-
-### Status
-
-1.Man kan se alla städer och elsparkcyklar som finns i systemet.
-1.Man skall kunna stänga av/stoppa en elsparkcykel så att den inte kan köras längre.
-1.När en användare hyr elsparkcykeln är det möjligt att starta den och köra.
-1.Användaren kan lämna tillbaka en elsparkcykel och släppa kontrollen över den.
-1.När elsparkcykeln tas in för underhåll eller laddning så markeras det att elsparkcykeln är i underhållsläge. En elsparkcykel som laddas på en laddstation kan inte hyras av en användare och en röd lampa visar att den inte är tillgänglig.
-1.\* Ledig elsparkcykel visas som grön, uthyrd som orange, ej tillgänglig som röd.
-
-### Sensor
-
-1.Elsparkcykeln varnar när den behöver laddas.
-
-### Positionsdata och/eller status och/eller sensor
-
-1.Man kan se hur många (och vilka) elsparkcyklar som finns på varje laddstation och accepterad parkeringsplats.
-1.Varje resa som en användare gör kostar pengar, dels en fast taxa och en rörlig taxa per tidsenhet och en taxa beroende av var de parkerar.
-1.Om en användare tar en elsparkcykel som står på fri parkering - och lämnar på en definierad parkering - så blir startavgiften lite lägre
-1.Elsparkcykeln sparar en logg över sina resor med start (plats, tid) och slut (plats, tid) samt användare.
-1.\* hastighet, svänga, bromsa, position, batteri, lampor fungerar, luft i däcken etc.
-
-## Elsparkcykel <-> server kommunikation
-
-Här har jag, med mina begränsade kunskaper, vänt och vridit på olika sätt att få elsparkcykel
-och server att prata med varandra och med risk för eventuella tankevurpor och snetänk
-så har jag kommit fram till tre alternativ. (feedback uppskattas!)
-
-### HTTP
-
-Att använda HTTP går bra från elsparkcykel till server, men är värre åt andra hållet.
-Tusentals elsparkcyklar kräver lika många unika IP adresser och jag vet helt enkelt inte hur
-servern ska kunna hitta/hålla reda på alla.
-
-### Websockets
-
-Med en websockets connection kan data flöda åt båda hållen, men hur tusentals connections
-påverkar serverns prestanda har jag idag ingen aning om. Jag tror inte att själva
-kopplingen påverkar så mycket, utan snarare vad servern faktiskt gör med data som den får.
-
-### IoT protokoll
-
-Detta känns som en överkurs och skulle bli väldigt förvånad om en IoT lösning hade förväntats av oss.
-Men alternativet finns.
-
-## Simulering
-
-Allt ligger lokalt så här är elsparkcykel <-> server kommunikation ett mindre problem.
-
-## Cykelns program
+# Elsparkcykelns mjukvara
 
 En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et.
 
-Elsparkcykelns program har bara information som rör sin egen position samt hälsa och övrig information
-som rör dess omgivning skickas till den från backend.
+Elsparkcykelns har sensorer som samlar in information som rör dess egen position samt funktionsstatus:
+
+- Batterinivån är låg
+- En lampa har gått sönder
+- Punktering
+
+Dessa statusindikatorer skickas till backend. Backend matar i sin tur elsparkcykeln med information som rör dess omgivning:
 
 - Uthyrd till en användare
-- användare avslutar hyran
+- Användare avslutar hyran
 - Begränsa hastighet när den befinner sig i specifika zoner
 - Stoppa elsparkcykeln ifall den är utanför tillåtet område.
 - Intagen på service
 - Service utförd
-
-I varje elsparkcykel finns sensorer som känner av hälsan och när den ändras
-så skickas den informationen till backend.
-
-- Batterinivån är låg
-- En lampa har gått sönder
-- Punktering etc.
 
 Det är endast när elsparkcykelns status har blivit ändrad till &rdquo;uthyrd&rdquo; eller på &rdquo;service som
 elsparkcykeln är upplåst och går att köra. Så fort dess status återvänder till &rdquo;ledig&rdquo; så
@@ -369,7 +304,7 @@ Blir det rörelse på en elsparkcykel som ej är uthyrd skickas då en varning o
 och sedan med ett tätt intervall tills den återigen står stilla. Detta möjliggör att personal kan hitta eventuellt stulna
 elsparkcykelar.
 
-Tusentals elsparkcyklar finns i systemet. Så för att minimera belastningen på API och backend så
+Tusentals elsparkcyklar finns i systemet. För att minimera belastningen på API och backend så
 uppdaterar dom sin position med olika intervall beroende på olika faktorer.
 
 - En uthyrd elsparkcykel i rörelse skickar positionsdata ofta
