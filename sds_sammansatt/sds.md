@@ -28,6 +28,7 @@
     - [REST-API](#rest-api)
       - [Substantiv](#substantiv)
       - [Verb](#verb)
+      - [Lista över routes](#lista-över-routes)
       - [Dokumentation](#dokumentation)
       - [Versioner](#versioner)
       - [Autentisering](#autentisering)
@@ -244,16 +245,16 @@ De grundläggande kraven för systemets backend är:
 
 - Databasen skall kunna hantera relevant data.
 - Systemet skall erbjuda ett väldokumenterat REST API som tredjepartsleverantörer kan använda för att bygga extra tjänster och applikationer.
-- REST API:et skall kunna hantera flera olika versioner, t ex genom att använda v1/ som en del i URI:n.
+- REST API:et skall kunna hantera flera olika versioner, t ex genom att använda v1/ som en del i ~~URI~~URL:n.
 - REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger.
 
-Med underlag av data från tester med MongoDb och MariaDb, där respektive databas belastades med en stor mängd anrop under kort tid,
-valdes MariaDb som databas för att hantera all data.
-Samma tester visade också på stora skillnader i prestanda mellen en FastApi (Python) och Express (node) server, där Express
+Med underlag av data från tester med MongoDB och MariaDB, där respektive databas belastades med en stor mängd anrop under kort tid,
+valdes MariaDB som databas för att hantera all data.
+Samma tester visade också på stora skillnader i prestanda mellan en FastAPI (Python) och Express (node) server, där Express
 visade sig vara det bättre valet.
-Städernas geodata fås från "TODO". Det är ett fritt bibliotek som erbjuder den data som behövs.
+Städernas geodata fås från **TODO**. Det är ett fritt bibliotek som erbjuder den data som behövs.
 
-Kommunikation mellan klienter och backend sker via API't och där klinten enbart känner till sin egen data och
+Kommunikation mellan klienter och backend sker via API:t och där klinten enbart känner till sin egen data och
 backend har data över alla delar i systemet.
 Några exempel på kommunikationen är:
 
@@ -262,9 +263,9 @@ Några exempel på kommunikationen är:
 
 ### Databas
 
-Information systemets olika entiteter samlas i en databas. En entitet kan t.ex. vara "användare", "stad" eller "administratör". Varje entitet har en egen tabell i databasen. I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.
+Information om systemets olika entiteter samlas i en databas. En entitet kan t ex vara "användare", "stad" eller "administratör". Varje entitet har en egen tabell i databasen. I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.
 
-Den databas som ingår i systemet är en DATABASTYP. Systemet kommunicerar med databasen via ORM/SQL/Redis? (Byggs ut när vi har bestämt oss)
+Systemet kommunicerar med databasen via ORM/SQL/Redis? (**TODO** Byggs ut när vi har bestämt oss)
 
 Följande tabeller/entiteter finns i databasen:
 
@@ -276,7 +277,7 @@ Denna tabell innehåller information om städer. Varje stad har:
 - ett namn
 - en geografisk position
 
-En stad har också relationer till andra entiteter den kan ha en eller flera:
+En stad har också relationer till andra entiteter, den kan ha en eller flera:
 
 - Elsparkcyklar
 - Laddstationer
@@ -375,7 +376,11 @@ Denna tabell innehåller information om resor. Varje resa har:
 
 Nedanstående bild visar de entiteter som förekommer i databasen, deras attribut och inbördes relationer.
 
+![entity relation-diagram](er.png)
+
 ### REST-API
+
+Systemets applikationer använder ett REST-API för att kommunicera med systemets backend. För att veta vilka routes vi behöver ha i REST-API:et så har följande substantiv identifierats (dessa stämmer överens med entiteterna i databasen):
 
 #### Substantiv
 
@@ -390,7 +395,21 @@ Nedanstående bild visar de entiteter som förekommer i databasen, deras attribu
 
 #### Verb
 
+De identifierade substantiven behöver också utföra handlingar, därav följande verblista:
+
 - En användare ska hyra en elsparkcykel
+- En användare ska registrera ett konto
+- En användare ska logga in på sitt konto
+- En användare ska lämna tillbaka en elsparkcykel
+- En administratör ska registrera ett konto
+- En administratör ska logga in på sitt konto
+- En huvudadministratör ska registera en administratör
+- En elsparkcykel ska köra
+- En laddstation ska innehålla elsparkcyklar
+- En stad ska innehålla elsparkcyklar, zoner etc.
+- En verkstad ska kunna utföra service på elsparkcyklar
+
+#### Lista över routes
 
 `URL`                         | `GET`                                  | `POST`                         | `PUT`                                       | `DELETE`
 ------------------------------|:--------------------------------------:|:------------------------------:|:-------------------------------------------:|:-------------------:
@@ -430,10 +449,6 @@ Nedanstående bild visar de entiteter som förekommer i databasen, deras attribu
 `/trips/{id}`                 | Visa en resa med id {id}     | :x:    | Modifiera en resa med id {id}           | Ta bort en resa med id {id}
 `/trips/{userId}`             | Visa alla resor med användar-id {användar-id}     | :x:    | :x:           | :x:
 
-Systemets applikationer använder ett REST-API för att kommunicera med systemets backend.
-
-(Känns som jag behöver skriva lite mer i denna del men kommer inte på vad.)
-
 #### Dokumentation
 
 För att underlätta för tredjepartsleverntörer att bygga externa tjänster och applicationer är
@@ -445,11 +460,11 @@ REST-API&rsquo;et väldokumenterat.
 #### Versioner
 
 REST-API&rsquo;et har byggts för att vara framtidssäkert där uppdateringar och tillägg hanteras med
-versionsnummer som en del i URI:n.
+versionsnummer som en del i ~~URI~~URL:en.
 
 #### Autentisering
 
-Alla applikationer som använder REST-API&rsquo;et måste autentisera (JWT?) sig för att kontrollera att endast
+Alla applikationer som använder REST-API&rsquo;et måste autentisera sig med hjälp av JSON Web Tokens för att kontrollera att endast
 endpoints som rör applikationen finns tillgängliga.
 
 ##### Godkänd autentisering
