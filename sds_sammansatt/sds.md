@@ -25,14 +25,14 @@
       - [Användare](#användare)
       - [Administratör](#administratör)
       - [Resa](#resa)
-  - [REST-API](#rest-api)
-    - [Substantiv](#substantiv)
-    - [Verb](#verb)
-    - [Dokumentation](#dokumentation)
-    - [Versioner](#versioner)
-    - [Autentisering](#autentisering)
-      - [Godkänd autentisering](#godkänd-autentisering)
-      - [Misslyckad autentisering](#misslyckad-autentisering)
+    - [REST-API](#rest-api)
+      - [Substantiv](#substantiv)
+      - [Verb](#verb)
+      - [Dokumentation](#dokumentation)
+      - [Versioner](#versioner)
+      - [Autentisering](#autentisering)
+        - [Godkänd autentisering](#godkänd-autentisering)
+        - [Misslyckad autentisering](#misslyckad-autentisering)
 
 ## Inledning
 
@@ -244,7 +244,7 @@ De grundläggande kraven för systemets backend är:
 
 - Databasen skall kunna hantera relevant data.
 - Systemet skall erbjuda ett väldokumenterat REST API som tredjepartsleverantörer kan använda för att bygga extra tjänster och applikationer.
-- REST API:et skall kunna hantera flera olika versioner, tex genom att använda v1/ som en del i URI:n.
+- REST API:et skall kunna hantera flera olika versioner, t ex genom att använda v1/ som en del i URI:n.
 - REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger.
 
 Med underlag av data från tester med MongoDb och MariaDb, där respektive databas belastades med en stor mängd anrop under kort tid,
@@ -375,9 +375,9 @@ Denna tabell innehåller information om resor. Varje resa har:
 
 Nedanstående bild visar de entiteter som förekommer i databasen, deras attribut och inbördes relationer.
 
-## REST-API
+### REST-API
 
-### Substantiv
+#### Substantiv
 
 - Användare
 - Administratör
@@ -388,7 +388,7 @@ Nedanstående bild visar de entiteter som förekommer i databasen, deras attribu
 - Förbjuden zon
 - Verkstad
 
-### Verb
+#### Verb
 
 - En användare ska hyra en elsparkcykel
 
@@ -434,7 +434,7 @@ Systemets applikationer använder ett REST-API för att kommunicera med systemet
 
 (Känns som jag behöver skriva lite mer i denna del men kommer inte på vad.)
 
-### Dokumentation
+#### Dokumentation
 
 För att underlätta för tredjepartsleverntörer att bygga externa tjänster och applicationer är
 REST-API&rsquo;et väldokumenterat.
@@ -442,17 +442,17 @@ REST-API&rsquo;et väldokumenterat.
 - Länk till dokumentationen?
 - Ett exempel från dokumentationen på en enskild endpoint?
 
-### Versioner
+#### Versioner
 
 REST-API&rsquo;et har byggts för att vara framtidssäkert där uppdateringar och tillägg hanteras med
 versionsnummer som en del i URI:n.
 
-### Autentisering
+#### Autentisering
 
 Alla applikationer som använder REST-API&rsquo;et måste autentisera (JWT?) sig för att kontrollera att endast
 endpoints som rör applikationen finns tillgängliga.
 
-#### Godkänd autentisering
+##### Godkänd autentisering
 
 En applikation för administratörer kan se alla användare i systemet.
 
@@ -473,7 +473,7 @@ En applikation för administratörer kan se alla användare i systemet.
         ]
     }
 
-#### Misslyckad autentisering
+##### Misslyckad autentisering
 
 En applikation för användare kan **inte** se alla användare i systemet.
 
