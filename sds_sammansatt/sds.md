@@ -1,49 +1,39 @@
+# Elsparkcyklar AB
+
 - [Elsparkcyklar AB](#elsparkcyklar-ab)
   - [Inledning](#inledning)
     - [Bakgrund](#bakgrund)
   - [Översikt över systemet](#översikt-över-systemet)
     - [Systemets användare](#systemets-användare)
     - [Systemets delar](#systemets-delar)
-  - [Kundens app](#kundens-app)
-  - [Kundens webbgränssnitt](#kundens-webbgränssnitt)
-  - [Substantiv](#substantiv)
-  - [Verb](#verb)
+  - [Användarens app](#användarens-app)
+  - [Användarens webbgränssnitt](#användarens-webbgränssnitt)
   - [Administratörsgränssnitt](#administratörsgränssnitt)
-  - [Översikt och daglig drift](#översikt-och-daglig-drift)
-  - [Hantering av kunder](#hantering-av-kunder)
-  - [Behörighetshantering](#behörighetshantering)
-  - [Geodatahantering](#geodatahantering)
-  - [Översikt cykeldator](#översikt-cykeldator)
-    - [Beteende](#beteende)
-    - [Positionsdata](#positionsdata)
-    - [Status](#status)
-    - [Sensor](#sensor)
-    - [Positionsdata och/eller status och/eller sensor](#positionsdata-ocheller-status-ocheller-sensor)
-  - [Elsparkcykel <-> server kommunikation](#elsparkcykel---server-kommunikation)
-    - [HTTP](#http)
-    - [Websockets](#websockets)
-    - [IoT protokoll](#iot-protokoll)
-  - [Simulering](#simulering)
-  - [Cykelns program](#cykelns-program)
+    - [Översikt och daglig drift](#översikt-och-daglig-drift)
+    - [Hantering av kunder](#hantering-av-kunder)
+    - [Behörighetshantering](#behörighetshantering)
+    - [Geodatahantering](#geodatahantering)
+  - [Elsparkcykelns mjukvara](#elsparkcykelns-mjukvara)
   - [Backend](#backend)
-  - [Databas](#databas)
-  - [Stad](#stad)
-  - [Elsparkcykel](#elsparkcykel)
-  - [Laddstation](#laddstation)
-  - [Parkeringsplats](#parkeringsplats)
-  - [Zon](#zon)
-  - [Verkstad (ska verkstäder vara med?)](#verkstad-ska-verkstäder-vara-med)
-  - [Användare](#användare)
-  - [Administratör](#administratör)
-  - [Resa](#resa)
-  - [REST-API](#rest-api)
-    - [Dokumentation](#dokumentation)
-  - [Versioner](#versioner)
-  - [Autentisering](#autentisering)
-    - [Godkänd autentisering](#godkänd-autentisering)
-    - [Misslyckad autentisering](#misslyckad-autentisering)
-
-# Elsparkcyklar AB
+    - [Databas](#databas)
+      - [Stad](#stad)
+      - [Elsparkcykel](#elsparkcykel)
+      - [Laddstation](#laddstation)
+      - [Parkeringsplats](#parkeringsplats)
+      - [Zon](#zon)
+      - [Verkstad (ska verkstäder vara med?)](#verkstad-ska-verkstäder-vara-med)
+      - [Användare](#användare)
+      - [Administratör](#administratör)
+      - [Resa](#resa)
+    - [REST-API](#rest-api)
+      - [Substantiv](#substantiv)
+      - [Verb](#verb)
+      - [Lista över routes](#lista-över-routes)
+      - [Dokumentation](#dokumentation)
+      - [Versioner](#versioner)
+      - [Autentisering](#autentisering)
+        - [Godkänd autentisering](#godkänd-autentisering)
+        - [Misslyckad autentisering](#misslyckad-autentisering)
 
 ## Inledning
 
@@ -100,17 +90,16 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 
 [3] Se <https://www.oreilly.com/content/software-architecture-patterns/>
 
-
-# Användarens app
+## Användarens app
 
 ![Hemskärm](mobile_-_home.png)
-_Hemskärm i mobilapp_
+*Hemskärm i mobilapp*
 
 Alternativt kartbild istället för Hemskärm
 
 I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs i React. Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning via en app. För att kunna hyra en elsparkcykel måste användaren autentisera och identifiera sig, detta görs via Ouath med ett GitHub konto. När användaren loggar in i appen visas en kartbild med tillgängliga elsparkcyklar, laddstationer och rekommenderade parkeringsplatser. I vårt program identifieras en elsparkcykel genom att från kartbilden välja elsparcykelns ikon vilket ger användaren möjligheten att välja vald elsparkcykel för uthyrning.
 
-Då en uthyrning påbörjats så låses cykeln upp och användaren kan manövrera elsparkcykeln under hyrtiden. 
+Då en uthyrning påbörjats så låses cykeln upp och användaren kan manövrera elsparkcykeln under hyrtiden.
 
 Användaren kan också, via appen, få information från den hyrda elsparkcykeln i form av:
 
@@ -127,18 +116,16 @@ När färden avslutats låses cykeln igen.
 
 Denna bild ger en översikt över flödet för att hyra en elsparkcykel i användarens mobilapp runda cirklar visar kommandon som utförs i backend.
 
-
 ![Flödet i användarens app vid uthyrning av elsparkcykel](användarens_app.drawio.png)
 
 Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 
-# Användarens webbgränssnitt
-
+## Användarens webbgränssnitt
 
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
-Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. 
+Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter.
 
 Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 
@@ -149,81 +136,26 @@ Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 - användarnamn
 - lösenord
 
-När användaren loggar in har denne möjlighet att ändra detaljer angående kontot eller radera det. 
+När användaren loggar in har denne möjlighet att ändra detaljer angående kontot eller radera det.
 
 Användaren kan i webbgränssnitttet också se detaljer om sina resor som innefattar:
 
-* ID på resan
-* Startdatum (2000-01-01)
-* Starttid (11:11 LT)
-* Slutdatum (2000-01-01)
-* Sluttid (11:11 LT)
-* Startpunkt
-* Slutpunkt
-* Kostnad för resan (kronor, ören)
+- ID på resan
+- Startdatum (2000-01-01)
+- Starttid (11:11 LT)
+- Slutdatum (2000-01-01)
+- Sluttid (11:11 LT)
+- Startpunkt
+- Slutpunkt
+- Kostnad för resan (kronor, ören)
 
-Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad. 
+Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad.
 
 Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
 
 [1] Se <https://reactjs.org/>
-
-Nedanstående tabell flyttas till avsnittet API.
-
-## Substantiv
-
-* Användare
-* Administratör
-* Huvudadministratör
-* Elsparkcykel
-* Laddstation
-* Stad
-* Förbjuden zon
-* Verkstad
-
-## Verb
-
-* En användare ska hyra en elsparkcykel
-
-`URL`                         | `GET`                                  | `POST`                         | `PUT`                                       | `DELETE`
-------------------------------|:--------------------------------------:|:------------------------------:|:-------------------------------------------:|:-------------------:
-`/users/`                     | Visa alla användare                    | Skapa en ny användare          | :x:                                         | :x:
-`/users/{id}`                 | Visa en användare med id {id}          | :x:                            | Modifiera en användare med id {id}          | Ta bort en användare med id {id}
-`/users/{id}/position`        | Visa positionen för en användare med id {id} | :x:                      | :x: | :x:
-`/users/{city}/`              | Visa alla användare som för tillfället hyr en elsparkcykel i stad {city} | :x: | :x: | :x:
-`/users/online/`              | Visa alla användare som för tillfället är online | :x: | :x: | :x:
-`/users/offline/`             | Visa alla användare som för tillfället är offline | :x: | :x: | :x:
-`/administrators/`            | Visa alla administratörer              | Skapa en ny administratör      | :x:                                         | :x:
-`/administrators/{id}`        | Visa en administratörer med id {id}    | :x:                            | Modifiera en administratör med id {id}      | Ta bort en administratör med id {id}
-`/mainAdministrators/`        | Visa alla huvudadministratör           | Skapa en ny huvudadministratör | :x:                                         | :x:
-`/mainAdministrators/{id}`    | Visa en huvudadministratör med id {id} | :x:                            | Modifiera en huvudadministratör med id {id} | Ta bort en huvudadministratör med id {id}
-`/cities/`                    | Visa alla städer                       | Skapa en ny stad               | :x:                                         | :x:
-`/cities/{id}`                | Visa en stad med id {id}               | :x:                            | Modifiera en stad med id {id}               | Ta bort en stad med id {id}
-`/cities/{id}/forbiddenZones/` | Visa alla förbjudna zoner i stad med id {id} | :x: | :x: | :x:
-`/cities/{id}/electricScooters/` | Visa alla elsparkcyklar i stad med id {id} | :x: | :x: | :x:
-`/cities/{id}/chargingStations/`  | Visa alla laddstationer i stad med id {id} | :x: | :x: | :x:
-`/cities/{id}/workshops/`     | Visa alla verkstäder i stad med id {id}  | :x:           | :x:                                         | :x:
-`/electricScooters/`          | Visa alla elsparkcyklar                | Skapa en ny elsparkcykel       | :x:                                         | :x:
-`/electricScooters/rented`    | Visa alla elsparkcyklar som just nu är uthyrda | :x: | :x:                                         | :x:
-`/electricScooters/stale`     | Visa alla elsparkcyklar som just nu inte är uthyrda | :x: | :x:                                         | :x:
-`/electricScooters/serviced`  | Visa alla elsparkcyklar som just nu är under service | :x: | :x:                                         | :x:
-`/electricScooters/{id}`      | Visa en elsparkcykel med id {id}       | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
-`/electricScooters/{id}/position` | Visa positionen för en elsparkcykel med id {id} | :x: | :x: | :x:
-`/electricScooters/{id}/batteryLevel` | Visa batterinivån för en elsparkcykel med id {id} | :x: | :x: | :x:
-`/electricScooters/{id}/stop` | :x:                                    | Stoppa elsparkcykeln           | :x:                                         | :x:
-`/chargingStations/`          | Visa alla laddstationer                | Skapa en ny laddstation        | :x:                                         | :x:
-`/chargingStations/{id}`      | Visa en laddstation med id {id}        | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
-`/forbiddenZones/`            | Visa alla förbjudna zoner              | Skapa en ny förbjuden zon      | :x:                                         | :x:
-`/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
-`/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
-`/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
-`/parkingZones/`              | Visa en alla parkeringplatser          | Skapa en ny parkeringsplats    | :x:           | :x:
-`/parkingZones/{id}`          | Visa en parkeringplats med id {id}     | :x:    | Modifiera en parkeringsplats med id {id}           | Ta bort en parkeringsplats med id {id}
-`/trips/`                     | Visa alla resor     | Skapa en ny resa    | :x:            | :x:
-`/trips/{id}`                 | Visa en resa med id {id}     | :x:    | Modifiera en resa med id {id}           | Ta bort en resa med id {id}
-`/trips/{userId}`             | Visa alla resor med användar-id {användar-id}     | :x:    | :x:           | :x:
 
 ## Administratörsgränssnitt
 
@@ -238,35 +170,37 @@ Systemets administratörsgränssnitt används av behöriga användare för att f
 
 Administratörsgränssnitt innehåller vyer för att inspektera resurser, skicka kommandon till enskilda cyklar, hantera kundinformation, hantera behörigheter, samt uppdatera systemet med ny data, t ex nya städer man etablerar sig i, nya cyklar, nya parkeringsplatser etc.
 
-## Översikt och daglig drift
+### Översikt och daglig drift
 
 I vyn för översikt och daglig drift presenteras all information kring cyklar, laddstationer, parkeringsplatser och områden med särskilda bestämmelser för varje stad man verkar i. Vyn är kartcentrerad. I kartan kan man se information om aktuell status för alla tillgängliga resurser i vald stad, samt även filtrera kartvyn baserat på resursers typ, identitet eller status. Denna vy används också för att skicka manuella driftkommandon till enskilda cyklar. Det kan t ex  vara ett kommando för att stoppa cykeln, om administratören ser behov av det.
 
 ![Systemets översiktsvy](admin_oversikt.drawio.png)
 *Översiktsvy från systemet*
 
-## Hantering av kunder
+### Hantering av kunder
 
 Kundvyn är en klassisk listvy. Här kan man se en lista på alla företagets kunder, som kan filtreras på stad, användarnamn, antal gjorda resor m m. I denna vyn kan administratören också uppdatera information om enskilda kunder, t ex för att ge en kund en generell rabatt eller rabatt för en enskild resa. Administratören kan också skapa upp nya kunder i denna vy, även om detta i normalfallet hanteras av kunden själv.
 
 ![Systemets kundvy](admin_kundvy.drawio.png)
 *Kundvy från systemet*
 
-## Behörighetshantering
+### Behörighetshantering
 
 Vyn för behörighetshantering används för att skapa användare och tilldela dessa behörigheter i administratörssystemet. Huvudadministratören anges vid konfiguration av systemet, men alla övriga roller hanteras i detta gränssnitt.
 
 ![Systemets behörighetsvy](admin_behorighet.drawio.png)
 *Behörighetsvy från systemet*
 
-## Geodatahantering
+### Geodatahantering
 
 Systemet har kraftfulla och lättanvända funktioner för att hantera nya marknader och nya resurser. I vyn för geodatahantering kan administratören lägga till nya städer för företaget, samt skapa, uppdatera och radera information om enskilda resurser.
 
 ![Systemets kartredigeringsvy](admin_kartred.drawio.png)
 *Kartredigeringsvy från systemet*
 
-# Elsparkcykelns mjukvara
+## Elsparkcykelns mjukvara
+
+![Cykelkommunikation](./cykelkommunikation.svg)
 
 En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et.
 
@@ -311,32 +245,31 @@ De grundläggande kraven för systemets backend är:
 
 - Databasen skall kunna hantera relevant data.
 - Systemet skall erbjuda ett väldokumenterat REST API som tredjepartsleverantörer kan använda för att bygga extra tjänster och applikationer.
-- REST API:et skall kunna hantera flera olika versioner, tex genom att använda v1/ som en del i URI:n.
-- REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger. 
+- REST API:et skall kunna hantera flera olika versioner, t ex genom att använda v1/ som en del i ~~URI~~URL:n.
+- REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger.
 
-Med underlag av data från tester med MongoDb och MariaDb, där respektive databas belastades med en stor mängd anrop under kort tid,
-valdes MariaDb som databas för att hantera all data.  
-Samma tester visade också på stora skillnader i prestanda mellen en FastApi (Python) och Express (node) server, där Express
-visade sig vara det bättre valet.  
-Städernas geodata fås från "TODO". Det är ett fritt bibliotek som erbjuder den data som behövs.  
+Med underlag av data från tester med MongoDB och MariaDB, där respektive databas belastades med en stor mängd anrop under kort tid,
+valdes MariaDB som databas för att hantera all data.
+Samma tester visade också på stora skillnader i prestanda mellan en FastAPI (Python) och Express (node) server, där Express
+visade sig vara det bättre valet.
+Städernas geodata fås från **TODO**. Det är ett fritt bibliotek som erbjuder den data som behövs.
 
-Kommunikation mellan klienter och backend sker via API't och där klinten enbart känner till sin egen data och 
-backend har data över alla delar i systemet.  
+Kommunikation mellan klienter och backend sker via API:t och där klinten enbart känner till sin egen data och
+backend har data över alla delar i systemet.
 Några exempel på kommunikationen är:
 
 ![Backend-exempel](backend_example.png)
 *Några övergripande exempel på kommunikationen*
 
-## Databas
+### Databas
 
+Information om systemets olika entiteter samlas i en databas. En entitet kan t ex vara "användare", "stad" eller "administratör". Varje entitet har en egen tabell i databasen. I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.
 
-Information systemets olika entiteter samlas i en databas. En entitet kan t.ex. vara "användare", "stad" eller "administratör". Varje entitet har en egen tabell i databasen. I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.
-
-Den databas som ingår i systemet är en DATABASTYP. Systemet kommunicerar med databasen via ORM/SQL/Redis? (Byggs ut när vi har bestämt oss)
+Systemet kommunicerar med databasen via ORM/SQL/Redis? (**TODO** Byggs ut när vi har bestämt oss)
 
 Följande tabeller/entiteter finns i databasen:
 
-## Stad
+#### Stad
 
 Denna tabell innehåller information om städer. Varje stad har:
 
@@ -344,7 +277,7 @@ Denna tabell innehåller information om städer. Varje stad har:
 - ett namn
 - en geografisk position
 
-En stad har också relationer till andra entiteter den kan ha en eller flera:
+En stad har också relationer till andra entiteter, den kan ha en eller flera:
 
 - Elsparkcyklar
 - Laddstationer
@@ -352,7 +285,7 @@ En stad har också relationer till andra entiteter den kan ha en eller flera:
 - Zoner
 - Verkstäder?
 
-## Elsparkcykel
+#### Elsparkcykel
 
 Denna tabell innehåller information om elsparkcyklar. Varje elsparkcykel har
 
@@ -368,7 +301,7 @@ En elsparkcykel har också relationer till andra entiteter, den kan ha:
 - en användare (om elsparkcykeln är uthyrd)
 - en eller flera (historiska) resor
 
-## Laddstation
+#### Laddstation
 
 Denna tabell innehåller information om laddstationer. Varje laddstation har:
 
@@ -377,7 +310,7 @@ Denna tabell innehåller information om laddstationer. Varje laddstation har:
 
 Bör vi också koppla elsparkcyklar till specifika laddstationer?
 
-## Parkeringsplats
+#### Parkeringsplats
 
 Denna tabell innehåller information om parkeringsplatser, både tillåtna och otillåtna. Varje parkeringsplats har:
 
@@ -385,7 +318,7 @@ Denna tabell innehåller information om parkeringsplatser, både tillåtna och o
 - en position
 - en typ som talar om ifall detta är en "+parkeringsplats" en vanlig parkeringsplats eller en förbjuden parkeringsplats
 
-## Zon
+#### Zon
 
 Denna tabell innehåller information om särskilda zoner. Varje zon har:
 
@@ -394,14 +327,14 @@ Denna tabell innehåller information om särskilda zoner. Varje zon har:
 - en typ som visar om det är tillåtet att färdas i zonen eller inte
 - en hastighetsbegränsning som bestämmer högsta tillåtna hastighet i zonen?
 
-## Verkstad (ska verkstäder vara med?)
+#### Verkstad (ska verkstäder vara med?)
 
 Denna tabell innehåller information om verkstäder där elsparkcyklar servas och repareras. Varje verkstad har:
 
 - ett unikt id
 - en position
 
-## Användare
+#### Användare
 
 Denna tabell innehåller information om användare. Varje användare har:
 
@@ -422,7 +355,7 @@ En användare har också relationer till andra entiteter, den kan ha:
 - en elsparkcykel (om användaren hyr en cykel)
 - en eller flera (historiska) resor
 
-## Administratör
+#### Administratör
 
 Denna tabell innehåller information om administratörer. Varje administratör har:
 
@@ -431,7 +364,7 @@ Denna tabell innehåller information om administratörer. Varje administratör h
 - ett lösenord
 - en typ som beskriver administratörens behörighet (huvudadministratör eller vanlig administratör)
 
-## Resa
+#### Resa
 
 Denna tabell innehåller information om resor. Varje resa har:
 
@@ -443,14 +376,80 @@ Denna tabell innehåller information om resor. Varje resa har:
 
 Nedanstående bild visar de entiteter som förekommer i databasen, deras attribut och inbördes relationer.
 
-## REST-API
+![entity relation-diagram](er.png)
 
-(Hur göra en intern github länk till Richards fantastiska API spreadsheet?)
-(Känns som jag behöver skriva lite mer i denna del men kommer inte på vad.)
+### REST-API
 
-Systemets applikationer använder ett REST-API för att kommunicera med systemets backend.
+Systemets applikationer använder ett REST-API för att kommunicera med systemets backend. För att veta vilka routes vi behöver ha i REST-API:et så har följande substantiv identifierats (dessa stämmer överens med entiteterna i databasen):
 
-### Dokumentation
+#### Substantiv
+
+- Användare
+- Administratör
+- Huvudadministratör
+- Elsparkcykel
+- Laddstation
+- Stad
+- Förbjuden zon
+- Verkstad
+
+#### Verb
+
+De identifierade substantiven behöver också utföra handlingar, därav följande verblista:
+
+- En användare ska hyra en elsparkcykel
+- En användare ska registrera ett konto
+- En användare ska logga in på sitt konto
+- En användare ska lämna tillbaka en elsparkcykel
+- En administratör ska registrera ett konto
+- En administratör ska logga in på sitt konto
+- En huvudadministratör ska registera en administratör
+- En elsparkcykel ska köra
+- En laddstation ska innehålla elsparkcyklar
+- En stad ska innehålla elsparkcyklar, zoner etc.
+- En verkstad ska kunna utföra service på elsparkcyklar
+
+#### Lista över routes
+
+`URL`                         | `GET`                                  | `POST`                         | `PUT`                                       | `DELETE`
+------------------------------|:--------------------------------------:|:------------------------------:|:-------------------------------------------:|:-------------------:
+`/users/`                     | Visa alla användare                    | Skapa en ny användare          | :x:                                         | :x:
+`/users/{id}`                 | Visa en användare med id {id}          | :x:                            | Modifiera en användare med id {id}          | Ta bort en användare med id {id}
+`/users/{id}/position`        | Visa positionen för en användare med id {id} | :x:                      | :x: | :x:
+`/users/{city}/`              | Visa alla användare som för tillfället hyr en elsparkcykel i stad {city} | :x: | :x: | :x:
+`/users/online/`              | Visa alla användare som för tillfället är online | :x: | :x: | :x:
+`/users/offline/`             | Visa alla användare som för tillfället är offline | :x: | :x: | :x:
+`/administrators/`            | Visa alla administratörer              | Skapa en ny administratör      | :x:                                         | :x:
+`/administrators/{id}`        | Visa en administratörer med id {id}    | :x:                            | Modifiera en administratör med id {id}      | Ta bort en administratör med id {id}
+`/mainAdministrators/`        | Visa alla huvudadministratör           | Skapa en ny huvudadministratör | :x:                                         | :x:
+`/mainAdministrators/{id}`    | Visa en huvudadministratör med id {id} | :x:                            | Modifiera en huvudadministratör med id {id} | Ta bort en huvudadministratör med id {id}
+`/cities/`                    | Visa alla städer                       | Skapa en ny stad               | :x:                                         | :x:
+`/cities/{id}`                | Visa en stad med id {id}               | :x:                            | Modifiera en stad med id {id}               | Ta bort en stad med id {id}
+`/cities/{id}/forbiddenZones/` | Visa alla förbjudna zoner i stad med id {id} | :x: | :x: | :x:
+`/cities/{id}/electricScooters/` | Visa alla elsparkcyklar i stad med id {id} | :x: | :x: | :x:
+`/cities/{id}/chargingStations/`  | Visa alla laddstationer i stad med id {id} | :x: | :x: | :x:
+`/cities/{id}/workshops/`     | Visa alla verkstäder i stad med id {id}  | :x:           | :x:                                         | :x:
+`/electricScooters/`          | Visa alla elsparkcyklar                | Skapa en ny elsparkcykel       | :x:                                         | :x:
+`/electricScooters/rented`    | Visa alla elsparkcyklar som just nu är uthyrda | :x: | :x:                                         | :x:
+`/electricScooters/stale`     | Visa alla elsparkcyklar som just nu inte är uthyrda | :x: | :x:                                         | :x:
+`/electricScooters/serviced`  | Visa alla elsparkcyklar som just nu är under service | :x: | :x:                                         | :x:
+`/electricScooters/{id}`      | Visa en elsparkcykel med id {id}       | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
+`/electricScooters/{id}/position` | Visa positionen för en elsparkcykel med id {id} | :x: | :x: | :x:
+`/electricScooters/{id}/batteryLevel` | Visa batterinivån för en elsparkcykel med id {id} | :x: | :x: | :x:
+`/electricScooters/{id}/stop` | :x:                                    | Stoppa elsparkcykeln           | :x:                                         | :x:
+`/chargingStations/`          | Visa alla laddstationer                | Skapa en ny laddstation        | :x:                                         | :x:
+`/chargingStations/{id}`      | Visa en laddstation med id {id}        | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
+`/forbiddenZones/`            | Visa alla förbjudna zoner              | Skapa en ny förbjuden zon      | :x:                                         | :x:
+`/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
+`/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
+`/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
+`/parkingZones/`              | Visa en alla parkeringplatser          | Skapa en ny parkeringsplats    | :x:           | :x:
+`/parkingZones/{id}`          | Visa en parkeringplats med id {id}     | :x:    | Modifiera en parkeringsplats med id {id}           | Ta bort en parkeringsplats med id {id}
+`/trips/`                     | Visa alla resor     | Skapa en ny resa    | :x:            | :x:
+`/trips/{id}`                 | Visa en resa med id {id}     | :x:    | Modifiera en resa med id {id}           | Ta bort en resa med id {id}
+`/trips/{userId}`             | Visa alla resor med användar-id {användar-id}     | :x:    | :x:           | :x:
+
+#### Dokumentation
 
 För att underlätta för tredjepartsleverntörer att bygga externa tjänster och applicationer är
 REST-API&rsquo;et väldokumenterat.
@@ -458,17 +457,17 @@ REST-API&rsquo;et väldokumenterat.
 - Länk till dokumentationen?
 - Ett exempel från dokumentationen på en enskild endpoint?
 
-## Versioner
+#### Versioner
 
 REST-API&rsquo;et har byggts för att vara framtidssäkert där uppdateringar och tillägg hanteras med
-versionsnummer som en del i URI:n.
+versionsnummer som en del i ~~URI~~URL:en.
 
-## Autentisering
+#### Autentisering
 
-Alla applikationer som använder REST-API&rsquo;et måste autentisera (JWT?) sig för att kontrollera att endast
+Alla applikationer som använder REST-API&rsquo;et måste autentisera sig med hjälp av JSON Web Tokens för att kontrollera att endast
 endpoints som rör applikationen finns tillgängliga.
 
-### Godkänd autentisering
+##### Godkänd autentisering
 
 En applikation för administratörer kan se alla användare i systemet.
 
@@ -489,7 +488,7 @@ En applikation för administratörer kan se alla användare i systemet.
         ]
     }
 
-### Misslyckad autentisering
+##### Misslyckad autentisering
 
 En applikation för användare kan **inte** se alla användare i systemet.
 
