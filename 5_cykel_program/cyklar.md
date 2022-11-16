@@ -177,7 +177,7 @@ Allt ligger lokalt så här är elsparkcykel <-> server kommunikation ett mindre
 
 ## Cykelns program
 
-I systemet ingår ett program som kontrollerar en elsparkcykel. I systmet är en elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och status via API:et samt lyssna på anrop som talar om för cykeln om den ska låsa upp sig (t.ex. när den hyrs ut), låsa sig (t.ex. när den lämnas tillbaka) eller om den ska stängas av/stoppas. 
+En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et.
 
 Elsparkcykelns program har bara information som rör sin egen position samt hälsa och övrig information
 som rör dess omgivning skickas till den från backend.
