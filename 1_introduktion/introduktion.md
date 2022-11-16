@@ -49,14 +49,7 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 
 [1] <https://www.transportstyrelsen.se/globalassets/global/publikationer-och-rapporter/vag/slutrapport-utredning-regler-eldrivna-enpersonsfordon.pdf>
 
-[2] Jönköpingsposten 3/9 2022 samt <https://rkrattsbaser.gov.se/sfst?bet=1998:1276> $4
+[2] Se Jönköpingsposten 3/9 2022 samt <https://rkrattsbaser.gov.se/sfst?bet=1998:1276> $4
 
-[3] <https://www.oreilly.com/content/software-architecture-patterns/>
+[3] Se <https://www.oreilly.com/content/software-architecture-patterns/>
 
-Bilder på hur systemet kommunicerar med de olika delarna.
-
-Bilder på olika gränssnitt (mock-ups) ?
-
-UML-diagram (draw.io t.ex.)
-
-Komponentdiagram
