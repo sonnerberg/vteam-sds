@@ -49,104 +49,81 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 
 [1] <https://www.transportstyrelsen.se/globalassets/global/publikationer-och-rapporter/vag/slutrapport-utredning-regler-eldrivna-enpersonsfordon.pdf>
 
-[2] Jönköpingsposten 3/9 2022 samt <https://rkrattsbaser.gov.se/sfst?bet=1998:1276> $4
+[2] Se Jönköpingsposten 3/9 2022 samt <https://rkrattsbaser.gov.se/sfst?bet=1998:1276> $4
 
-[3] <https://www.oreilly.com/content/software-architecture-patterns/>
+[3] Se <https://www.oreilly.com/content/software-architecture-patterns/>
 
-Bilder på hur systemet kommunicerar med de olika delarna.
+# Användarens app
 
-Bilder på olika gränssnitt (mock-ups) ?
+![Hemskärm](mobile_-_home.png)
+_Hemskärm i mobilapp_
 
-UML-diagram (draw.io t.ex.)
+Alternativt kartbild istället för Hemskärm
 
-Komponentdiagram
-# Kundens app
+I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs i React. Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning via en app. För att kunna hyra en elsparkcykel måste användaren autentisera och identifiera sig, detta görs via Ouath med ett GitHub konto. När användaren loggar in i appen visas en kartbild med tillgängliga elsparkcyklar, laddstationer och rekommenderade parkeringsplatser. I vårt program identifieras en elsparkcykel genom att från kartbilden välja elsparcykelns ikon vilket ger användaren möjligheten att välja vald elsparkcykel för uthyrning.
 
-Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning.
-I verkligheten görs detta genom att scanna en QR-kod som identifierar elsparkcykeln. [referens](https://turiststockholm.se/sightseeing-guider/hyra-elsparkcykel-i-stockholm-med-voi/).
-I vårt program indentifieras en elsparkcykel genom att från en kartbild välja elsparcykelns ikon vilket ger användaren möjligheten att välja vald elsparkcykel för uthyrning.
+Då en uthyrning påbörjats så låses cykeln upp och användaren kan manövrera elsparkcykeln under hyrtiden. 
 
-Då en uthyrning påbörjats så kan användaren manövrera elsparkcykeln. De manövreringsmöjligheter som finns är:
-
-- elsparkcykelns hastighet (gashandtag)
-- svänga vänster och höger genom att svänga med styret
-- bromsa **_(finns det mer än en broms???)_**
-
-Användaren kan också få information från den hyrda elsparkcykeln i form av:
+Användaren kan också, via appen, få information från den hyrda elsparkcykeln i form av:
 
 - batterinivå
 - behov av service (med anledning av t.ex. punktering, trasiga lampor eller dåliga bromsar)
 
-Då användaren avslutar sin hyrning av elsparkcykeln så debiteras användarens konto automatiskt för färden. Färdens kostnad kan variera beroende på:
+Då användaren avslutar sin sin resa och återlämnar elsparkcykeln så debiteras användarens konto automatiskt för färden. Färdens kostnad kan variera beroende på:
 
-- tid på dygnet (tillgång och efterfrågan)
-- om cykeln flyttats från fri parkering (valfri parkeringsplats utanför rekommenderade parkeringszoner) till en mer önskvärd parkeringsplats
+- hur lång hyrestiden är
+- om cykeln flyttats från fri parkering (valfri parkeringsplats utanför rekommenderade parkeringszoner) till en mer önskvärd parkeringsplatsen
 - om cykeln parkeras genom fri parkering
 
-Denna kartbild visar var samtliga laddstationer och rekommenderade parkeringsplatser finns.
+När färden avslutats låses cykeln igen.
 
-Denna kartbild visar var samtliga lediga elsparkcyklar finns att hitta.
+Denna bild ger en översikt över flödet för att hyra en elsparkcykel i användarens mobilapp runda cirklar visar kommandon som utförs i backend.
 
-![Hemskärm](mobile_-_home.png)
 
-_Hemskärm i mobilapp_
+![Flödet i användarens app vid uthyrning av elsparkcykel](användarens_app.drawio.png)
 
-![Hemskärm](mobile_-_login.png)
+Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 
-_Logga in i mobilapp_
+# Användarens webbgränssnitt
 
-![Hemskärm](mobile_-_register.png)
 
-_Registrera i mobilapp_
+![Hemskärm](desktop_-_home.png)
+*Hemskärm i webbläsare för dator*
 
-![Hemskärm](mobile_-_contact.png)
+Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. 
 
-_Kontakta företaget i mobilapp_
+Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 
-![Hemskärm](mobile_-_faq.png)
+- förnamn
+- efternamn
+- adress
+- faktureringsadress
+- användarnamn
+- lösenord
 
-_Frågor och svar i mobilapp_
+När användaren loggar in har denne möjlighet att ändra detaljer angående kontot eller radera det. 
 
-# Kundens webbgränssnitt
-
-När en användare besöker företagets hemsida så behöver användaren registera ett konto för att kunna hyra elsparkcyklar. Det finns flera sätt att skapa ett konto. Antingen görs det på sedvanligt vis genom att uppge:
-
-* förnamn
-* efternamn
-* adress
-* faktureringsadress
-* användarnamn
-* lösenord
-
-***Författarens kommentar: smidigt formulär utan bekräftelse av lösenord och en knapp som kan visa lösenordet medan det skrivs. Om vi ska kunna registrera med github så får vi inte namn, efternamn, adress. Ska vi ha med det?***
-
-Då användaren loggat in på sitt konto så kan användaren se och fylla på sitt saldo. Saldot används för att bekosta resor med elsparkcykel. Användaren behöver inte ha ett positivt saldo utan kan sedan tidigare ha valt att betala i efterhand via diverse betaltjänster.
-
-Användaren kan också se sin färdhistorik som innefattar:
+Användaren kan i webbgränssnitttet också se detaljer om sina resor som innefattar:
 
 * ID på resan
 * Startdatum (2000-01-01)
 * Starttid (11:11 LT)
 * Slutdatum (2000-01-01)
 * Sluttid (11:11 LT)
-* Startpunkt (lat/long, geografiskt närliggande namn?)
-* Slutpunkt (lat/long, geografiskt närliggande namn?)
+* Startpunkt
+* Slutpunkt
 * Kostnad för resan (kronor, ören)
 
-## Substantiv
+Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad. 
 
-* Användare
-* Administratör
-* Huvudadministratör
-* Elsparkcykel
-* Laddstation
-* Stad
-* Förbjuden zon
-* Verkstad
+Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
-## Verb
+![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
 
-* En användare ska hyra en elsparkcykel
+[1] Se <https://reactjs.org/>
+
+Nedanstående tabell bör flyttas till avsnittet API.
+
 
 `URL`                         | `GET`                                  | `POST`                         | `PUT`                                       | `DELETE`
 ------------------------------|:--------------------------------------:|:------------------------------:|:-------------------------------------------:|:-------------------:
@@ -180,21 +157,12 @@ Användaren kan också se sin färdhistorik som innefattar:
 `/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
 `/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
 `/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
+`/parkingZones/`              | Visa en alla parkeringplatser          | Skapa en ny parkeringsplats    | :x:           | :x:
+`/parkingZones/{id}`          | Visa en parkeringplats med id {id}     | :x:    | Modifiera en parkeringsplats med id {id}           | Ta bort en parkeringsplats med id {id}
+`/trips/`                     | Visa alla resor     | Skapa en ny resa    | :x:            | :x:
+`/trips/{id}`                 | Visa en resa med id {id}     | :x:    | Modifiera en resa med id {id}           | Ta bort en resa med id {id}
+`/trips/{userId}`             | Visa alla resor med användar-id {användar-id}     | :x:    | :x:           | :x:
 
-![Hemskärm](desktop_-_home.png)
-*Hemskärm i webbläsare för dator*
-
-![Hemskärm](desktop_-_password_login.png)
-*Logga in i webbläsare för dator*
-
-![Hemskärm](desktop_-_register.png)
-*Registrera i webbläsare för dator*
-
-![Hemskärm](desktop_-_contact.png)
-*Kontakta företaget i webbläsare för dator*
-
-![Hemskärm](desktop_-_fr%C3%A5gor_och_svar.png)
-*Frågor och svar i webbläsare för dator*
 
 # Administratörsgränssnitt
 

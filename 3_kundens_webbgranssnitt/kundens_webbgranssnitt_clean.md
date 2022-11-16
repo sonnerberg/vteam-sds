@@ -1,28 +1,42 @@
-# Kundens webbgränssnitt
+# Användarens webbgränssnitt
 
-När en användare besöker företagets hemsida så behöver användaren registera ett konto för att kunna hyra elsparkcyklar. Det finns flera sätt att skapa ett konto. Antingen görs det på sedvanligt vis genom att uppge:
 
-* förnamn
-* efternamn
-* adress
-* faktureringsadress
-* användarnamn
-* lösenord
+![Hemskärm](desktop_-_home.png)
+*Hemskärm i webbläsare för dator*
 
-***Författarens kommentar: smidigt formulär utan bekräftelse av lösenord och en knapp som kan visa lösenordet medan det skrivs. Om vi ska kunna registrera med github så får vi inte namn, efternamn, adress. Ska vi ha med det?***
+Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. 
 
-Då användaren loggat in på sitt konto så kan användaren se och fylla på sitt saldo. Saldot används för att bekosta resor med elsparkcykel. Användaren behöver inte ha ett positivt saldo utan kan sedan tidigare ha valt att betala i efterhand via diverse betaltjänster.
+Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 
-Användaren kan också se sin färdhistorik som innefattar:
+- förnamn
+- efternamn
+- adress
+- faktureringsadress
+- användarnamn
+- lösenord
+
+När användaren loggar in har denne möjlighet att ändra detaljer angående kontot eller radera det. 
+
+Användaren kan i webbgränssnitttet också se detaljer om sina resor som innefattar:
 
 * ID på resan
 * Startdatum (2000-01-01)
 * Starttid (11:11 LT)
 * Slutdatum (2000-01-01)
 * Sluttid (11:11 LT)
-* Startpunkt (lat/long, geografiskt närliggande namn?)
-* Slutpunkt (lat/long, geografiskt närliggande namn?)
+* Startpunkt
+* Slutpunkt
 * Kostnad för resan (kronor, ören)
+
+Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad. 
+
+Nedanstående diagram visar flödet i användarens webbgränssnitt:
+
+![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
+
+[1] Se <https://reactjs.org/>
+
+Nedanstående tabell flyttas till avsnittet API.
 
 ## Substantiv
 
@@ -71,18 +85,9 @@ Användaren kan också se sin färdhistorik som innefattar:
 `/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
 `/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
 `/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
+`/parkingZones/`              | Visa en alla parkeringplatser          | Skapa en ny parkeringsplats    | :x:           | :x:
+`/parkingZones/{id}`          | Visa en parkeringplats med id {id}     | :x:    | Modifiera en parkeringsplats med id {id}           | Ta bort en parkeringsplats med id {id}
+`/trips/`                     | Visa alla resor     | Skapa en ny resa    | :x:            | :x:
+`/trips/{id}`                 | Visa en resa med id {id}     | :x:    | Modifiera en resa med id {id}           | Ta bort en resa med id {id}
+`/trips/{userId}`             | Visa alla resor med användar-id {användar-id}     | :x:    | :x:           | :x:
 
-![Hemskärm](desktop_-_home.png)
-*Hemskärm i webbläsare för dator*
-
-![Hemskärm](desktop_-_password_login.png)
-*Logga in i webbläsare för dator*
-
-![Hemskärm](desktop_-_register.png)
-*Registrera i webbläsare för dator*
-
-![Hemskärm](desktop_-_contact.png)
-*Kontakta företaget i webbläsare för dator*
-
-![Hemskärm](desktop_-_fr%C3%A5gor_och_svar.png)
-*Frågor och svar i webbläsare för dator*
