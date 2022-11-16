@@ -25,6 +25,7 @@
     - [IoT protokoll](#iot-protokoll)
   - [Simulering](#simulering)
   - [Cykelns program](#cykelns-program)
+  - [Backend](#backend)
   - [Databas](#databas)
   - [Stad](#stad)
   - [Elsparkcykel](#elsparkcykel)
@@ -317,7 +318,30 @@ Vae elsparkcykel sparar också en egen historik över alla sina resor.
 - Resans startposition samt klockslag
 - Resans slutposition samt klockslag
 
+## Backend
+
+De grundläggande kraven för systemets backend är:
+
+- Databasen skall kunna hantera relevant data.
+- Systemet skall erbjuda ett väldokumenterat REST API som tredjepartsleverantörer kan använda för att bygga extra tjänster och applikationer.
+- REST API:et skall kunna hantera flera olika versioner, tex genom att använda v1/ som en del i URI:n.
+- REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger. 
+
+Med underlag av data från tester med MongoDb och MariaDb, där respektive databas belastades med en stor mängd anrop under kort tid,
+valdes MariaDb som databas för att hantera all data.  
+Samma tester visade också på stora skillnader i prestanda mellen en FastApi (Python) och Express (node) server, där Express
+visade sig vara det bättre valet.  
+Städernas geodata fås från "TODO". Det är ett fritt bibliotek som erbjuder den data som behövs.  
+
+Kommunikation mellan klienter och backend sker via API't och där klinten enbart känner till sin egen data och 
+backend har data över alla delar i systemet.  
+Några exempel på kommunikationen är:
+
+![Backend-exempel](backend_example.png)
+*Några övergripande exempel på kommunikationen*
+
 ## Databas
+
 
 Information systemets olika entiteter samlas i en databas. En entitet kan t.ex. vara "användare", "stad" eller "administratör". Varje entitet har en egen tabell i databasen. I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.
 
