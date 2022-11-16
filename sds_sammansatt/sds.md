@@ -1,11 +1,13 @@
+# Elsparkcyklar AB
+
 - [Elsparkcyklar AB](#elsparkcyklar-ab)
   - [Inledning](#inledning)
     - [Bakgrund](#bakgrund)
   - [Översikt över systemet](#översikt-över-systemet)
     - [Systemets användare](#systemets-användare)
     - [Systemets delar](#systemets-delar)
-  - [Kundens app](#kundens-app)
-  - [Kundens webbgränssnitt](#kundens-webbgränssnitt)
+  - [Användarens app](#användarens-app)
+  - [Användarens webbgränssnitt](#användarens-webbgränssnitt)
   - [Substantiv](#substantiv)
   - [Verb](#verb)
   - [Administratörsgränssnitt](#administratörsgränssnitt)
@@ -13,18 +15,7 @@
   - [Hantering av kunder](#hantering-av-kunder)
   - [Behörighetshantering](#behörighetshantering)
   - [Geodatahantering](#geodatahantering)
-  - [Översikt cykeldator](#översikt-cykeldator)
-    - [Beteende](#beteende)
-    - [Positionsdata](#positionsdata)
-    - [Status](#status)
-    - [Sensor](#sensor)
-    - [Positionsdata och/eller status och/eller sensor](#positionsdata-ocheller-status-ocheller-sensor)
-  - [Elsparkcykel <-> server kommunikation](#elsparkcykel---server-kommunikation)
-    - [HTTP](#http)
-    - [Websockets](#websockets)
-    - [IoT protokoll](#iot-protokoll)
-  - [Simulering](#simulering)
-  - [Cykelns program](#cykelns-program)
+  - [Elsparkcykelns mjukvara](#elsparkcykelns-mjukvara)
   - [Backend](#backend)
   - [Databas](#databas)
   - [Stad](#stad)
@@ -42,8 +33,6 @@
   - [Autentisering](#autentisering)
     - [Godkänd autentisering](#godkänd-autentisering)
     - [Misslyckad autentisering](#misslyckad-autentisering)
-
-# Elsparkcyklar AB
 
 ## Inledning
 
@@ -100,17 +89,16 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 
 [3] Se <https://www.oreilly.com/content/software-architecture-patterns/>
 
-
-# Användarens app
+## Användarens app
 
 ![Hemskärm](mobile_-_home.png)
-_Hemskärm i mobilapp_
+*Hemskärm i mobilapp*
 
 Alternativt kartbild istället för Hemskärm
 
 I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs i React. Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning via en app. För att kunna hyra en elsparkcykel måste användaren autentisera och identifiera sig, detta görs via Ouath med ett GitHub konto. När användaren loggar in i appen visas en kartbild med tillgängliga elsparkcyklar, laddstationer och rekommenderade parkeringsplatser. I vårt program identifieras en elsparkcykel genom att från kartbilden välja elsparcykelns ikon vilket ger användaren möjligheten att välja vald elsparkcykel för uthyrning.
 
-Då en uthyrning påbörjats så låses cykeln upp och användaren kan manövrera elsparkcykeln under hyrtiden. 
+Då en uthyrning påbörjats så låses cykeln upp och användaren kan manövrera elsparkcykeln under hyrtiden.
 
 Användaren kan också, via appen, få information från den hyrda elsparkcykeln i form av:
 
@@ -127,18 +115,16 @@ När färden avslutats låses cykeln igen.
 
 Denna bild ger en översikt över flödet för att hyra en elsparkcykel i användarens mobilapp runda cirklar visar kommandon som utförs i backend.
 
-
 ![Flödet i användarens app vid uthyrning av elsparkcykel](användarens_app.drawio.png)
 
 Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 
-# Användarens webbgränssnitt
-
+## Användarens webbgränssnitt
 
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
-Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. 
+Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter.
 
 Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 
@@ -149,20 +135,20 @@ Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 - användarnamn
 - lösenord
 
-När användaren loggar in har denne möjlighet att ändra detaljer angående kontot eller radera det. 
+När användaren loggar in har denne möjlighet att ändra detaljer angående kontot eller radera det.
 
 Användaren kan i webbgränssnitttet också se detaljer om sina resor som innefattar:
 
-* ID på resan
-* Startdatum (2000-01-01)
-* Starttid (11:11 LT)
-* Slutdatum (2000-01-01)
-* Sluttid (11:11 LT)
-* Startpunkt
-* Slutpunkt
-* Kostnad för resan (kronor, ören)
+- ID på resan
+- Startdatum (2000-01-01)
+- Starttid (11:11 LT)
+- Slutdatum (2000-01-01)
+- Sluttid (11:11 LT)
+- Startpunkt
+- Slutpunkt
+- Kostnad för resan (kronor, ören)
 
-Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad. 
+Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad.
 
 Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
@@ -174,18 +160,18 @@ Nedanstående tabell flyttas till avsnittet API.
 
 ## Substantiv
 
-* Användare
-* Administratör
-* Huvudadministratör
-* Elsparkcykel
-* Laddstation
-* Stad
-* Förbjuden zon
-* Verkstad
+- Användare
+- Administratör
+- Huvudadministratör
+- Elsparkcykel
+- Laddstation
+- Stad
+- Förbjuden zon
+- Verkstad
 
 ## Verb
 
-* En användare ska hyra en elsparkcykel
+- En användare ska hyra en elsparkcykel
 
 `URL`                         | `GET`                                  | `POST`                         | `PUT`                                       | `DELETE`
 ------------------------------|:--------------------------------------:|:------------------------------:|:-------------------------------------------:|:-------------------:
@@ -266,7 +252,9 @@ Systemet har kraftfulla och lättanvända funktioner för att hantera nya markna
 ![Systemets kartredigeringsvy](admin_kartred.drawio.png)
 *Kartredigeringsvy från systemet*
 
-# Elsparkcykelns mjukvara
+## Elsparkcykelns mjukvara
+
+![Cykelkommunikation](./cykelkommunikation.svg)
 
 En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et.
 
@@ -312,23 +300,22 @@ De grundläggande kraven för systemets backend är:
 - Databasen skall kunna hantera relevant data.
 - Systemet skall erbjuda ett väldokumenterat REST API som tredjepartsleverantörer kan använda för att bygga extra tjänster och applikationer.
 - REST API:et skall kunna hantera flera olika versioner, tex genom att använda v1/ som en del i URI:n.
-- REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger. 
+- REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger.
 
 Med underlag av data från tester med MongoDb och MariaDb, där respektive databas belastades med en stor mängd anrop under kort tid,
-valdes MariaDb som databas för att hantera all data.  
+valdes MariaDb som databas för att hantera all data.
 Samma tester visade också på stora skillnader i prestanda mellen en FastApi (Python) och Express (node) server, där Express
-visade sig vara det bättre valet.  
-Städernas geodata fås från "TODO". Det är ett fritt bibliotek som erbjuder den data som behövs.  
+visade sig vara det bättre valet.
+Städernas geodata fås från "TODO". Det är ett fritt bibliotek som erbjuder den data som behövs.
 
-Kommunikation mellan klienter och backend sker via API't och där klinten enbart känner till sin egen data och 
-backend har data över alla delar i systemet.  
+Kommunikation mellan klienter och backend sker via API't och där klinten enbart känner till sin egen data och
+backend har data över alla delar i systemet.
 Några exempel på kommunikationen är:
 
 ![Backend-exempel](backend_example.png)
 *Några övergripande exempel på kommunikationen*
 
 ## Databas
-
 
 Information systemets olika entiteter samlas i en databas. En entitet kan t.ex. vara "användare", "stad" eller "administratör". Varje entitet har en egen tabell i databasen. I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.
 
