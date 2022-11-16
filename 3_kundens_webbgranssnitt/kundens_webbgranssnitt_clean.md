@@ -4,9 +4,20 @@
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
-I användarens webbgränssnitt kan en användare logga in i för att se detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. Denna del av systemet är en desktopapp som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt. [React](https://reactjs.org/) 
+Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter. 
 
-Användaren kan också se detaljer om sina resor som innefattar:
+Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
+
+- förnamn
+- efternamn
+- adress
+- faktureringsadress
+- användarnamn
+- lösenord
+
+När användaren loggar in har denne möjlighet att ändra detaljer angående kontot eller radera det. 
+
+Användaren kan i webbgränssnitttet också se detaljer om sina resor som innefattar:
 
 * ID på resan
 * Startdatum (2000-01-01)
@@ -17,13 +28,13 @@ Användaren kan också se detaljer om sina resor som innefattar:
 * Slutpunkt
 * Kostnad för resan (kronor, ören)
 
-
-Då användaren loggat in på sitt konto så kan denne också se och fylla på sitt saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst i så fall dras en avgift varje månad. 
+Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad. 
 
 Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
 
+[1] Se <https://reactjs.org/>
 
 Nedanstående tabell flyttas till avsnittet API.
 
@@ -74,16 +85,9 @@ Nedanstående tabell flyttas till avsnittet API.
 `/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
 `/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
 `/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
+`/parkingZones/`              | Visa en alla parkeringplatser          | Skapa en ny parkeringsplats    | :x:           | :x:
+`/parkingZones/{id}`          | Visa en parkeringplats med id {id}     | :x:    | Modifiera en parkeringsplats med id {id}           | Ta bort en parkeringsplats med id {id}
+`/trips/`                     | Visa alla resor     | Skapa en ny resa    | :x:            | :x:
+`/trips/{id}`                 | Visa en resa med id {id}     | :x:    | Modifiera en resa med id {id}           | Ta bort en resa med id {id}
+`/trips/{userId}`             | Visa alla resor med användar-id {användar-id}     | :x:    | :x:           | :x:
 
-
-![Hemskärm](desktop_-_password_login.png)
-*Logga in i webbläsare för dator*
-
-![Hemskärm](desktop_-_register.png)
-*Registrera i webbläsare för dator*
-
-![Hemskärm](desktop_-_contact.png)
-*Kontakta företaget i webbläsare för dator*
-
-![Hemskärm](desktop_-_fr%C3%A5gor_och_svar.png)
-*Frågor och svar i webbläsare för dator*
