@@ -187,43 +187,6 @@ Nedanstående tabell flyttas till avsnittet API.
 
 * En användare ska hyra en elsparkcykel
 
-`URL`                         | `GET`                                  | `POST`                         | `PUT`                                       | `DELETE`
-------------------------------|:--------------------------------------:|:------------------------------:|:-------------------------------------------:|:-------------------:
-`/users/`                     | Visa alla användare                    | Skapa en ny användare          | :x:                                         | :x:
-`/users/{id}`                 | Visa en användare med id {id}          | :x:                            | Modifiera en användare med id {id}          | Ta bort en användare med id {id}
-`/users/{id}/position`        | Visa positionen för en användare med id {id} | :x:                      | :x: | :x:
-`/users/{city}/`              | Visa alla användare som för tillfället hyr en elsparkcykel i stad {city} | :x: | :x: | :x:
-`/users/online/`              | Visa alla användare som för tillfället är online | :x: | :x: | :x:
-`/users/offline/`             | Visa alla användare som för tillfället är offline | :x: | :x: | :x:
-`/administrators/`            | Visa alla administratörer              | Skapa en ny administratör      | :x:                                         | :x:
-`/administrators/{id}`        | Visa en administratörer med id {id}    | :x:                            | Modifiera en administratör med id {id}      | Ta bort en administratör med id {id}
-`/mainAdministrators/`        | Visa alla huvudadministratör           | Skapa en ny huvudadministratör | :x:                                         | :x:
-`/mainAdministrators/{id}`    | Visa en huvudadministratör med id {id} | :x:                            | Modifiera en huvudadministratör med id {id} | Ta bort en huvudadministratör med id {id}
-`/cities/`                    | Visa alla städer                       | Skapa en ny stad               | :x:                                         | :x:
-`/cities/{id}`                | Visa en stad med id {id}               | :x:                            | Modifiera en stad med id {id}               | Ta bort en stad med id {id}
-`/cities/{id}/forbiddenZones/` | Visa alla förbjudna zoner i stad med id {id} | :x: | :x: | :x:
-`/cities/{id}/electricScooters/` | Visa alla elsparkcyklar i stad med id {id} | :x: | :x: | :x:
-`/cities/{id}/chargingStations/`  | Visa alla laddstationer i stad med id {id} | :x: | :x: | :x:
-`/cities/{id}/workshops/`     | Visa alla verkstäder i stad med id {id}  | :x:           | :x:                                         | :x:
-`/electricScooters/`          | Visa alla elsparkcyklar                | Skapa en ny elsparkcykel       | :x:                                         | :x:
-`/electricScooters/rented`    | Visa alla elsparkcyklar som just nu är uthyrda | :x: | :x:                                         | :x:
-`/electricScooters/stale`     | Visa alla elsparkcyklar som just nu inte är uthyrda | :x: | :x:                                         | :x:
-`/electricScooters/serviced`  | Visa alla elsparkcyklar som just nu är under service | :x: | :x:                                         | :x:
-`/electricScooters/{id}`      | Visa en elsparkcykel med id {id}       | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
-`/electricScooters/{id}/position` | Visa positionen för en elsparkcykel med id {id} | :x: | :x: | :x:
-`/electricScooters/{id}/batteryLevel` | Visa batterinivån för en elsparkcykel med id {id} | :x: | :x: | :x:
-`/electricScooters/{id}/stop` | :x:                                    | Stoppa elsparkcykeln           | :x:                                         | :x:
-`/chargingStations/`          | Visa alla laddstationer                | Skapa en ny laddstation        | :x:                                         | :x:
-`/chargingStations/{id}`      | Visa en laddstation med id {id}        | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
-`/forbiddenZones/`            | Visa alla förbjudna zoner              | Skapa en ny förbjuden zon      | :x:                                         | :x:
-`/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
-`/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
-`/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
-`/parkingZones/`              | Visa en alla parkeringplatser          | Skapa en ny parkeringsplats    | :x:           | :x:
-`/parkingZones/{id}`          | Visa en parkeringplats med id {id}     | :x:    | Modifiera en parkeringsplats med id {id}           | Ta bort en parkeringsplats med id {id}
-`/trips/`                     | Visa alla resor     | Skapa en ny resa    | :x:            | :x:
-`/trips/{id}`                 | Visa en resa med id {id}     | :x:    | Modifiera en resa med id {id}           | Ta bort en resa med id {id}
-`/trips/{userId}`             | Visa alla resor med användar-id {användar-id}     | :x:    | :x:           | :x:
 
 ## Administratörsgränssnitt
 
@@ -305,7 +268,7 @@ Vae elsparkcykel sparar också en egen historik över alla sina resor.
 - Resans startposition samt klockslag
 - Resans slutposition samt klockslag
 
-## Backend
+# Backend
 
 De grundläggande kraven för systemets backend är:
 
@@ -327,123 +290,71 @@ Några exempel på kommunikationen är:
 ![Backend-exempel](backend_example.png)
 *Några övergripande exempel på kommunikationen*
 
-## Databas
+# Databas
 
 
-Information systemets olika entiteter samlas i en databas. En entitet kan t.ex. vara "användare", "stad" eller "administratör". Varje entitet har en egen tabell i databasen. I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.
+Information systemets olika entiteter samlas i en databas. En entitet kan t.ex. vara "användare", "stad" eller "administratör". I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.  
+Databasen som används är MariaDB. Det är en open source relations-databas. Den är baserad på MySQL databasen och använder traditionell SQL syntax.  
 
-Den databas som ingår i systemet är en DATABASTYP. Systemet kommunicerar med databasen via ORM/SQL/Redis? (Byggs ut när vi har bestämt oss)
+De fyra entiteter som utgör grunden för databasen är:
 
-Följande tabeller/entiteter finns i databasen:
+![Databas-mjuk](databas-mjuk.png)
+*De fyra huvudsakliga entiteterna*
 
-## Stad
+Tabeller vars data är en produkt av olika händelser uppdateras med data från någon av de fyra entiteterna. tex när en användare hyr en elsparkcykel så startas en resa.
+- Vilken användare hyrde
+- Vilken elsparkcykel som hyrdes
+- Elsparkcykelns position när hyran startades
+- Elsparkcykelns position när hyran avslutades
 
-Denna tabell innehåller information om städer. Varje stad har:
+Denna resa utgör i sin tur underlaget för en faktura.
+- Stadens taxa
+- Eventuell rabatt om resan avslutades i en parkeringszon
 
-- ett unikt id som identifierar staden i systemet
-- ett namn
-- en geografisk position
+Nedanstående bild visar samtliga entiteter som förekommer i databasen, deras attribut och inbördes relationer.
 
-En stad har också relationer till andra entiteter den kan ha en eller flera:
-
-- Elsparkcyklar
-- Laddstationer
-- Parkeringsplatser
-- Zoner
-- Verkstäder?
-
-## Elsparkcykel
-
-Denna tabell innehåller information om elsparkcyklar. Varje elsparkcykel har
-
-- ett unikt id
-- en position
-- en status, ett värde som visar om elsparkcykeln är ok, laddas eller behöver service
-- en batterinivå
-- en uthyrningsstatus som visar om elsparkcykeln är uthyrd eller inte
-- en hastighet
-
-En elsparkcykel har också relationer till andra entiteter, den kan ha:
-
-- en användare (om elsparkcykeln är uthyrd)
-- en eller flera (historiska) resor
-
-## Laddstation
-
-Denna tabell innehåller information om laddstationer. Varje laddstation har:
-
-- ett unikt id
-- en position
-
-Bör vi också koppla elsparkcyklar till specifika laddstationer?
-
-## Parkeringsplats
-
-Denna tabell innehåller information om parkeringsplatser, både tillåtna och otillåtna. Varje parkeringsplats har:
-
-- ett unikt id
-- en position
-- en typ som talar om ifall detta är en "+parkeringsplats" en vanlig parkeringsplats eller en förbjuden parkeringsplats
-
-## Zon
-
-Denna tabell innehåller information om särskilda zoner. Varje zon har:
-
-- ett unikt id
-- en position
-- en typ som visar om det är tillåtet att färdas i zonen eller inte
-- en hastighetsbegränsning som bestämmer högsta tillåtna hastighet i zonen?
-
-## Verkstad (ska verkstäder vara med?)
-
-Denna tabell innehåller information om verkstäder där elsparkcyklar servas och repareras. Varje verkstad har:
-
-- ett unikt id
-- en position
-
-## Användare
-
-Denna tabell innehåller information om användare. Varje användare har:
-
-- ett unikt id
-- ett förnamn (får vi detta med OAuth?)
-- ett efternamn (får vi detta med OAuth?)
-- en adress (får vi detta med OAuth?)
-- en faktureringsadress (får vi detta med OAuth?)
-- ett användarnamn (behöver vi detta med OAuth?)
-- ett lösenord (behöver vi detta med OAuth?)
-- en e-postadress
-- ett saldo
-- en position? (behöver vi användarnas positioner?)
-- en status som visar om användaren är inloggad eller inte? (behöver vi detta?)
-
-En användare har också relationer till andra entiteter, den kan ha:
-
-- en elsparkcykel (om användaren hyr en cykel)
-- en eller flera (historiska) resor
-
-## Administratör
-
-Denna tabell innehåller information om administratörer. Varje administratör har:
-
-- ett unikt id
-- ett användarnamn
-- ett lösenord
-- en typ som beskriver administratörens behörighet (huvudadministratör eller vanlig administratör)
-
-## Resa
-
-Denna tabell innehåller information om resor. Varje resa har:
-
-- ett unikt id
-- en startposition
-- en slutposition
-- en starttid
-- en sluttid
-
-Nedanstående bild visar de entiteter som förekommer i databasen, deras attribut och inbördes relationer.
+![Databas-er](databas-er.png)
+*ER-diagram*
 
 ## REST-API
+
+`URL`                         | `GET`                                  | `POST`                         | `PUT`                                       | `DELETE`
+------------------------------|:--------------------------------------:|:------------------------------:|:-------------------------------------------:|:-------------------:
+`/users/`                     | Visa alla användare                    | Skapa en ny användare          | :x:                                         | :x:
+`/users/{id}`                 | Visa en användare med id {id}          | :x:                            | Modifiera en användare med id {id}          | Ta bort en användare med id {id}
+`/users/{id}/position`        | Visa positionen för en användare med id {id} | :x:                      | :x: | :x:
+`/users/{city}/`              | Visa alla användare som för tillfället hyr en elsparkcykel i stad {city} | :x: | :x: | :x:
+`/users/online/`              | Visa alla användare som för tillfället är online | :x: | :x: | :x:
+`/users/offline/`             | Visa alla användare som för tillfället är offline | :x: | :x: | :x:
+`/administrators/`            | Visa alla administratörer              | Skapa en ny administratör      | :x:                                         | :x:
+`/administrators/{id}`        | Visa en administratörer med id {id}    | :x:                            | Modifiera en administratör med id {id}      | Ta bort en administratör med id {id}
+`/mainAdministrators/`        | Visa alla huvudadministratör           | Skapa en ny huvudadministratör | :x:                                         | :x:
+`/mainAdministrators/{id}`    | Visa en huvudadministratör med id {id} | :x:                            | Modifiera en huvudadministratör med id {id} | Ta bort en huvudadministratör med id {id}
+`/cities/`                    | Visa alla städer                       | Skapa en ny stad               | :x:                                         | :x:
+`/cities/{id}`                | Visa en stad med id {id}               | :x:                            | Modifiera en stad med id {id}               | Ta bort en stad med id {id}
+`/cities/{id}/forbiddenZones/` | Visa alla förbjudna zoner i stad med id {id} | :x: | :x: | :x:
+`/cities/{id}/electricScooters/` | Visa alla elsparkcyklar i stad med id {id} | :x: | :x: | :x:
+`/cities/{id}/chargingStations/`  | Visa alla laddstationer i stad med id {id} | :x: | :x: | :x:
+`/cities/{id}/workshops/`     | Visa alla verkstäder i stad med id {id}  | :x:           | :x:                                         | :x:
+`/electricScooters/`          | Visa alla elsparkcyklar                | Skapa en ny elsparkcykel       | :x:                                         | :x:
+`/electricScooters/rented`    | Visa alla elsparkcyklar som just nu är uthyrda | :x: | :x:                                         | :x:
+`/electricScooters/stale`     | Visa alla elsparkcyklar som just nu inte är uthyrda | :x: | :x:                                         | :x:
+`/electricScooters/serviced`  | Visa alla elsparkcyklar som just nu är under service | :x: | :x:                                         | :x:
+`/electricScooters/{id}`      | Visa en elsparkcykel med id {id}       | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
+`/electricScooters/{id}/position` | Visa positionen för en elsparkcykel med id {id} | :x: | :x: | :x:
+`/electricScooters/{id}/batteryLevel` | Visa batterinivån för en elsparkcykel med id {id} | :x: | :x: | :x:
+`/electricScooters/{id}/stop` | :x:                                    | Stoppa elsparkcykeln           | :x:                                         | :x:
+`/chargingStations/`          | Visa alla laddstationer                | Skapa en ny laddstation        | :x:                                         | :x:
+`/chargingStations/{id}`      | Visa en laddstation med id {id}        | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
+`/forbiddenZones/`            | Visa alla förbjudna zoner              | Skapa en ny förbjuden zon      | :x:                                         | :x:
+`/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
+`/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
+`/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
+`/parkingZones/`              | Visa en alla parkeringplatser          | Skapa en ny parkeringsplats    | :x:           | :x:
+`/parkingZones/{id}`          | Visa en parkeringplats med id {id}     | :x:    | Modifiera en parkeringsplats med id {id}           | Ta bort en parkeringsplats med id {id}
+`/trips/`                     | Visa alla resor     | Skapa en ny resa    | :x:            | :x:
+`/trips/{id}`                 | Visa en resa med id {id}     | :x:    | Modifiera en resa med id {id}           | Ta bort en resa med id {id}
+`/trips/{userId}`             | Visa alla resor med användar-id {användar-id}     | :x:    | :x:           | :x:
 
 (Hur göra en intern github länk till Richards fantastiska API spreadsheet?)
 (Känns som jag behöver skriva lite mer i denna del men kommer inte på vad.)
