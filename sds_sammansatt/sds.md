@@ -122,7 +122,7 @@ Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
-Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[4] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter.
+Denna del av systemet är en desktop-app som, liksom användarens mobilapp, byggs i React. I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sitt Githubkonto.
 
 Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 
