@@ -199,7 +199,7 @@ Systemet har kraftfulla och lättanvända funktioner för att hantera nya markna
 
 ![Cykelkommunikation](./cykelkommunikation.svg)
 
-En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et.
+En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et. Elsparkcykelns mjukvara byggs i Python, då det i detta programspråk finns många färdiga bibliotek för att hantera integration med sensorer o dyl.
 
 Elsparkcykelns har sensorer som samlar in information som rör dess egen position samt funktionsstatus:
 
@@ -408,6 +408,22 @@ En applikation för användare kan **inte** se alla användare i systemet.
             "detail": "No valid API key provided."
         }
     }
+
+# Tester
+
+Alla i systemet ingående komponenter kommer under utvecklingen av systemets genomgå unit- och integrationstester
+
+# CI/CD
+
+För att säkerställa att alla tester körs som de ska, och att ingen ny kod skapas som bryter beteendet i befintlig kod, bygger vi ett flöde för CI/CD i GitHub.
+
+# Simulering
+
+Innan systemet färdigställs för slutleverans kommer systemet utsättas för ett virtuellt stresstest. I detta test simulerar vi  5000 cyklar som hyrs ut, framförs, och återlämnas i vardera stad systemet skall användas i. Resultatet av denna simulering sammanställs och infogas i leveransrapporten.
+
+# Driftsättning
+
+Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar containerization genom Docker. 
 
 # Referenser
 
