@@ -121,11 +121,10 @@ Denna bild ger en översikt över flödet för att hyra en elsparkcykel i använ
 Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 
 ## Användarens webbgränssnitt
-
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
-Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter.
+Denna del av systemet är en desktop-app som liksom användarens mobilapp byggs i React. I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sitt Githubkonto.
 
 Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 
@@ -141,21 +140,19 @@ När användaren loggar in har denne möjlighet att ändra detaljer angående ko
 Användaren kan i webbgränssnitttet också se detaljer om sina resor som innefattar:
 
 - ID på resan
-- Startdatum (2000-01-01)
-- Starttid (11:11 LT)
-- Slutdatum (2000-01-01)
-- Sluttid (11:11 LT)
+- Startdatum 
+- Starttid
+- Slutdatum
+- Sluttid
 - Startpunkt
 - Slutpunkt
-- Kostnad för resan (kronor, ören)
+- Kostnad för resan
 
 Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad.
 
 Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
-
-[1] Se <https://reactjs.org/>
 
 ## Administratörsgränssnitt
 
