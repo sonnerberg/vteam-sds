@@ -1,14 +1,3 @@
-<style>
-
-  div {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;   
-    background-color: white;
-  }
-</style>
-
 # Elsparkcyklar AB
 
 - [Elsparkcyklar AB](#elsparkcyklar-ab)
@@ -59,9 +48,7 @@ Elsparkcyklar är ett, jämfört med andra fortskaffningsmedel, relativt nytt in
 Vår förhoppning är att det system som vi presenterar här kommer att kunna lösa en del av dessa utmaningar, inte minst genom att uppmuntra användarna till ett korrekt bruk av cyklarna och genom att automatiskt begränsa var och med vilken hastighet cyklarna kan köras.
 
 ## Översikt över systemet
-<div style="display: block; margin-left: auto; margin-right: auto; width: 75%; background-color: white;">
 ![Översikt över systemet](./overblick.svg)
-</div>
 *Fig 1. Översikt över systemet*
 
 ### Systemets användare
