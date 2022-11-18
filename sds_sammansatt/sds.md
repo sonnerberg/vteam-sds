@@ -154,6 +154,8 @@ Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ## Administratörsgränssnitt
 
+Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[4] JavaScript-biblioteket Leaflet används för att skapa och hantera kartor och geodata.
+
 Systemets administratörsgränssnitt används av behöriga användare för att få en översikt över företagets alla resurser:
 
 - Kunder
