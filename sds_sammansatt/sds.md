@@ -1,3 +1,14 @@
+<style>
+
+  div {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;   
+    background-color: white;
+  }
+</style>
+
 # Elsparkcyklar AB
 
 - [Elsparkcyklar AB](#elsparkcyklar-ab)
@@ -48,6 +59,10 @@ Elsparkcyklar är ett, jämfört med andra fortskaffningsmedel, relativt nytt in
 Vår förhoppning är att det system som vi presenterar här kommer att kunna lösa en del av dessa utmaningar, inte minst genom att uppmuntra användarna till ett korrekt bruk av cyklarna och genom att automatiskt begränsa var och med vilken hastighet cyklarna kan köras.
 
 ## Översikt över systemet
+<div>
+![Översikt över systemet](./overblick.svg)
+</div>
+*Fig 1. Översikt över systemet*
 
 ### Systemets användare
 
@@ -84,12 +99,6 @@ Nedanstående diagram visar en översikt över systemets huvudkomponenter samt h
 
 I följande avsnitt beskriver vi systemets olika delar i detalj.
 
-[1] <https://www.transportstyrelsen.se/globalassets/global/publikationer-och-rapporter/vag/slutrapport-utredning-regler-eldrivna-enpersonsfordon.pdf>
-
-[2] Se Jönköpingsposten 3/9 2022 samt <https://rkrattsbaser.gov.se/sfst?bet=1998:1276> $4
-
-[3] Se <https://www.oreilly.com/content/software-architecture-patterns/>
-
 ## Användarens app
 
 ![Hemskärm](mobile_-_home.png)
@@ -125,7 +134,7 @@ Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
-Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[1] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter.
+Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[4] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter.
 
 Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 
@@ -155,7 +164,6 @@ Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
 
-[1] Se <https://reactjs.org/>
 
 ## Administratörsgränssnitt
 
@@ -411,3 +419,13 @@ En applikation för användare kan **inte** se alla användare i systemet.
             "detail": "No valid API key provided."
         }
     }
+
+# Referenser
+
+[1] <https://www.transportstyrelsen.se/globalassets/global/publikationer-och-rapporter/vag/slutrapport-utredning-regler-eldrivna-enpersonsfordon.pdf>
+
+[2] Se Jönköpingsposten 3/9 2022 samt <https://rkrattsbaser.gov.se/sfst?bet=1998:1276> $4
+
+[3] Se <https://www.oreilly.com/content/software-architecture-patterns/>
+
+[4] Se <https://reactjs.org/>
