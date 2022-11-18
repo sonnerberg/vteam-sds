@@ -48,6 +48,8 @@ Elsparkcyklar är ett, jämfört med andra fortskaffningsmedel, relativt nytt in
 Vår förhoppning är att det system som vi presenterar här kommer att kunna lösa en del av dessa utmaningar, inte minst genom att uppmuntra användarna till ett korrekt bruk av cyklarna, att t.ex. parkera cykeln på en parkeringsplats kommer innebära lägre kostnader för användaren, och genom att automatiskt begränsa var och med vilken hastighet cyklarna kan köras.
 
 ## Översikt över systemet
+![Översikt över systemet](./overblick.svg)
+*Fig 1. Översikt över systemet*
 
 ### Systemets användare
 
@@ -83,12 +85,6 @@ Nedanstående diagram visar en översikt över systemets huvudkomponenter samt h
 *Fig 1. Översikt över systemets huvudkomponenter*
 
 I följande avsnitt beskriver vi systemets olika delar i detalj.
-
-[1] <https://www.transportstyrelsen.se/globalassets/global/publikationer-och-rapporter/vag/slutrapport-utredning-regler-eldrivna-enpersonsfordon.pdf>
-
-[2] Se Jönköpingsposten 3/9 2022 samt <https://rkrattsbaser.gov.se/sfst?bet=1998:1276> $4
-
-[3] Se <https://www.oreilly.com/content/software-architecture-patterns/>
 
 ## Användarens app
 
@@ -126,7 +122,7 @@ Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
-Denna del av systemet är en desktop-app som liksom användarens mobilapp byggs i React. I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sitt Githubkonto.
+Denna del av systemet är en desktop-app som byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[4] I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sina Github uppgifter.
 
 Det är också möjigt att skapa ett konto på sedvanligt vis genom att uppge:
 
@@ -157,6 +153,8 @@ Nedanstående diagram visar flödet i användarens webbgränssnitt:
 ![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
 
 ## Administratörsgränssnitt
+
+Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[4] JavaScript-biblioteket Leaflet används för att skapa och hantera kartor och geodata.
 
 Systemets administratörsgränssnitt används av behöriga användare för att få en översikt över företagets alla resurser:
 
@@ -201,7 +199,7 @@ Systemet har kraftfulla och lättanvända funktioner för att hantera nya markna
 
 ![Cykelkommunikation](./cykelkommunikation.svg)
 
-En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et.
+En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et. Elsparkcykelns mjukvara byggs i Python, då det i detta programspråk finns många färdiga bibliotek för att hantera integration med sensorer o dyl.
 
 Elsparkcykelns har sensorer som samlar in information som rör dess egen position samt funktionsstatus:
 
@@ -410,3 +408,29 @@ En applikation för användare kan **inte** se alla användare i systemet.
             "detail": "No valid API key provided."
         }
     }
+
+# Tester
+
+Alla i systemet ingående komponenter kommer under utvecklingen av systemets genomgå unit- och integrationstester
+
+# CI/CD
+
+För att säkerställa att alla tester körs som de ska, och att ingen ny kod skapas som bryter beteendet i befintlig kod, bygger vi ett flöde för CI/CD i GitHub.
+
+# Simulering
+
+Innan systemet färdigställs för slutleverans kommer systemet utsättas för ett virtuellt stresstest. I detta test simulerar vi  5000 cyklar som hyrs ut, framförs, och återlämnas i vardera stad systemet skall användas i. Resultatet av denna simulering sammanställs och infogas i leveransrapporten.
+
+# Driftsättning
+
+Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar containerization genom Docker. 
+
+# Referenser
+
+[1] <https://www.transportstyrelsen.se/globalassets/global/publikationer-och-rapporter/vag/slutrapport-utredning-regler-eldrivna-enpersonsfordon.pdf>
+
+[2] Se Jönköpingsposten 3/9 2022 samt <https://rkrattsbaser.gov.se/sfst?bet=1998:1276> $4
+
+[3] Se <https://www.oreilly.com/content/software-architecture-patterns/>
+
+[4] Se <https://reactjs.org/>
