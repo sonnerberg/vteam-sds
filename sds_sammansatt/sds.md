@@ -41,11 +41,11 @@ I detta dokument beskrivs ett system som hanterar uthyrning av elsparkcyklar. Sy
 
 ### Bakgrund
 
-Företaget "Svenska Elsparkcyklar AB" har utryckt ett behov av ett system som kan hantera uthyrning av elsparkcyklar i svenska städer. För närvarande är företaget etablerat och har verksamhet i "TRE STÄDER" och planerar att expandera till fler med stöd av ett nytt datasystem.
+Företaget "Svenska Elsparkcyklar AB" har utryckt ett behov av ett system som kan hantera uthyrning av elsparkcyklar i svenska städer. För närvarande är företaget etablerat och har verksamhet i Örebro, Eskilstuna och Vansbro och planerar att expandera till fler med stöd av ett nytt datasystem.
 
 Elsparkcyklar är ett, jämfört med andra fortskaffningsmedel, relativt nytt inslag i vår trafikmiljö. De utgör ett nytt sätt att röra sig och kan med rätt förutsättningar utgöra ett miljövänligt sätt att öka transporteffektiviteten i våra städer. Utmaningarna är dock flera, i en utredning från 2021 påpekar Transportstyrelsen att regelverket kan upplevas som otydligt och att många upplever att de som använder cyklarna inte beter sig korrekt. Transportstyrelsen menar i sin utredning att det framförallt rör sig om att användarna parkerar fel och framför fordonen på ett felaktigt sätt. [1] Sedan 1:a september 2022 får elsparkcyklar inte längre framföras på trottoarer och gångbanor och felparkerade cyklar kan beläggas med avgifter. [2]
 
-Vår förhoppning är att det system som vi presenterar här kommer att kunna lösa en del av dessa utmaningar, inte minst genom att uppmuntra användarna till ett korrekt bruk av cyklarna och genom att automatiskt begränsa var och med vilken hastighet cyklarna kan köras.
+Vår förhoppning är att det system som vi presenterar här kommer att kunna lösa en del av dessa utmaningar, inte minst genom att uppmuntra användarna till ett korrekt bruk av cyklarna, att t.ex. parkera cykeln på en parkeringsplats kommer innebära lägre kostnader för användaren, och genom att automatiskt begränsa var och med vilken hastighet cyklarna kan köras.
 
 ## Översikt över systemet
 ![Översikt över systemet](./overblick.svg)
@@ -57,27 +57,27 @@ Systemets huvudsakliga användare är kunder (benämns härefter som användare)
 
 Användare har möjlighet att hyra en cykel via en mobilapplikation som också visar status för senaste resan och en historik över gjorda resor. Användare har också tillgång till ett webbgränssnitt där de kan se sina kontodetaljer och en historik över sin användning och betalningar.
 
-Administratörer har möjlighet att via ett webbgränssnitt se status på cyklar och stationer samt få information om kunder. Administratörer kan också lägga till nya cyklar, laddstationer, zoner för parkering, förbjudna zoner och städer.
+Administratörer har möjlighet att via ett webbgränssnitt se status på cyklar och stationer samt få information om kunder. Administratörer kan också lägga till nya cyklar, laddstationer, zoner för parkering, zoner med särskilda regler och städer.
 
 ### Systemets delar
 
 Systemet omfattar följande huvudsakliga komponenter:
 
-- Databas med information om cyklar, laddstationer, parkeringszoner, tillåtna zoner att cykla i, användare och administratörer.
+- Databas med information om cyklar, laddstationer, parkeringszoner, tillåtna zoner att cykla i, användare och administratörer
 
-- Backend - en komponent som sköter kopplingen mellan API och databas.
+- Backend - en komponent som sköter kopplingen mellan API och databas
 
 - API med möjlighet att koppla in anpassade applikationer, grundsystemet levereras med följande applikationer:
 
-  - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, städer och information om kunder.
+  - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, städer och information om kunder
 
-  - Webbgränssnitt för kunden så att denne kan logga in och se sitt konto, historik av utlåning och betalningar.
+  - Webbgränssnitt för kunden så att denne kan logga in och se sitt konto, historik av utlåning och betalningar
 
-  - Mobilanpassad webbapp för kunden så denne kan se låna/lämna tillbaka cykeln samt se status på senaste resan och historik över gjorda resor.
+  - Mobilanpassad webbapp för kunden så denne kan se låna/lämna tillbaka cykeln samt se status på senaste resan och historik över gjorda resor
 
-  - Ett cykelprogram som styr och övervakar cykeln (på, av, hastighet, begränsa hastighet, position, behöver service/laddning).
+  - Ett cykelprogram som styr och övervakar cykeln (på, av, hastighet, begränsa hastighet, position, behöver service/laddning)
 
-Samtliga applikationer som kopplas mot API:et måste autentisera sin anslutning.
+Samtliga applikationer som kopplas mot API:et måste autentisera sin anslutning
 
 Nedanstående diagram visar en översikt över systemets huvudkomponenter samt hur de relaterar till- och kommunicerar med varandra i olika lager. [3]
 
@@ -91,9 +91,9 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 ![Hemskärm](mobile_-_home.png)
 *Hemskärm i mobilapp*
 
-Alternativt kartbild istället för Hemskärm
+I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs med hjälp av JavaScript-biblioteket React. Med React finns möjlighet att bygga upp ett användargränssnitt genom att skriva enskilda komponenter som kopplas samman till ett sammanhängande UI. React  kräver inte att man använder någon viss teknologi i resten av systemet och är därför ett bra val för att bygga användargränssnitt i ett modulärt system, där delar ska kunna bytas ut eller läggas till efter behov. Det finns också möjlighet att bygga mobila "native"-applikationer med hjälp av React Native.[4] 
 
-I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs i React. Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning via en app. För att kunna hyra en elsparkcykel måste användaren autentisera och identifiera sig, detta görs via Ouath med ett GitHub konto. När användaren loggar in i appen visas en kartbild med tillgängliga elsparkcyklar, laddstationer och rekommenderade parkeringsplatser. I vårt program identifieras en elsparkcykel genom att från kartbilden välja elsparcykelns ikon vilket ger användaren möjligheten att välja vald elsparkcykel för uthyrning.
+Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning via appen. För att kunna hyra en elsparkcykel måste användaren autentisera och identifiera sig, detta görs via OAuth med hjälp av ett GitHub konto. När användaren loggar in i appen visas en kartbild med tillgängliga elsparkcyklar, laddstationer och rekommenderade parkeringsplatser. I vårt program identifieras en elsparkcykel genom att från kartbilden välja elsparcykelns ikon vilket ger användaren möjligheten att välja vald elsparkcykel för uthyrning.
 
 Då en uthyrning påbörjats så låses cykeln upp och användaren kan manövrera elsparkcykeln under hyrtiden.
 
@@ -105,19 +105,20 @@ Användaren kan också, via appen, få information från den hyrda elsparkcykeln
 Då användaren avslutar sin sin resa och återlämnar elsparkcykeln så debiteras användarens konto automatiskt för färden. Färdens kostnad kan variera beroende på:
 
 - hur lång hyrestiden är
-- om cykeln flyttats från fri parkering (valfri parkeringsplats utanför rekommenderade parkeringszoner) till en mer önskvärd parkeringsplatsen
+- om cykeln flyttats från fri parkering (valfri parkeringsplats utanför rekommenderade parkeringszoner) till en mer önskvärd parkeringsplats
 - om cykeln parkeras genom fri parkering
 
 När färden avslutats låses cykeln igen.
 
-Denna bild ger en översikt över flödet för att hyra en elsparkcykel i användarens mobilapp runda cirklar visar kommandon som utförs i backend.
+Denna bild ger en översikt över flödet för att hyra en elsparkcykel i användarens mobilapp, runda cirklar visar kommandon som utförs i backend.
 
 ![Flödet i användarens app vid uthyrning av elsparkcykel](användarens_app.drawio.png)
 
 Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 
-## Användarens webbgränssnitt
+[4] Se <https://reactjs.org/>
 
+## Användarens webbgränssnitt
 ![Hemskärm](desktop_-_home.png)
 *Hemskärm i webbläsare för dator*
 
@@ -137,20 +138,19 @@ När användaren loggar in har denne möjlighet att ändra detaljer angående ko
 Användaren kan i webbgränssnitttet också se detaljer om sina resor som innefattar:
 
 - ID på resan
-- Startdatum (2000-01-01)
-- Starttid (11:11 LT)
-- Slutdatum (2000-01-01)
-- Sluttid (11:11 LT)
+- Startdatum 
+- Starttid
+- Slutdatum
+- Sluttid
 - Startpunkt
 - Slutpunkt
-- Kostnad för resan (kronor, ören)
+- Kostnad för resan
 
 Slutligen kan användaren då denne loggat in på sitt konto också se och fylla på det saldo som används för att bekosta resor med elsparkcykel. Alternativt kan användaren koppla sig till och betala via en betalningstjänst, i så fall dras en avgift varje månad.
 
 Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ![Flödet i användarens webbgränssnitt](användarens_webbgränssnitt.drawio.png)
-
 
 ## Administratörsgränssnitt
 
