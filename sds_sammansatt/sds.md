@@ -65,7 +65,7 @@ Systemet omfattar följande huvudsakliga komponenter:
 
 - API med möjlighet att koppla in anpassade applikationer, grundsystemet levereras med följande applikationer:
 
-  - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, städer och information om kunder
+  - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, zoner städer och information om kunder
 
   - Webbgränssnitt för kunden så att denne kan logga in och se sitt konto, historik av utlåning och betalningar
 
