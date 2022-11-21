@@ -91,7 +91,9 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 ![Hemskärm](mobile_-_home.png)
 *Hemskärm i mobilapp*
 
-I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs med hjälp av JavaScript-biblioteket React. Med React finns möjlighet att bygga upp ett användargränssnitt genom att skriva enskilda komponenter som kopplas samman till ett sammanhängande UI. React  kräver inte att man använder någon viss teknologi i resten av systemet och är därför ett bra val för att bygga användargränssnitt i ett modulärt system, där delar ska kunna bytas ut eller läggas till efter behov. Det finns också möjlighet att bygga mobila "native"-applikationer med hjälp av React Native.[5] 
+I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs med hjälp av JavaScript-biblioteket React. Med React finns möjlighet att bygga upp ett användargränssnitt genom att skriva enskilda komponenter som kopplas samman till ett sammanhängande UI. React  kräver inte att man använder någon viss teknologi i resten av systemet och är därför ett bra val för att bygga användargränssnitt i ett modulärt system, där delar ska kunna bytas ut eller läggas till efter behov. Det finns också möjlighet att bygga mobila "native"-applikationer med hjälp av React Native.[5]
+
+Leaflet används för att skapa och hantera kartor och geodata. Leaflet är ett JavaScript bibliotek för att hantera interaktiva kartor. Bibliotekeket är litet och kompakt, jämfört med andra bibliotek för karthantering, t ex OpenLayers, och fungerar väl både för desktop och mobil. Det är därför ett bra val för att hantera kartor i ett system som innehåller applikationer för båda dessa typer av enheter. [6] 
 
 Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning via appen. För att kunna hyra en elsparkcykel måste användaren autentisera och identifiera sig, detta görs via OAuth med hjälp av ett GitHub konto. När användaren loggar in i appen visas en kartbild med tillgängliga elsparkcyklar, laddstationer och rekommenderade parkeringsplatser. I vårt program identifieras en elsparkcykel genom att från kartbilden välja elsparcykelns ikon vilket ger användaren möjligheten att välja vald elsparkcykel för uthyrning.
 
@@ -155,7 +157,7 @@ Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ## Administratörsgränssnitt
 
-Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[5] JavaScript-biblioteket Leaflet används för att skapa och hantera kartor och geodata.
+Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[5] Leaflet används för att skapa och hantera kartor och geodata. Leaflet är ett JavaScript bibliotek för att hantera interaktiva kartor. Bibliotekeket är litet och kompakt, jämfört med andra bibliotek för karthantering, t ex OpenLayers, och fungerar väl både för desktop och mobil. Det är därför ett bra val för att hantera kartor i ett system som innehåller applikationer för båda dessa typer av enheter. [6] 
 
 Systemets administratörsgränssnitt används av behöriga användare för att få en översikt över företagets alla resurser:
 
@@ -420,7 +422,7 @@ För att säkerställa att alla tester körs som de ska, och att ingen ny kod sk
 
 # Simulering
 
-Innan systemet färdigställs för slutleverans kommer systemet utsättas för ett virtuellt stresstest. I detta test simulerar vi  5000 cyklar som hyrs ut, framförs, och återlämnas i vardera stad systemet skall användas i. Resultatet av denna simulering sammanställs och infogas i leveransrapporten.
+Innan systemet färdigställs för slutleverans kommer systemet utsättas för ett virtuellt stresstest. I detta test simulerar vi  5000 cyklar som hyrs ut, framförs, och återlämnas i vardera stad systemet skall användas i. Simuleringsprogrammet kommer att använda sig av förgenererade rutter längs städernas vägnät för att simulera ett realistiskt användarbeteende. Resultatet av denna simulering sammanställs och infogas i leveransrapporten.
 
 # Driftsättning
 
@@ -437,3 +439,6 @@ Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar
 [4] M. Richards. "Software architecture patterns". Internet: https://www.oreilly.com/content/software-architecture-patterns/ [2022-11-18].
 
 [5] "React". Internet: https://reactjs.org/ [2022-11-19]
+
+[6] "Leaflet - a JavaScript library for interactive maps". Internet: https://leafletjs.com/ [2022-11-19]
+
