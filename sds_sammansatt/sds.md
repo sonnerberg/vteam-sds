@@ -246,7 +246,7 @@ De grundläggande kraven för systemets backend är:
 - REST API:et skall kunna hantera flera olika versioner, t ex genom att använda v1/ som en del i ~~URI~~URL:n.
 - REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger.
 
-Med underlag av data från tester med MongoDB och MariaDB, där respektive databas belastades med en stor mängd anrop under kort tid,
+Med underlag av data från tester [6] med MongoDB och MariaDB, där respektive databas belastades med en stor mängd anrop under kort tid,
 valdes MariaDB som databas för att hantera all data.
 Samma tester visade också på stora skillnader i prestanda mellan en FastAPI (Python) och Express (node) server, där Express
 visade sig vara det bättre valet.
@@ -437,3 +437,5 @@ Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar
 [4] M. Richards. "Software architecture patterns". Internet: https://www.oreilly.com/content/software-architecture-patterns/ [2022-11-18].
 
 [5] "React". Internet: https://reactjs.org/ [2022-11-19]
+
+[6] "Requests/sek". Internet: https://github.com/virtuella-team/vteam/tree/tzLocal [2022-11-19]
