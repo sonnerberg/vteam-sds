@@ -250,7 +250,7 @@ Med underlag av data från tester med MongoDB och MariaDB, där respektive datab
 valdes MariaDB som databas för att hantera all data. [6]
 Samma tester visade också på stora skillnader i prestanda mellan en FastAPI (Python) och Express (node) server, där Express
 visade sig vara det bättre valet.
-Städernas geodata fås från **TODO**. Det är ett fritt bibliotek som erbjuder den data som behövs.
+Städernas geodata fås från Open Street Map. Det är ett fritt bibliotek som erbjuder den data som behövs. [9]
 
 Kommunikation mellan klienter och backend sker via API:t och där klinten enbart känner till sin egen data och
 backend har data över alla delar i systemet.
@@ -444,4 +444,6 @@ Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar
 
 [7] "Hantering av geodata i databas/backend". Internet: https://github.com/virtuella-team/vteam-sds/blob/main/8_teknisk_analys_geo/teknisk_analys_geo.md [2022-11-19].
 
-[Y] "Turf.js". Internet: https://turfjs.org/ [2022-11-19].
+[8] "Turf.js". Internet: https://turfjs.org/ [2022-11-19].
+
+[9] "Open Street Map" . https://www.openstreetmap.org/#map=5/62.994/17.637 [2022-11-19]
