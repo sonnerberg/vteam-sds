@@ -33,7 +33,7 @@
 
 ## Inledning
 
-I detta dokument beskrivs ett system som hanterar uthyrning av elsparkcyklar. Systemet ger kunder möjlighet att skapa användarkonton och hyra cyklar, administratörer ges möjlighet att administrera cyklar, laddstationer, parkeringsplatser, städer och information om kunder. Systemet innehåller också ett program för cykeln som styr och övervakar denna.
+I detta dokument beskrivs ett system som hanterar uthyrning av elsparkcyklar. Systemet ger kunder möjlighet att skapa användarkonton och hyra cyklar, administratörer ges möjlighet att administrera cyklar, laddstationer, parkeringsplatser, zoner, städer och information om kunder. Systemet innehåller också ett program för cykeln som styr och övervakar denna.
 
 ### Bakgrund
 
@@ -61,11 +61,11 @@ Systemet omfattar följande huvudsakliga komponenter:
 
 - Databas med information om cyklar, laddstationer, parkeringszoner, tillåtna zoner att cykla i, användare och administratörer
 
-- Backend - en komponent som sköter kopplingen mellan API och databas
+- Backendmodeller - en komponent bestående av modeller som sköter kopplingen mellan API och databas och gör beräkningar av t.ex. positioner
 
 - API med möjlighet att koppla in anpassade applikationer, grundsystemet levereras med följande applikationer:
 
-  - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, städer och information om kunder
+  - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, zoner städer och information om kunder
 
   - Webbgränssnitt för kunden så att denne kan logga in och se sitt konto, historik av utlåning och betalningar
 
