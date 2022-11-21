@@ -246,8 +246,8 @@ De grundläggande kraven för systemets backend är:
 - REST API:et skall kunna hantera flera olika versioner, t ex genom att använda v1/ som en del i ~~URI~~URL:n.
 - REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger.
 
-Med underlag av data från tester [6] med MongoDB och MariaDB, där respektive databas belastades med en stor mängd anrop under kort tid,
-valdes MariaDB som databas för att hantera all data.
+Med underlag av data från tester med MongoDB och MariaDB, där respektive databas belastades med en stor mängd anrop under kort tid,
+valdes MariaDB som databas för att hantera all data. [6]
 Samma tester visade också på stora skillnader i prestanda mellan en FastAPI (Python) och Express (node) server, där Express
 visade sig vara det bättre valet.
 Städernas geodata fås från **TODO**. Det är ett fritt bibliotek som erbjuder den data som behövs.
@@ -259,8 +259,10 @@ Några exempel på kommunikationen är:
 ![Backend-exempel](backend_example.png)
 *Några övergripande exempel på kommunikationen*
 
-## Databas
+## Backendmodeller
+I backend ingår ett lager med modeller som sköter kommunikationen mellan api och databas, alltså skickar in SQL-frågor till databasen och tar emot svar. I dessa modeller genomförs också olika beräkningar. Det kan tex handla om att beräkna kostnaden för en resa, eller beräkna om en cykel befinner sig inom en viss zon. För att göra de nödvändiga geografiska beräkningarna använder vi oss av geodatabibliotek som underlättar detta. Efter att ha undersökt olika bibliotek både för Python och JS kom vi fram till att JS biblioteken tycks vara mer lättanvända.[7] Vi kommer därför använda oss av TurfJS, ett bibliotek som som har flera funktioner som kommer att underlätta för oss att beräkna cyklarnas positioner och göra backendmodellerna effektivare.[7] [8]
 
+## Databas
 
 Information systemets olika entiteter samlas i en databas. En entitet kan t.ex. vara "användare", "stad" eller "administratör". I detta avsnitt beskrivs vilka entiteter som finns i databasen, vilka egenskaper de har och hur entiteterna relaterar till varandra.  
 Databasen som används är MariaDB. Det är en open source relations-databas. Den är baserad på MySQL databasen och använder traditionell SQL syntax.  
@@ -439,3 +441,7 @@ Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar
 [5] "React". Internet: https://reactjs.org/ [2022-11-19]
 
 [6] "Requests/sek". Internet: https://github.com/virtuella-team/vteam/tree/tzLocal [2022-11-19]
+
+[7] "Hantering av geodata i databas/backend". Internet: https://github.com/virtuella-team/vteam-sds/blob/main/8_teknisk_analys_geo/teknisk_analys_geo.md [2022-11-19].
+
+[Y] "Turf.js". Internet: https://turfjs.org/ [2022-11-19].
