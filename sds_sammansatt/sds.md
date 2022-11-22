@@ -75,7 +75,7 @@ Systemet omfattar följande huvudsakliga komponenter:
 
 Samtliga applikationer som kopplas mot API:et måste autentisera sin anslutning
 
-Nedanstående diagram visar en översikt över systemets huvudkomponenter samt hur de relaterar till- och kommunicerar med varandra i olika lager.[4]
+Nedanstående diagram visar en översikt över systemets huvudkomponenter samt hur de relaterar till- och kommunicerar med varandra i olika lager. [4]
 
 ![Översikt över systemets huvudkomponenter](./komponenter_översikt.png)
 *Fig 1. Översikt över systemets huvudkomponenter*
@@ -87,7 +87,7 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 ![Hemskärm](mobile_-_home.png)
 *Hemskärm i mobilapp*
 
-I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs med hjälp av JavaScript-biblioteket React. Med React finns möjlighet att bygga upp ett användargränssnitt genom att skriva enskilda komponenter som kopplas samman till ett sammanhängande UI. React  kräver inte att man använder någon viss teknologi i resten av systemet och är därför ett bra val för att bygga användargränssnitt i ett modulärt system, där delar ska kunna bytas ut eller läggas till efter behov. Det finns också möjlighet att bygga mobila "native"-applikationer med hjälp av React Native.[5]
+I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs med hjälp av JavaScript-biblioteket React. Med React finns möjlighet att bygga upp ett användargränssnitt genom att skriva enskilda komponenter som kopplas samman till ett sammanhängande UI. React  kräver inte att man använder någon viss teknologi i resten av systemet och är därför ett bra val för att bygga användargränssnitt i ett modulärt system, där delar ska kunna bytas ut eller läggas till efter behov. Det finns också möjlighet att bygga mobila "native"-applikationer med hjälp av React Native. [5]
 
 Leaflet används för att skapa och hantera kartor och geodata. Leaflet är ett JavaScript bibliotek för att hantera interaktiva kartor. Bibliotekeket är litet och kompakt, jämfört med andra bibliotek för karthantering, t ex OpenLayers, och fungerar väl både för desktop och mobil. Det är därför ett bra val för att hantera kartor i ett system som innehåller applikationer för båda dessa typer av enheter. [6] 
 
@@ -153,7 +153,7 @@ Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ## Administratörsgränssnitt
 
-Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[5] Leaflet används för att skapa och hantera kartor och geodata. Leaflet är ett JavaScript bibliotek för att hantera interaktiva kartor. Bibliotekeket är litet och kompakt, jämfört med andra bibliotek för karthantering, t ex OpenLayers, och fungerar väl både för desktop och mobil. Det är därför ett bra val för att hantera kartor i ett system som innehåller applikationer för båda dessa typer av enheter. [6] 
+Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt. [5] Leaflet används för att skapa och hantera kartor och geodata. Leaflet är ett JavaScript bibliotek för att hantera interaktiva kartor. Bibliotekeket är litet och kompakt, jämfört med andra bibliotek för karthantering, t ex OpenLayers, och fungerar väl både för desktop och mobil. Det är därför ett bra val för att hantera kartor i ett system som innehåller applikationer för båda dessa typer av enheter. [6] 
 
 Systemets administratörsgränssnitt används av behöriga användare för att få en översikt över företagets alla resurser:
 
@@ -245,10 +245,10 @@ De grundläggande kraven för systemets backend är:
 - REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger.
 
 Med underlag av data från tester med MongoDB och MariaDB, där respektive databas belastades med en stor mängd anrop under kort tid,
-valdes MariaDB som databas för att hantera all data. [6]
+valdes MariaDB som databas för att hantera all data. [7]
 Samma tester visade också på stora skillnader i prestanda mellan en FastAPI (Python) och Express (node) server, där Express
 visade sig vara det bättre valet.
-Städernas geodata fås från Open Street Map. Det är ett fritt bibliotek som erbjuder den data som behövs. [9]
+Städernas geodata fås från Open Street Map. Det är ett fritt bibliotek som erbjuder den data som behövs. [8]
 
 Kommunikation mellan klienter och backend sker via API:t och där klinten enbart känner till sin egen data och
 backend har data över alla delar i systemet.
@@ -258,7 +258,7 @@ Några exempel på kommunikationen är:
 *Några övergripande exempel på kommunikationen*
 
 ## Backendmodeller
-I backend ingår ett lager med modeller som sköter kommunikationen mellan api och databas, alltså skickar in SQL-frågor till databasen och tar emot svar. I dessa modeller genomförs också olika beräkningar. Det kan tex handla om att beräkna kostnaden för en resa, eller beräkna om en cykel befinner sig inom en viss zon. För att göra de nödvändiga geografiska beräkningarna använder vi oss av geodatabibliotek som underlättar detta. Efter att ha undersökt olika bibliotek både för Python och JS kom vi fram till att JS biblioteken tycks vara mer lättanvända.[7] Vi kommer därför använda oss av TurfJS, ett bibliotek som som har flera funktioner som kommer att underlätta för oss att beräkna cyklarnas positioner och göra backendmodellerna effektivare.[7] [8]
+I backend ingår ett lager med modeller som sköter kommunikationen mellan api och databas, alltså skickar in SQL-frågor till databasen och tar emot svar. I dessa modeller genomförs också olika beräkningar. Det kan tex handla om att beräkna kostnaden för en resa, eller beräkna om en cykel befinner sig inom en viss zon. För att göra de nödvändiga geografiska beräkningarna använder vi oss av geodatabibliotek som underlättar detta. Efter att ha undersökt olika bibliotek både för Python och JS kom vi fram till att JS biblioteken tycks vara mer lättanvända. [9] Vi kommer därför använda oss av TurfJS, ett bibliotek som som har flera funktioner som kommer att underlätta för oss att beräkna cyklarnas positioner och göra backendmodellerna effektivare. [9] [10]
 
 ## Databas
 
@@ -440,11 +440,11 @@ Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar
 
 [6] "Leaflet - a JavaScript library for interactive maps". Internet: https://leafletjs.com/ [2022-11-19]
 
-[7] "Hantering av geodata i databas/backend". Internet: https://github.com/virtuella-team/vteam-sds/blob/main/8_teknisk_analys_geo/teknisk_analys_geo.md [2022-11-19].
+[7] "Requests/sek". Internet: https://github.com/virtuella-team/vteam/tree/tzLocal [2022-11-19]
 
-[8] "Turf.js". Internet: https://turfjs.org/ [2022-11-19].
+[8] "Open Street Map" . https://www.openstreetmap.org/#map=5/62.994/17.637 [2022-11-19]
 
-[9] "Open Street Map" . https://www.openstreetmap.org/#map=5/62.994/17.637 [2022-11-19]
+[9] "Hantering av geodata i databas/backend". Internet: https://github.com/virtuella-team/vteam-sds/blob/main/8_teknisk_analys_geo/teknisk_analys_geo.md [2022-11-19].
 
-[10] "Requests/sek". Internet: https://github.com/virtuella-team/vteam/tree/tzLocal [2022-11-19]
+[10] "Turf.js". Internet: https://turfjs.org/ [2022-11-19].
 
