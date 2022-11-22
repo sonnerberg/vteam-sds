@@ -14,17 +14,8 @@
     - [Behörighetshantering](#behörighetshantering)
     - [Geodatahantering](#geodatahantering)
   - [Elsparkcykelns mjukvara](#elsparkcykelns-mjukvara)
-  - [Backend](#backend)
-    - [Databas](#databas)
-      - [Stad](#stad)
-      - [Elsparkcykel](#elsparkcykel)
-      - [Laddstation](#laddstation)
-      - [Parkeringsplats](#parkeringsplats)
-      - [Zon](#zon)
-      - [Verkstad (ska verkstäder vara med?)](#verkstad-ska-verkstäder-vara-med)
-      - [Användare](#användare)
-      - [Administratör](#administratör)
-      - [Resa](#resa)
+- [Backend](#backend)
+  - [Databas](#databas)
     - [REST-API](#rest-api)
       - [Substantiv](#substantiv)
       - [Verb](#verb)
@@ -34,10 +25,15 @@
       - [Autentisering](#autentisering)
         - [Godkänd autentisering](#godkänd-autentisering)
         - [Misslyckad autentisering](#misslyckad-autentisering)
+- [Tester](#tester)
+- [CI/CD](#cicd)
+- [Simulering](#simulering)
+- [Driftsättning](#driftsättning)
+- [Referenser](#referenser)
 
 ## Inledning
 
-I detta dokument beskrivs ett system som hanterar uthyrning av elsparkcyklar. Systemet ger kunder möjlighet att skapa användarkonton och hyra cyklar, administratörer ges möjlighet att administrera cyklar, laddstationer, parkeringsplatser, städer och information om kunder. Systemet innehåller också ett program för cykeln som styr och övervakar denna.
+I detta dokument beskrivs ett system som hanterar uthyrning av elsparkcyklar. Systemet ger kunder möjlighet att skapa användarkonton och hyra cyklar, administratörer ges möjlighet att administrera cyklar, laddstationer, parkeringsplatser, zoner, städer och information om kunder. Systemet innehåller också ett program för cykeln som styr och övervakar denna.
 
 ### Bakgrund
 
@@ -65,11 +61,11 @@ Systemet omfattar följande huvudsakliga komponenter:
 
 - Databas med information om cyklar, laddstationer, parkeringszoner, tillåtna zoner att cykla i, användare och administratörer
 
-- Backend - en komponent som sköter kopplingen mellan API och databas
+- Backendmodeller - en komponent bestående av modeller som sköter kopplingen mellan API och databas och gör beräkningar av t.ex. positioner
 
 - API med möjlighet att koppla in anpassade applikationer, grundsystemet levereras med följande applikationer:
 
-  - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, städer och information om kunder
+  - Administrativt webbgränssnitt där man kan se status för och administrera (ändra, ta bort och lägga till) cyklar, laddstationer, parkeringsplatser, zoner städer och information om kunder
 
   - Webbgränssnitt för kunden så att denne kan logga in och se sitt konto, historik av utlåning och betalningar
 
@@ -91,7 +87,9 @@ I följande avsnitt beskriver vi systemets olika delar i detalj.
 ![Hemskärm](mobile_-_home.png)
 *Hemskärm i mobilapp*
 
-I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs med hjälp av JavaScript-biblioteket React. Med React finns möjlighet att bygga upp ett användargränssnitt genom att skriva enskilda komponenter som kopplas samman till ett sammanhängande UI. React  kräver inte att man använder någon viss teknologi i resten av systemet och är därför ett bra val för att bygga användargränssnitt i ett modulärt system, där delar ska kunna bytas ut eller läggas till efter behov. Det finns också möjlighet att bygga mobila "native"-applikationer med hjälp av React Native.[5] 
+I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs med hjälp av JavaScript-biblioteket React. Med React finns möjlighet att bygga upp ett användargränssnitt genom att skriva enskilda komponenter som kopplas samman till ett sammanhängande UI. React  kräver inte att man använder någon viss teknologi i resten av systemet och är därför ett bra val för att bygga användargränssnitt i ett modulärt system, där delar ska kunna bytas ut eller läggas till efter behov. Det finns också möjlighet att bygga mobila "native"-applikationer med hjälp av React Native.[5]
+
+Leaflet används för att skapa och hantera kartor och geodata. Leaflet är ett JavaScript bibliotek för att hantera interaktiva kartor. Bibliotekeket är litet och kompakt, jämfört med andra bibliotek för karthantering, t ex OpenLayers, och fungerar väl både för desktop och mobil. Det är därför ett bra val för att hantera kartor i ett system som innehåller applikationer för båda dessa typer av enheter. [6] 
 
 Elsparkcyklar som är registrerade i systemet för uthyrning och inte upptagna eller under service kan av en användare väljas för uthyrning via appen. För att kunna hyra en elsparkcykel måste användaren autentisera och identifiera sig, detta görs via OAuth med hjälp av ett GitHub konto. När användaren loggar in i appen visas en kartbild med tillgängliga elsparkcyklar, laddstationer och rekommenderade parkeringsplatser. I vårt program identifieras en elsparkcykel genom att från kartbilden välja elsparcykelns ikon vilket ger användaren möjligheten att välja vald elsparkcykel för uthyrning.
 
@@ -155,7 +153,7 @@ Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ## Administratörsgränssnitt
 
-Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[5] JavaScript-biblioteket Leaflet används för att skapa och hantera kartor och geodata.
+Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt.[5] Leaflet används för att skapa och hantera kartor och geodata. Leaflet är ett JavaScript bibliotek för att hantera interaktiva kartor. Bibliotekeket är litet och kompakt, jämfört med andra bibliotek för karthantering, t ex OpenLayers, och fungerar väl både för desktop och mobil. Det är därför ett bra val för att hantera kartor i ett system som innehåller applikationer för båda dessa typer av enheter. [6] 
 
 Systemets administratörsgränssnitt används av behöriga användare för att få en översikt över företagets alla resurser:
 
@@ -422,7 +420,7 @@ För att säkerställa att alla tester körs som de ska, och att ingen ny kod sk
 
 # Simulering
 
-Innan systemet färdigställs för slutleverans kommer systemet utsättas för ett virtuellt stresstest. I detta test simulerar vi  5000 cyklar som hyrs ut, framförs, och återlämnas i vardera stad systemet skall användas i. Resultatet av denna simulering sammanställs och infogas i leveransrapporten.
+Innan systemet färdigställs för slutleverans kommer systemet utsättas för ett virtuellt stresstest. I detta test simulerar vi  5000 cyklar som hyrs ut, framförs, och återlämnas i vardera stad systemet skall användas i. Simuleringsprogrammet kommer att använda sig av förgenererade rutter längs städernas vägnät för att simulera ett realistiskt användarbeteende. Resultatet av denna simulering sammanställs och infogas i leveransrapporten.
 
 # Driftsättning
 
@@ -440,10 +438,13 @@ Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar
 
 [5] "React". Internet: https://reactjs.org/ [2022-11-19]
 
-[6] "Requests/sek". Internet: https://github.com/virtuella-team/vteam/tree/tzLocal [2022-11-19]
+[6] "Leaflet - a JavaScript library for interactive maps". Internet: https://leafletjs.com/ [2022-11-19]
 
 [7] "Hantering av geodata i databas/backend". Internet: https://github.com/virtuella-team/vteam-sds/blob/main/8_teknisk_analys_geo/teknisk_analys_geo.md [2022-11-19].
 
 [8] "Turf.js". Internet: https://turfjs.org/ [2022-11-19].
 
 [9] "Open Street Map" . https://www.openstreetmap.org/#map=5/62.994/17.637 [2022-11-19]
+
+[10] "Requests/sek". Internet: https://github.com/virtuella-team/vteam/tree/tzLocal [2022-11-19]
+
