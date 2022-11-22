@@ -15,6 +15,7 @@
     - [Geodatahantering](#geodatahantering)
   - [Elsparkcykelns mjukvara](#elsparkcykelns-mjukvara)
 - [Backend](#backend)
+  - [Backendmodeller](#backendmodeller)
   - [Databas](#databas)
     - [REST-API](#rest-api)
       - [Substantiv](#substantiv)
