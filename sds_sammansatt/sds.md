@@ -45,7 +45,8 @@ Vår förhoppning är att det system som vi presenterar här kommer att kunna l�
 
 ## Översikt över systemet
 ![Översikt över systemet](./overblick.svg)
-*Fig 1. Översikt över systemet*
+
+*Översikt över systemet*
 
 ### Systemets användare
 
@@ -78,13 +79,15 @@ Samtliga applikationer som kopplas mot API:et måste autentisera sin anslutning
 Nedanstående diagram visar en översikt över systemets huvudkomponenter samt hur de relaterar till- och kommunicerar med varandra i olika lager. [4]
 
 ![Översikt över systemets huvudkomponenter](./komponenter_översikt.png)
-*Fig 1. Översikt över systemets huvudkomponenter*
+
+*Översikt över systemets huvudkomponenter*
 
 I följande avsnitt beskriver vi systemets olika delar i detalj.
 
 ## Användarens app
 
 ![Hemskärm](mobile_-_home.png)
+
 *Hemskärm i mobilapp*
 
 I användarens app kan en användare hyra och återlämna elsparkcyklar. Appen är mobilanpassad och byggs med hjälp av JavaScript-biblioteket React. Med React finns möjlighet att bygga upp ett användargränssnitt genom att skriva enskilda komponenter som kopplas samman till ett sammanhängande UI. React  kräver inte att man använder någon viss teknologi i resten av systemet och är därför ett bra val för att bygga användargränssnitt i ett modulärt system, där delar ska kunna bytas ut eller läggas till efter behov. Det finns också möjlighet att bygga mobila "native"-applikationer med hjälp av React Native. [5]
@@ -114,10 +117,9 @@ Denna bild ger en översikt över flödet för att hyra en elsparkcykel i använ
 
 Figur - flödet i användarens app vid uthyrning av elsparkcykel.
 
-[4] Se <https://reactjs.org/>
-
 ## Användarens webbgränssnitt
 ![Hemskärm](desktop_-_home.png)
+
 *Hemskärm i webbläsare för dator*
 
 Denna del av systemet är en desktop-app som, liksom användarens mobilapp, byggs i React. I användarens webbgränssnitt kan en användare logga in för att se och ändra detaljer om sitt konto. Användaren skapar ett konto och loggar in via OAuth med hjälp av sitt Githubkonto.
@@ -153,7 +155,7 @@ Nedanstående diagram visar flödet i användarens webbgränssnitt:
 
 ## Administratörsgränssnitt
 
-Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt. [5] Leaflet används för att skapa och hantera kartor och geodata. Leaflet är ett JavaScript bibliotek för att hantera interaktiva kartor. Bibliotekeket är litet och kompakt, jämfört med andra bibliotek för karthantering, t ex OpenLayers, och fungerar väl både för desktop och mobil. Det är därför ett bra val för att hantera kartor i ett system som innehåller applikationer för båda dessa typer av enheter. [6] 
+Administratörsgränssnittet byggs i React - ett JavaScript bibliotek för att skapa användargränssnitt. [5] Leaflet används för att skapa och hantera kartor och geodata [6]
 
 Systemets administratörsgränssnitt används av behöriga användare för att få en översikt över företagets alla resurser:
 
@@ -171,6 +173,7 @@ Administratörsgränssnitt innehåller vyer för att inspektera resurser, skicka
 I vyn för översikt och daglig drift presenteras all information kring cyklar, laddstationer, parkeringsplatser och områden med särskilda bestämmelser för varje stad man verkar i. Vyn är kartcentrerad. I kartan kan man se information om aktuell status för alla tillgängliga resurser i vald stad, samt även filtrera kartvyn baserat på resursers typ, identitet eller status. Denna vy används också för att skicka manuella driftkommandon till enskilda cyklar. Det kan t ex  vara ett kommando för att stoppa cykeln, om administratören ser behov av det.
 
 ![Systemets översiktsvy](admin_oversikt.drawio.png)
+
 *Översiktsvy från systemet*
 
 ### Hantering av kunder
@@ -178,6 +181,7 @@ I vyn för översikt och daglig drift presenteras all information kring cyklar, 
 Kundvyn är en klassisk listvy. Här kan man se en lista på alla företagets kunder, som kan filtreras på stad, användarnamn, antal gjorda resor m m. I denna vyn kan administratören också uppdatera information om enskilda kunder, t ex för att ge en kund en generell rabatt eller rabatt för en enskild resa. Administratören kan också skapa upp nya kunder i denna vy, även om detta i normalfallet hanteras av kunden själv.
 
 ![Systemets kundvy](admin_kundvy.drawio.png)
+
 *Kundvy från systemet*
 
 ### Behörighetshantering
@@ -185,6 +189,7 @@ Kundvyn är en klassisk listvy. Här kan man se en lista på alla företagets ku
 Vyn för behörighetshantering används för att skapa användare och tilldela dessa behörigheter i administratörssystemet. Huvudadministratören anges vid konfiguration av systemet, men alla övriga roller hanteras i detta gränssnitt.
 
 ![Systemets behörighetsvy](admin_behorighet.drawio.png)
+
 *Behörighetsvy från systemet*
 
 ### Geodatahantering
@@ -192,11 +197,14 @@ Vyn för behörighetshantering används för att skapa användare och tilldela d
 Systemet har kraftfulla och lättanvända funktioner för att hantera nya marknader och nya resurser. I vyn för geodatahantering kan administratören lägga till nya städer för företaget, samt skapa, uppdatera och radera information om enskilda resurser.
 
 ![Systemets kartredigeringsvy](admin_kartred.drawio.png)
+
 *Kartredigeringsvy från systemet*
 
 ## Elsparkcykelns mjukvara
 
 ![Cykelkommunikation](./cykelkommunikation.svg)
+
+*Elsparkcykelns kommunikation med systemet*
 
 En elsparkcykels huvudsakliga uppgift är att hela tiden meddela sin positon och hälsa via API&rsquo;et. Elsparkcykelns mjukvara byggs i Python, då det i detta programspråk finns många färdiga bibliotek för att hantera integration med sensorer o dyl.
 
@@ -229,7 +237,7 @@ uppdaterar dom sin position med olika intervall beroende på olika faktorer.
 - En ledig och stillastående elsparkcykel skickar positionsdata sällan
 - En elsparkcykel på laddning eller service skickar positionsdata sällan
 
-Vae elsparkcykel sparar också en egen historik över alla sina resor.
+Varje elsparkcykel sparar också en egen historik över alla sina resor.
 
 - Resans användare
 - Resans startposition samt klockslag
@@ -241,7 +249,7 @@ De grundläggande kraven för systemets backend är:
 
 - Databasen skall kunna hantera relevant data.
 - Systemet skall erbjuda ett väldokumenterat REST API som tredjepartsleverantörer kan använda för att bygga extra tjänster och applikationer.
-- REST API:et skall kunna hantera flera olika versioner, t ex genom att använda v1/ som en del i ~~URI~~URL:n.
+- REST API:et skall kunna hantera flera olika versioner, t ex genom att använda v1/ som en del i URL:n.
 - REST API:et skall hantera autentisering så man kan kontrollera/begränsa belastningen som varje applikation ger.
 
 Med underlag av data från tester med MongoDB och MariaDB, där respektive databas belastades med en stor mängd anrop under kort tid,
@@ -255,10 +263,11 @@ backend har data över alla delar i systemet.
 Några exempel på kommunikationen är:
 
 ![Backend-exempel](backend_example.png)
+
 *Några övergripande exempel på kommunikationen*
 
 ## Backendmodeller
-I backend ingår ett lager med modeller som sköter kommunikationen mellan api och databas, alltså skickar in SQL-frågor till databasen och tar emot svar. I dessa modeller genomförs också olika beräkningar. Det kan tex handla om att beräkna kostnaden för en resa, eller beräkna om en cykel befinner sig inom en viss zon. För att göra de nödvändiga geografiska beräkningarna använder vi oss av geodatabibliotek som underlättar detta. Efter att ha undersökt olika bibliotek både för Python och JS kom vi fram till att JS biblioteken tycks vara mer lättanvända. [9] Vi kommer därför använda oss av TurfJS, ett bibliotek som som har flera funktioner som kommer att underlätta för oss att beräkna cyklarnas positioner och göra backendmodellerna effektivare. [9] [10]
+I backend ingår ett lager med modeller som sköter kommunikationen mellan API och databas, alltså skickar in SQL-frågor till databasen och tar emot svar. I dessa modeller genomförs också olika beräkningar. Det kan tex handla om att beräkna kostnaden för en resa, eller beräkna om en cykel befinner sig inom en viss zon. För att göra de nödvändiga geografiska beräkningarna använder vi oss av geodatabibliotek som underlättar detta. Efter att ha undersökt olika bibliotek både för Python och JS kom vi fram till att JS biblioteken tycks vara mer lättanvända. [9] Vi kommer därför använda oss av TurfJS, ett bibliotek som som har flera funktioner som kommer att underlätta för oss att beräkna cyklarnas positioner och göra backendmodellerna effektivare. [9] [10]
 
 ## Databas
 
@@ -268,6 +277,7 @@ Databasen som används är MariaDB. Det är en open source relations-databas. De
 De fyra entiteter som utgör grunden för databasen är:
 
 ![Databas-mjuk](databas-mjuk.png)
+
 *De fyra huvudsakliga entiteterna*
 
 Tabeller vars data är en produkt av olika händelser uppdateras med data från någon av de fyra entiteterna. tex när en användare hyr en elsparkcykel så startas en resa.
@@ -283,11 +293,14 @@ Denna resa utgör i sin tur underlaget för en faktura.
 Nedanstående bild visar samtliga entiteter som förekommer i databasen, deras attribut och inbördes relationer.
 
 ![Databas-er](databas-er.png)
+
 *ER-diagram*
 
 ### REST-API
 
-Systemets applikationer använder ett REST-API för att kommunicera med systemets backend. För att veta vilka routes vi behöver ha i REST-API:et så har följande substantiv identifierats (dessa stämmer överens med entiteterna i databasen):
+Systemets applikationer använder ett API för att kommunicera med systemets backend. API:et i detta system är ett så kallat REST API. Klienterna ansluter till API:et och autentiserar sig och kan sedan skicka en GET, POST, PUT eller DELETE förfrågan för att få, skicka in, uppdatera eller ta bort information i systemet. Varje förfrågan får ett svar i JSON-format som klienten sedan kan använda, t.ex. för att visa ut information till användaren.[11] 
+
+För att veta vilka routes vi behöver ha i REST-API:et så har följande substantiv identifierats (dessa stämmer överens med entiteterna i databasen):
 
 #### Substantiv
 
@@ -297,7 +310,7 @@ Systemets applikationer använder ett REST-API för att kommunicera med systemet
 - Elsparkcykel
 - Laddstation
 - Stad
-- Förbjuden zon
+- Zon
 - Verkstad
 
 #### Verb
@@ -332,7 +345,7 @@ De identifierade substantiven behöver också utföra handlingar, därav följan
 `/mainAdministrators/{id}`    | Visa en huvudadministratör med id {id} | :x:                            | Modifiera en huvudadministratör med id {id} | Ta bort en huvudadministratör med id {id}
 `/cities/`                    | Visa alla städer                       | Skapa en ny stad               | :x:                                         | :x:
 `/cities/{id}`                | Visa en stad med id {id}               | :x:                            | Modifiera en stad med id {id}               | Ta bort en stad med id {id}
-`/cities/{id}/forbiddenZones/` | Visa alla förbjudna zoner i stad med id {id} | :x: | :x: | :x:
+`/cities/{id}/zones/` | Visa alla zoner i stad med id {id} | :x: | :x: | :x:
 `/cities/{id}/electricScooters/` | Visa alla elsparkcyklar i stad med id {id} | :x: | :x: | :x:
 `/cities/{id}/chargingStations/`  | Visa alla laddstationer i stad med id {id} | :x: | :x: | :x:
 `/cities/{id}/workshops/`     | Visa alla verkstäder i stad med id {id}  | :x:           | :x:                                         | :x:
@@ -346,8 +359,8 @@ De identifierade substantiven behöver också utföra handlingar, därav följan
 `/electricScooters/{id}/stop` | :x:                                    | Stoppa elsparkcykeln           | :x:                                         | :x:
 `/chargingStations/`          | Visa alla laddstationer                | Skapa en ny laddstation        | :x:                                         | :x:
 `/chargingStations/{id}`      | Visa en laddstation med id {id}        | :x:                            | Modifiera en elsparkcykel med id {id}       | Ta bort en elsparkcykel med id {id}
-`/forbiddenZones/`            | Visa alla förbjudna zoner              | Skapa en ny förbjuden zon      | :x:                                         | :x:
-`/forbiddenZones/{id}`        | Visa en förbjuden zon med id {id}      | :x:                            | Modifiera en förbjuden zon med id {id}      | Ta bort en förbjuden zon med id {id}
+`/zones/`            | Visa alla zoner              | Skapa en ny zon      | :x:                                         | :x:
+`/zones/{id}`        | Visa en zon med id {id}      | :x:                            | Modifiera en zon med id {id}      | Ta bort en zon med id {id}
 `/workshops/`                 | Visa alla verkstäder                   | Skapa en ny verkstad           | :x:                                         | :x:
 `/workshops/{id}`             | Visa en verkstad med id {id}           | :x:                            | Modifiera en verkstad med id {id}           | Ta bort en verkstad med id {id}
 `/parkingZones/`              | Visa en alla parkeringplatser          | Skapa en ny parkeringsplats    | :x:           | :x:
@@ -359,19 +372,16 @@ De identifierade substantiven behöver också utföra handlingar, därav följan
 #### Dokumentation
 
 För att underlätta för tredjepartsleverntörer att bygga externa tjänster och applicationer är
-REST-API&rsquo;et väldokumenterat.
-
-- Länk till dokumentationen?
-- Ett exempel från dokumentationen på en enskild endpoint?
+REST-API:et väldokumenterat.
 
 #### Versioner
 
 REST-API&rsquo;et har byggts för att vara framtidssäkert där uppdateringar och tillägg hanteras med
-versionsnummer som en del i ~~URI~~URL:en.
+versionsnummer som en del i URL:en.
 
 #### Autentisering
 
-Alla applikationer som använder REST-API&rsquo;et måste autentisera sig med hjälp av JSON Web Tokens för att kontrollera att endast
+Alla applikationer som använder REST-API:et måste autentisera sig med hjälp av JSON Web Tokens för att kontrollera att endast
 endpoints som rör applikationen finns tillgängliga.
 
 ##### Godkänd autentisering
@@ -444,7 +454,8 @@ Systemet kan driftas i valfri miljö då vi redan vid utvecklingen implementerar
 
 [8] "Open Street Map" . https://www.openstreetmap.org/#map=5/62.994/17.637 [2022-11-19]
 
-[9] "Hantering av geodata i databas/backend". Internet: https://github.com/virtuella-team/vteam-sds/blob/main/8_teknisk_analys_geo/teknisk_analys_geo.md [2022-11-19].
+[9] "Hantering av geodata i databas/backend". Internet: https://github.com/virtuella-team/vteam-sds/blob/main/teknisk-analys-geo/teknisk_analys_geo.md [2022-11-22].
 
 [10] "Turf.js". Internet: https://turfjs.org/ [2022-11-19].
 
+[11] [F. Ximenes and F. Juvenal. "How to design a RESTful API architecture from a human-language spec". Internet: https://www.oreilly.com/content/how-to-design-a-restful-api-architecture-from-a-human-language-spec/ [2022-11-19]
